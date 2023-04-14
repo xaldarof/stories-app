@@ -91,7 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
           physics: const BouncingScrollPhysics(),
           itemCount: 3,
           itemBuilder: (e, i) {
-            return const StoryItem();
+            return StoryItem(
+              onTap: () {
+                //
+              },
+            );
           },
         ),
       ),
