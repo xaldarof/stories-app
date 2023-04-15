@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jokes_app/common/extensions/array.dart';
 import 'package:jokes_app/common/extensions/controller_ext.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/decorations.dart';
@@ -18,24 +19,10 @@ class StoriesScreen extends StatefulWidget {
 }
 
 class _StoriesScreenState extends State<StoriesScreen> {
-  final ScrollController _scrollController = ScrollController();
-  bool showCategories = true;
+  var selectedCategoryIndex = 0;
 
   @override
   void initState() {
-    _scrollController.addListener(() {
-      if (showCategories == true) {
-        setState(() {
-          showCategories = false;
-        });
-      }
-    });
-    _scrollController.onTopReached((onTop) {
-      setState(() {
-        showCategories = onTop;
-      });
-    });
-
     super.initState();
   }
 
@@ -51,18 +38,28 @@ class _StoriesScreenState extends State<StoriesScreen> {
         ),
       child: BlocBuilder<StoriesBloc, StoriesState>(
         builder: (context, state) {
+          final bloc = context.read<StoriesBloc>();
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: PreferredSize(
               preferredSize: Size(context.width, 42),
-              child: (showCategories && state.categories != null)
+              child: (state.showCategories && state.categories != null)
                   ? ListView.builder(
                       itemCount: state.categories?.length,
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (e, i) {
                         final item = (state.categories ?? [])[i];
-                        return StoryCategoryItem(value: item);
+                        return StoryCategoryItem(
+                          value: item,
+                          selected: selectedCategoryIndex == i,
+                          onTap: () {
+                            bloc.add(GetCategoryStories(categoryId: item.id));
+                            setState(() {
+                              selectedCategoryIndex = i;
+                            });
+                          },
+                        );
                       },
                     )
                   : Container(),
@@ -71,7 +68,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
               height: context.height,
               width: context.width,
               decoration: DefaultBackgroundDecoration(),
-              child: (state.stories == null)
+              child: (state.categories.isEmpty)
                   ? SizedBox(
                       width: 24,
                       height: 24,
@@ -82,11 +79,11 @@ class _StoriesScreenState extends State<StoriesScreen> {
                       ),
                     )
                   : ListView.builder(
-                      controller: _scrollController,
+                      controller: bloc.scrollController,
                       physics: const BouncingScrollPhysics(),
-                      itemCount: state.stories?.length,
+                      itemCount: state.stories.length,
                       itemBuilder: (e, i) {
-                        final item = (state.stories ?? [])[i];
+                        final item = (state.stories)[i];
                         return StoryItem(
                           onTap: () {
                             //

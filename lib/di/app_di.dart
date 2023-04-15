@@ -1,10 +1,14 @@
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jokes_app/data/api/api_client.dart';
+import 'package:jokes_app/data/data_sources/publish_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/stories_network_data_source_impl.dart';
+import 'package:jokes_app/data/repositories/publish_repository_impl.dart';
 import 'package:jokes_app/data/repositories/stories_repository_impl.dart';
+import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/category_mapper.dart';
 import 'package:jokes_app/domain/mappers/story_mapper.dart';
+import 'package:jokes_app/domain/repositories/publish_repository.dart';
 
 import '../domain/data_sources/stories_network_data_source.dart';
 import '../domain/repositories/stories_repository.dart';
@@ -25,9 +29,13 @@ void _setUpRepos() {
       networkDataSource: injector.get(),
       storyMapper: StoryMapper(),
       categoryMapper: CategoryMapper()));
+  injector.registerSingleton<PublishRepository>(
+      PublishRepositoryImpl(networkDataSource: injector.get()));
 }
 
 void _setUpDataSources() {
   injector.registerSingleton<StoriesNetworkDataSource>(
       StoriesNetworkDataSourceImpl(client: injector.get()));
+  injector.registerSingleton<PublishNetworkDataSource>(
+      PublishNetworkDataSourceImpl(client: injector.get()));
 }

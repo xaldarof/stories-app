@@ -15,6 +15,7 @@ class StoriesRepositoryImpl extends StoriesRepository {
   @override
   Stream<DomainResult> getCategories() async* {
     try {
+      yield DomainLoading();
       final res = await _networkDataSource.getCategories();
       if (res != null) {
         final mapped = res.map((e) => _categoryMapper.map(e));
@@ -26,9 +27,10 @@ class StoriesRepositoryImpl extends StoriesRepository {
   }
 
   @override
-  Stream<DomainResult> getStories() async* {
+  Stream<DomainResult> getStories(int? categoryId, int page) async* {
     try {
-      final res = await _networkDataSource.getStories();
+      yield DomainLoading();
+      final res = await _networkDataSource.getStories(categoryId, page);
       if (res != null) {
         final mapped = res.map((e) => _storyMapper.map(e));
         yield DomainSuccess<List<Story>>(data: mapped.toList());

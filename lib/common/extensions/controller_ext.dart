@@ -13,12 +13,19 @@ extension ScrollExt on ScrollController {
     });
   }
 
+  void onBottomReached(Function() invoker) {
+    addListener(() {
+      if (offset >= position.maxScrollExtent && !position.outOfRange) {
+        invoker.call();
+      }
+    });
+  }
+
   void onTopReached(Function(bool) onReach) {
     addListener(() {
       if (offset <= position.minScrollExtent && !position.outOfRange) {
         onReach.call(true);
-      } else {
-      }
+      } else {}
     });
   }
 }
