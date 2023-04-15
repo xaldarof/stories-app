@@ -4,6 +4,7 @@ import 'package:jokes_app/common/widgets/button.dart';
 import 'package:jokes_app/common/widgets/input_widget.dart';
 
 import '../../common/resource/colors.dart';
+import '../../common/resource/decorations.dart';
 import '../../common/widgets/story_item.dart';
 
 class PublishScreen extends StatelessWidget {
@@ -11,18 +12,7 @@ class PublishScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: context.height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [
-              AppColors.primaryColor,
-              AppColors.primaryColorBlack,
-            ],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topLeft,
-            stops: const [0.0, 1],
-            tileMode: TileMode.clamp),
-        color: AppColors.primaryColor,
-      ),
+      decoration: DefaultBackgroundDecoration(),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         controller: ScrollController(),

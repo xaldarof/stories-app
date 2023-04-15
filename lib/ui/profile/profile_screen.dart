@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/settings_item.dart';
 import 'package:jokes_app/ui/profile/user_info_card.dart';
@@ -13,18 +14,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: context.height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [
-              AppColors.primaryColor,
-              AppColors.primaryColorBlack,
-            ],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topLeft,
-            stops: const [0.0, 1],
-            tileMode: TileMode.clamp),
-        color: AppColors.primaryColor,
-      ),
+      decoration: DefaultBackgroundDecoration(),
       child: SingleChildScrollView(
         child: Column(
           children: [

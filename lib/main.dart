@@ -39,9 +39,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
   final _screens = [
-    StoriesScreen(),
+    const StoriesScreen(),
     PublishScreen(),
-    ProfileScreen(),
+    const ProfileScreen(),
   ];
 
   @override
