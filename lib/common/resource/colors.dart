@@ -14,4 +14,6 @@ class AppColors {
   static var black = Colors.black;
 
   static var white = Colors.white;
+
+  static var grey = Colors.grey;
 }

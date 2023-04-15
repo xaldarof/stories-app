@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 
@@ -14,9 +15,9 @@ class StoryTypeIcon extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12, right: 12),
       height: 20,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: Color.fromARGB(Random().nextInt(255), Random().nextInt(255),
-              Random().nextInt(255), Random().nextInt(255))),
+        borderRadius: BorderRadius.circular(24),
+        color: Colors.brown,
+      ),
       child: Text(
         value.toLowerCase(),
         style: primaryTextStyle(color: AppColors.white),

@@ -1,15 +1,19 @@
 import 'dart:ui';
 
+import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jokes_app/common/widgets/story_item.dart';
+import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/profile/profile_screen.dart';
 import 'package:jokes_app/ui/publish/publish_screen.dart';
 import 'package:jokes_app/ui/stories/stories_screen.dart';
 
 import 'common/resource/colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EncryptedSharedPreferences.initialize('1234930934-023940-2394-0324234');
+  await setUpDependencies();
   runApp(const MyApp());
 }
 

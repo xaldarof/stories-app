@@ -10,14 +10,30 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
     StoryResponse(
       id: json['id'] as int,
       body: json['body'] as String,
-      timeCreate: json['time_create'] as String,
-      categoryId: json['category'] as int,
+      timeCreate: json['timeCreate'] as String,
+      categoryId: json['categoryId'] as int,
+      author:
+          StoryAuthorResponse.fromJson(json['author'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'body': instance.body,
-      'time_create': instance.timeCreate,
-      'category': instance.categoryId,
+      'timeCreate': instance.timeCreate,
+      'categoryId': instance.categoryId,
+      'author': instance.author,
+    };
+
+StoryAuthorResponse _$StoryAuthorResponseFromJson(Map<String, dynamic> json) =>
+    StoryAuthorResponse(
+      username: json['username'] as String,
+      userid: json['userid'] as int,
+    );
+
+Map<String, dynamic> _$StoryAuthorResponseToJson(
+        StoryAuthorResponse instance) =>
+    <String, dynamic>{
+      'username': instance.username,
+      'userid': instance.userid,
     };

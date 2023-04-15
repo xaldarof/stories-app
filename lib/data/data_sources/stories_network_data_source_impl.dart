@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/domain/data_sources/stories_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/base_response.dart';
+import 'package:jokes_app/domain/models/network/category_response.dart';
 import 'package:jokes_app/domain/models/network/story_response.dart';
 
 import '../api/api_client.dart';
@@ -13,10 +15,11 @@ class StoriesNetworkDataSourceImpl extends StoriesNetworkDataSource {
   Future<List<StoryResponse>?> getStories() async {
     try {
       final response = await _client.get("api/v1/stories");
-      final decoded = BaseResponse<List<StoryResponse>>.fromJson(
-          jsonDecode(response.data), (p0) => StoryResponse.fromJson(p0));
-      return decoded.data;
+      final decoded = BaseListResponse.fromJson(jsonDecode(response.data));
+      final list = decoded.data.map((e) => StoryResponse.fromJson(e));
+      return list.toList();
     } catch (e) {
+      printMessage(e.toString());
       return null;
     }
   }
@@ -24,4 +27,17 @@ class StoriesNetworkDataSourceImpl extends StoriesNetworkDataSource {
   StoriesNetworkDataSourceImpl({
     required DioClient client,
   }) : _client = client;
+
+  @override
+  Future<List<CategoryResponse>?> getCategories() async {
+    try {
+      final response = await _client.get("api/v1/categories");
+      final decoded = BaseListResponse.fromJson(jsonDecode(response.data));
+      final list = decoded.data.map((e) => CategoryResponse.fromJson(e));
+      return list.toList();
+    } catch (e) {
+      printMessage(e.toString());
+      return null;
+    }
+  }
 }

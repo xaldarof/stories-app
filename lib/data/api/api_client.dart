@@ -8,7 +8,7 @@ extension ResponseExt on Response {
 }
 
 class DioClient {
-  final String _baseUrl = "https://quotes.esoteric.uz/";
+  final String _baseUrl = "http://127.0.0.1:8000/";
   late Dio _dio;
 
   DioClient() {
@@ -34,9 +34,6 @@ class DioClient {
         baseUrl: _baseUrl,
         responseType: ResponseType.plain,
         connectTimeout: 120000,
-        headers: {
-          "Authorization": "Bearer $token",
-        },
         receiveTimeout: 120000,
         validateStatus: (code) {
           if (code! >= 200 && code <= 400) {

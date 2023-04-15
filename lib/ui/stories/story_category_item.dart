@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
+import 'package:jokes_app/domain/models/ui/category.dart';
 
 class StoryCategoryItem extends StatelessWidget {
-  final String value;
+  final Category value;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class StoryCategoryItem extends StatelessWidget {
         color: AppColors.darkGreen,
       ),
       child: Text(
-        value.toLowerCase(),
+        value.name.toLowerCase(),
         style: primaryTextStyle(color: AppColors.white),
       ),
     );

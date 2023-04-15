@@ -16,3 +16,16 @@ class BaseResponse<T> {
     return BaseResponse(json['results'] as T);
   }
 }
+class BaseListResponse {
+  List<dynamic> data;
+
+  BaseListResponse(this.data);
+
+  factory BaseListResponse.fromJson(Map<String, dynamic> json) {
+    return BaseListResponse((json['results'] as List<dynamic>));
+  }
+
+  factory BaseListResponse.fromJsonStringData(Map<String, dynamic> json) {
+    return BaseListResponse(json['results'] as dynamic);
+  }
+}
