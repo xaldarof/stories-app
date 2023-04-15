@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jokes_app/common/widgets/story_item.dart';
+import 'package:jokes_app/ui/profile/profile_screen.dart';
+import 'package:jokes_app/ui/publish/publish_screen.dart';
+import 'package:jokes_app/ui/stories/stories_screen.dart';
 
 import 'common/resource/colors.dart';
 
@@ -35,6 +38,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
+  final _screens = [
+    StoriesScreen(),
+    PublishScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -74,31 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: AppColors.primaryColorBlack,
         title: Text(widget.title),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-                AppColors.primaryColor,
-                AppColors.primaryColorBlack,
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topLeft,
-              stops: const [0.0, 1],
-              tileMode: TileMode.clamp),
-          color: AppColors.primaryColor,
-        ),
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (e, i) {
-            return StoryItem(
-              onTap: () {
-                //
-              },
-            );
-          },
-        ),
-      ),
+      body: _screens[selectedIndex],
     );
   }
 }

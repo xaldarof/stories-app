@@ -22,7 +22,7 @@ class StoryItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primaryDark,
           border: Border.all(color: AppColors.whiteAlpha52),
-          borderRadius: BorderRadius.circular(7),
+          borderRadius: BorderRadius.circular(24),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +32,9 @@ class StoryItem extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(
                       left: 24, top: 24, bottom: 12, right: 16),
-                  child: const StoryOwnerIcon(),
+                  child: const StoryOwnerIcon(
+                    icon: Icons.adb,
+                  ),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,

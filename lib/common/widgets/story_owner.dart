@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 
 class StoryOwnerIcon extends StatelessWidget {
-  const StoryOwnerIcon({super.key});
+  final IconData icon;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 52,
-      width: 52,
+      height: height ?? 52,
+      width: width ?? 52,
       decoration: BoxDecoration(
         color: Colors.white12,
         borderRadius: BorderRadius.circular(100),
       ),
-      child: const Icon(
-        Icons.adb,
+      child: Icon(
+        icon,
         color: Colors.white,
       ),
     );
   }
+
+  const StoryOwnerIcon({
+    super.key,
+    required this.icon,
+    this.width,
+    this.height,
+  });
 }
