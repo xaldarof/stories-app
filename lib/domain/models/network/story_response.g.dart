@@ -24,6 +24,7 @@ Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
       'timeCreate': instance.timeCreate,
       'categoryId': instance.categoryId,
       'author': instance.author,
+      'title': instance.title,
     };
 
 StoryAuthorResponse _$StoryAuthorResponseFromJson(Map<String, dynamic> json) =>

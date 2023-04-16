@@ -6,15 +6,10 @@ import 'package:jokes_app/common/utils/ui.dart';
 import 'package:jokes_app/common/widgets/button.dart';
 import 'package:jokes_app/common/widgets/input_widget.dart';
 import 'package:jokes_app/di/app_di.dart';
-import 'package:jokes_app/ui/auth/login/bloc/login_bloc.dart';
-import 'package:jokes_app/ui/auth/login/bloc/login_bloc.dart';
-import 'package:jokes_app/ui/auth/login/bloc/login_bloc.dart';
 import 'package:jokes_app/ui/auth/register/bloc/register_bloc.dart';
 import 'package:lottie/lottie.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
-
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -23,12 +18,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LoginBloc(
+      create: (_) => RegisterBloc(
         injector.get(),
       ),
-      child: BlocBuilder<LoginBloc, LoginState>(
+      child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
-          final bloc = context.read<LoginBloc>();
+          final bloc = context.read<RegisterBloc>();
           return Scaffold(
             body: Container(
               alignment: Alignment.center,
@@ -63,10 +58,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const Spacer(),
                   const Spacer(),
                   Button(
-                    loading: state.loginStatus == LoginStatus.loading,
+                    loading: state.registerStatus == RegisterStatus.loading,
                     margin: const EdgeInsets.all(24),
                     onTap: () {
-                      bloc.add(Login());
+                      bloc.add(Register());
                       unFocus();
                     },
                     text: 'Login',
