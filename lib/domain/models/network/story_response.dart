@@ -9,6 +9,7 @@ class StoryResponse {
   final String timeCreate;
   final int categoryId;
   final StoryAuthorResponse author;
+  final String title;
 
   const StoryResponse({
     required this.id,
@@ -16,6 +17,7 @@ class StoryResponse {
     required this.timeCreate,
     required this.categoryId,
     required this.author,
+    required this.title,
   });
 
   factory StoryResponse.fromJson(Map<String, dynamic> json) =>

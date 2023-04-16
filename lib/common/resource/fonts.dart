@@ -10,5 +10,6 @@ TextStyle primaryTextStyle(
     color: color,
     fontWeight: fontWeight,
     fontSize: fontSize,
+
   );
 }

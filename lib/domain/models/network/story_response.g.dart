@@ -14,6 +14,7 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
       categoryId: json['categoryId'] as int,
       author:
           StoryAuthorResponse.fromJson(json['author'] as Map<String, dynamic>),
+      title: json['title'] as String,
     );
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>

@@ -13,6 +13,7 @@ class StoryMapper extends Mapper<StoryResponse, Story> {
       categoryId: data.categoryId,
       authorId: data.author.userid,
       authorName: data.author.username,
+      title: data.title,
     );
   }
 }

@@ -69,7 +69,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
             body: Container(
               height: context.height,
               width: context.width,
-              decoration: DefaultBackgroundDecoration(),
+              decoration: const DefaultBackgroundDecoration(),
               child: (state.categories.isEmpty)
                   ? SizedBox(
                       width: 24,

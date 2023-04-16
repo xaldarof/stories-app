@@ -6,6 +6,8 @@ class Story {
   final int authorId;
   final String authorName;
 
+  final String title;
+
   const Story({
     required this.id,
     required this.body,
@@ -13,5 +15,6 @@ class Story {
     required this.categoryId,
     required this.authorId,
     required this.authorName,
+    required this.title,
   });
 }

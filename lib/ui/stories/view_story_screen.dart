@@ -1,15 +1,24 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
-import 'package:jokes_app/common/utils/size.dart';
 
-import '../../common/resource/decorations.dart';
 import '../../domain/models/ui/story.dart';
 
-class ViewStoryScreen extends StatelessWidget {
+class ViewStoryScreen extends StatefulWidget {
   final Story story;
+
+  @override
+  State<ViewStoryScreen> createState() => _ViewStoryScreenState();
+
+  const ViewStoryScreen({
+    super.key,
+    required this.story,
+  });
+}
+
+class _ViewStoryScreenState extends State<ViewStoryScreen> {
+  bool _titleAnimFinish = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,47 +27,69 @@ class ViewStoryScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(story.authorName),
+        title: Text(widget.story.authorName),
       ),
-      body: Expanded(
+      body: GestureDetector(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.only(
-                top: 100, left: 24, right: 24, bottom: 100),
-            decoration: const DefaultBackgroundDecoration(radius: 24),
-            child: AnimatedTextKit(
-              isRepeatingAnimation: false,
-              animatedTexts: [
-                TypewriterAnimatedText(
-                    speed: const Duration(milliseconds: 1),
-                    story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body +
-                        story.body,
-                    textStyle: primaryTextStyle()),
-              ],
-              onTap: () {
-                //
-              },
-            ),
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(top: 100, left: 24, right: 24),
+                child: AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  onFinished: () {
+                    setState(() {
+                      _titleAnimFinish = true;
+                    });
+                  },
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      speed: const Duration(milliseconds: 30),
+                      widget.story.title,
+                      textStyle: primaryTextStyle(fontSize: 16),
+                    ),
+                  ],
+                  onTap: () {
+                    //
+                  },
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(18),
+              ),
+              if (_titleAnimFinish)
+                Container(
+                  padding: const EdgeInsets.only(
+                      top: 24, left: 24, right: 24, bottom: 42),
+                  child: AnimatedTextKit(
+                    totalRepeatCount: 1,
+                    onFinished: () {
+                      //
+                    },
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        speed: const Duration(milliseconds: 30),
+                        widget.story.body +
+                            widget.story.body +
+                            widget.story.body +
+                            widget.story.body +
+                            widget.story.body +
+                            widget.story.body,
+                        textStyle: primaryTextStyle(fontSize: 16),
+                      ),
+                    ],
+                    onTap: () {
+                      //
+                    },
+                  ),
+                ),
+            ],
           ),
         ),
       ),
     );
   }
-
-  const ViewStoryScreen({
-    super.key,
-    required this.story,
-  });
 }
