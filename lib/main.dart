@@ -4,6 +4,7 @@ import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jokes_app/di/app_di.dart';
+import 'package:jokes_app/ui/auth/login/login_screen.dart';
 import 'package:jokes_app/ui/profile/profile_screen.dart';
 import 'package:jokes_app/ui/publish/publish_screen.dart';
 import 'package:jokes_app/ui/stories/stories_screen.dart';
@@ -23,10 +24,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Stories'),
+      home: LoginScreen(),
     );
   }
 }
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
   final _screens = [
     const StoriesScreen(),
-    PublishScreen(),
+    const PublishScreen(),
     const ProfileScreen(),
   ];
 
