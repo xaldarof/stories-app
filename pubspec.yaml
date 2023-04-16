@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^4.0.3
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
+  another_flushbar: ^1.12.29
 
   json_annotation: ^4.7.0
 

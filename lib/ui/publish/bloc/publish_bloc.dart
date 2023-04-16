@@ -30,6 +30,8 @@ class PublishBloc extends Bloc<PublishEvent, PublishState> {
       onData: (data) {
         printMessage(data);
         if (data is DomainLoading) {
+          bodyController.clear();
+          titleController.clear();
           return state.copyWith(publishStatus: PublishStatus.loading);
         }
         if (data is DomainFail) {

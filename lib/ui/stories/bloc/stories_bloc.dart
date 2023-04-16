@@ -17,6 +17,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
   final ScrollController scrollController = ScrollController();
 
   int page = 1;
+  bool endOfPaginationReached = false;
 
   StoriesBloc(this._repository) : super(const StoriesState()) {
     on<GetStories>(_getStories);
@@ -32,13 +33,16 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
       emit(state.copyWith(showCategories: onTop));
     });
     scrollController.onBottomReached(() {
-      page++;
-      add(GetStories(categoryId: state.categoryId));
+      if (!endOfPaginationReached) {
+        page++;
+        add(GetStories(categoryId: state.categoryId));
+      }
     });
   }
 
   Future<void> _getCategoryStories(
       GetCategoryStories event, Emitter emitter) async {
+    page = 1;
     emitter(state.copyWith(stories: [], categoryId: event.categoryId));
     add(GetStories(categoryId: event.categoryId));
   }
@@ -54,9 +58,10 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
           return state.copyWith(storiesStatus: StoriesStatus.fail);
         }
         if (data is DomainSuccess<List<Story>>) {
+          endOfPaginationReached = ((data.data?.length ?? 0) < 10);
           return state.copyWith(
               storiesStatus: StoriesStatus.success,
-              stories: (state.stories ?? []) + (data.data ?? []));
+              stories: (state.stories) + (data.data ?? []));
         }
         return state;
       },

@@ -20,7 +20,7 @@ class StoryTypeIcon extends StatelessWidget {
       ),
       child: Text(
         value.toLowerCase(),
-        style: primaryTextStyle(color: AppColors.white),
+        style: primaryTextStyle(color: AppColors.white, fontSize: 12),
       ),
     );
   }
