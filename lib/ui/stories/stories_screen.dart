@@ -4,10 +4,12 @@ import 'package:jokes_app/common/extensions/array.dart';
 import 'package:jokes_app/common/extensions/controller_ext.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/decorations.dart';
+import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/stories/bloc/stories_bloc.dart';
 import 'package:jokes_app/ui/stories/story_category_item.dart';
+import 'package:jokes_app/ui/stories/view_story_screen.dart';
 
 import '../../common/widgets/story_item.dart';
 
@@ -34,7 +36,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
           GetCategories(),
         )
         ..add(
-          GetStories(),
+          GetStories(categoryId: 1),
         ),
       child: BlocBuilder<StoriesBloc, StoriesState>(
         builder: (context, state) {
@@ -43,9 +45,9 @@ class _StoriesScreenState extends State<StoriesScreen> {
             extendBodyBehindAppBar: true,
             appBar: PreferredSize(
               preferredSize: Size(context.width, 42),
-              child: (state.showCategories && state.categories != null)
+              child: (state.showCategories && state.categories.isNotEmpty)
                   ? ListView.builder(
-                      itemCount: state.categories?.length,
+                      itemCount: state.categories.length,
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (e, i) {
@@ -86,7 +88,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                         final item = (state.stories)[i];
                         return StoryItem(
                           onTap: () {
-                            //
+                            context.navigateTo(ViewStoryScreen(story: item));
                           },
                           story: item,
                         );

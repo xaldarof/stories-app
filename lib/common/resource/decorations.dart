@@ -3,6 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'colors.dart';
 
 class DefaultBackgroundDecoration extends BoxDecoration {
+  final double? radius;
+
+  @override
+  BorderRadiusGeometry? get borderRadius => BorderRadius.circular(radius ?? 0);
+
   @override
   Color? get color => AppColors.primaryColor;
 
@@ -16,4 +21,8 @@ class DefaultBackgroundDecoration extends BoxDecoration {
       end: Alignment.topLeft,
       stops: const [0.0, 1],
       tileMode: TileMode.clamp);
+
+  const DefaultBackgroundDecoration({
+    this.radius,
+  });
 }

@@ -66,12 +66,15 @@ class StoryItem extends StatelessWidget {
               child: Container(
                 alignment: Alignment.topLeft,
                 margin: const EdgeInsets.only(left: 24, right: 24, top: 92),
-                child: Text(
-                  textAlign: TextAlign.start,
-                  story.body,
-                  style: primaryTextStyle(),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 5,
+                child: Hero(
+                  tag: 'tag',
+                  child: Text(
+                    textAlign: TextAlign.start,
+                    story.body,
+                    style: primaryTextStyle(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 5,
+                  ),
                 ),
               ),
             ),
@@ -84,7 +87,7 @@ class StoryItem extends StatelessWidget {
                 width: context.width,
                 text: 'View more',
                 onTap: () {
-                  //
+                  onTap.call();
                 },
               ),
             )
