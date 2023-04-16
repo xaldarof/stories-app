@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/ui.dart';
 
 import '../../common/resource/colors.dart';
@@ -21,6 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
     const StoriesScreen(),
     const PublishScreen(),
     const ProfileScreen(),
+  ];
+
+  final _screenTitles = [
+    'Stories',
+    'Publish',
+    'Profile',
   ];
 
   @override
@@ -57,6 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       appBar: AppBar(
         elevation: 0,
+        title: Text(
+          _screenTitles[selectedIndex],
+          style: primaryTextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: AppColors.primaryColorBlack,
       ),
       body: _screens[selectedIndex],

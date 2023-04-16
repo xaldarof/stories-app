@@ -12,6 +12,7 @@ class SettingsItem extends StatelessWidget {
   final double? width;
   final double? height;
   final String text;
+  final String? subText;
   final Function() onTap;
   final IconData icon;
 
@@ -36,12 +37,25 @@ class SettingsItem extends StatelessWidget {
                 icon: icon,
               ),
             ),
-            Text(
-              text,
-              style: primaryTextStyle(
-                  color: AppColors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
+            Flexible(
+              child: ListTile(
+                title: Text(
+                  text,
+                  style: primaryTextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+                subtitle: subText != null
+                    ? Text(
+                        subText!,
+                        style: primaryTextStyle(
+                            color: AppColors.whiteAlpha52,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
+                      )
+                    : null,
+              ),
             ),
           ],
         ),
@@ -57,6 +71,7 @@ class SettingsItem extends StatelessWidget {
     this.margin,
     this.width,
     this.height,
+    this.subText,
     required this.icon,
     required this.text,
     required this.onTap,

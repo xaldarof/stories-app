@@ -16,7 +16,7 @@ class StoryOwnerIcon extends StatelessWidget {
       ),
       child: Icon(
         icon,
-        color: Colors.white,
+        color: Colors.white.withAlpha(100),
       ),
     );
   }

@@ -39,10 +39,10 @@ class SplashScreen extends StatelessWidget {
         },
         listener: (context, state) {
           if (state.appState == AppState.logged) {
-            context.navigateTo(const HomeScreen());
+            context.navigateTo(const HomeScreen(), removeStack: true);
           }
           if (state.appState == AppState.unAuthorized) {
-            context.navigateTo(const LoginScreen());
+            context.navigateTo(const LoginScreen(), removeStack: true);
           }
         },
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/button.dart';
@@ -34,37 +36,39 @@ class PublishScreen extends StatelessWidget {
                     prev.publishStatus != curr.publishStatus,
               )
             ],
-            child: Container(
-              height: context.height,
-              decoration: DefaultBackgroundDecoration(),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                controller: ScrollController(),
-                child: Column(
-                  children: [
-                    Input(
-                      controller: bloc.titleController,
-                      hint: 'Title...',
-                      margin: const EdgeInsets.only(
-                          left: 24, right: 24, top: 24, bottom: 0),
-                      multiLine: false,
-                    ),
-                    Input(
-                      controller: bloc.bodyController,
-                      hint: 'Body...',
-                      margin: const EdgeInsets.all(24),
-                      multiLine: true,
-                    ),
-                    Button(
-                      loading: state.publishStatus == PublishStatus.loading,
-                      height: 52,
-                      onTap: () {
-                        bloc.add(PublishStory());
-                      },
-                      text: 'Send to review',
-                      margin: const EdgeInsets.all(24),
-                    ),
-                  ],
+            child: Scaffold(
+              body: Container(
+                height: context.height,
+                decoration: const DefaultBackgroundDecoration(),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  controller: ScrollController(),
+                  child: Column(
+                    children: [
+                      Input(
+                        controller: bloc.titleController,
+                        hint: 'Title...',
+                        margin: const EdgeInsets.only(
+                            left: 24, right: 24, top: 24, bottom: 0),
+                        multiLine: false,
+                      ),
+                      Input(
+                        controller: bloc.bodyController,
+                        hint: 'Body...',
+                        margin: const EdgeInsets.all(24),
+                        multiLine: true,
+                      ),
+                      Button(
+                        loading: state.publishStatus == PublishStatus.loading,
+                        height: 52,
+                        onTap: () {
+                          bloc.add(PublishStory());
+                        },
+                        text: 'Send to review',
+                        margin: const EdgeInsets.all(24),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

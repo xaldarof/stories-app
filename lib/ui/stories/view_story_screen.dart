@@ -19,6 +19,7 @@ class ViewStoryScreen extends StatefulWidget {
 
 class _ViewStoryScreenState extends State<ViewStoryScreen> {
   bool _titleAnimFinish = false;
+  bool _dateAnimFinish = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,8 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                     TypewriterAnimatedText(
                       speed: const Duration(milliseconds: 30),
                       widget.story.title,
-                      textStyle: primaryTextStyle(fontSize: 16),
+                      textStyle:
+                          primaryTextStyle(fontSize: 16, color: AppColors.grey),
                     ),
                   ],
                   onTap: () {
@@ -57,10 +59,33 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                   },
                 ),
               ),
+              if (_titleAnimFinish)
+                Container(
+                  padding: const EdgeInsets.only(top: 4, left: 24, right: 24),
+                  child: AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    onFinished: () {
+                      setState(() {
+                        _dateAnimFinish = true;
+                      });
+                    },
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        speed: const Duration(milliseconds: 30),
+                        widget.story.timeCreate,
+                        textStyle: primaryTextStyle(
+                            fontSize: 14, color: AppColors.grey),
+                      ),
+                    ],
+                    onTap: () {
+                      //
+                    },
+                  ),
+                ),
               const Padding(
                 padding: EdgeInsets.all(18),
               ),
-              if (_titleAnimFinish)
+              if (_dateAnimFinish)
                 Container(
                   padding: const EdgeInsets.only(
                       top: 24, left: 24, right: 24, bottom: 42),
