@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 
@@ -34,6 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (data is DomainFail) {
           return state.copyWith(loginStatus: LoginStatus.fail);
         }
+        return state;
       },
     );
   }

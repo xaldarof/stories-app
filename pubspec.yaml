@@ -38,7 +38,8 @@ dependencies:
   lottie: ^2.3.2
   simple_assets_generator: ^1.0.8
   json_annotation: ^4.7.0
-
+  rxdart: ^0.27.7
+  animate_gradient: ^0.0.2
   get_it: ^7.2.0
   dio: ^4.0.6
   dio_logging_interceptor: ^1.0.1

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:meta/meta.dart';
@@ -24,7 +25,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   Future<void> _register(Register event, Emitter emitter) {
     return emitter.forEach(
-      _repository.login(usernameController.text, passwordController.text),
+      _repository.register(usernameController.text, passwordController.text),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(registerStatus: RegisterStatus.loading);
@@ -35,6 +36,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         if (data is DomainFail) {
           return state.copyWith(registerStatus: RegisterStatus.fail);
         }
+        return state;
       },
     );
   }

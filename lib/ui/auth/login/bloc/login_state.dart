@@ -6,12 +6,17 @@ enum LoginStatus {
   fail,
 }
 
-class LoginState {
+class LoginState extends Equatable {
   final LoginStatus? loginStatus;
 
   const LoginState({
     this.loginStatus,
   });
+
+  @override
+  List<Object?> get props => [
+        loginStatus,
+      ];
 
   LoginState copyWith({
     LoginStatus? loginStatus,

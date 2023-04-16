@@ -7,12 +7,17 @@ enum RegisterStatus {
 }
 
 @immutable
-class RegisterState {
+class RegisterState extends Equatable {
   final RegisterStatus? registerStatus;
 
   const RegisterState({
     this.registerStatus,
   });
+
+  @override
+  List<Object?> get props => [
+        registerStatus,
+      ];
 
   RegisterState copyWith({
     RegisterStatus? registerStatus,
