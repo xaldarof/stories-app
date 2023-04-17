@@ -14,6 +14,7 @@ import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/category_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
+import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
 import 'package:jokes_app/domain/mappers/story_mapper.dart';
 import 'package:jokes_app/domain/repositories/auth_repository.dart';
 import 'package:jokes_app/domain/repositories/main_repository.dart';
@@ -49,7 +50,9 @@ void _setUpRepos() {
   injector.registerSingleton<MainRepository>(MainRepositoryImpl(
       dataSource: injector.get(), preferences: injector.get()));
   injector.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(
-      networkDataSource: injector.get(), profileMapper: ProfileMapper()));
+      networkDataSource: injector.get(),
+      profileMapper: ProfileMapper(),
+      profileStatsMapper: ProfileStatsMapper()));
 }
 
 void _setUpDataSources() {

@@ -7,6 +7,7 @@ import '../../domain/models/ui/story.dart';
 
 class ViewStoryScreen extends StatefulWidget {
   final Story story;
+  final Function() onReadFinish;
 
   @override
   State<ViewStoryScreen> createState() => _ViewStoryScreenState();
@@ -14,6 +15,7 @@ class ViewStoryScreen extends StatefulWidget {
   const ViewStoryScreen({
     super.key,
     required this.story,
+    required this.onReadFinish,
   });
 }
 
@@ -92,17 +94,12 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                   child: AnimatedTextKit(
                     totalRepeatCount: 1,
                     onFinished: () {
-                      //
+                      widget.onReadFinish.call();
                     },
                     animatedTexts: [
                       TypewriterAnimatedText(
                         speed: const Duration(milliseconds: 30),
-                        widget.story.body +
-                            widget.story.body +
-                            widget.story.body +
-                            widget.story.body +
-                            widget.story.body +
-                            widget.story.body,
+                        widget.story.body,
                         textStyle: primaryTextStyle(fontSize: 16),
                       ),
                     ],

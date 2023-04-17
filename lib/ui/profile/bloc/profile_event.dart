@@ -4,3 +4,4 @@ abstract class ProfileEvent {}
 
 
 class GetProfile extends ProfileEvent {}
+class GetProfileStats extends ProfileEvent {}

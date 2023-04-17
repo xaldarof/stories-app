@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jokes_app/common/extensions/controller_ext.dart';
+import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:jokes_app/domain/models/ui/category.dart';
 
@@ -23,6 +24,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
     on<GetStories>(_getStories);
     on<GetCategories>(_getCategories);
     on<GetCategoryStories>(_getCategoryStories);
+    on<SetAsRead>(_setAsRead);
 
     scrollController.addListener(() {
       if (state.showCategories == true) {
@@ -35,7 +37,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
     scrollController.onBottomReached(() {
       if (!endOfPaginationReached) {
         page++;
-        add(GetStories(categoryId: state.categoryId));
+        add(GetStories());
       }
     });
   }
@@ -44,12 +46,16 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
       GetCategoryStories event, Emitter emitter) async {
     page = 1;
     emitter(state.copyWith(stories: [], categoryId: event.categoryId));
-    add(GetStories(categoryId: event.categoryId));
+    add(GetStories());
+  }
+
+  Future<void> _setAsRead(SetAsRead event, Emitter emitter) async {
+    _repository.setAsRead(event.storyId);
   }
 
   Future<void> _getStories(GetStories event, Emitter emitter) {
     return emitter.forEach(
-      _repository.getStories(event.categoryId, page),
+      _repository.getStories(state.categoryId, page),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(storiesStatus: StoriesStatus.loading);
@@ -79,6 +85,8 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
           return state.copyWith(categoryStatus: StoriesStatus.fail);
         }
         if (data is DomainSuccess<List<Category>>) {
+          emitter(state.copyWith(categoryId: data.data?.first.id ?? 1));
+          add(GetStories());
           return state.copyWith(
               categoryStatus: StoriesStatus.success, categories: data.data);
         }

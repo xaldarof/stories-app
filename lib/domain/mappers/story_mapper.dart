@@ -14,6 +14,7 @@ class StoryMapper extends Mapper<StoryResponse, Story> {
       authorId: data.author.userid,
       authorName: data.author.username,
       title: data.title,
+      viewCount: data.viewCount,
     );
   }
 }

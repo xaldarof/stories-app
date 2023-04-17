@@ -47,4 +47,13 @@ class StoriesRepositoryImpl extends StoriesRepository {
   })  : _networkDataSource = networkDataSource,
         _storyMapper = storyMapper,
         _categoryMapper = categoryMapper;
+
+  @override
+  Future<void> setAsRead(int storyId) async {
+    try {
+      _networkDataSource.setAsRead(storyId);
+    } catch (e) {
+      //
+    }
+  }
 }

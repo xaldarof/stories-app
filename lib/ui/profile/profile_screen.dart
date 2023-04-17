@@ -16,6 +16,9 @@ class ProfileScreen extends StatelessWidget {
       create: (_) => ProfileBloc(injector.get())
         ..add(
           GetProfile(),
+        )
+        ..add(
+          GetProfileStats(),
         ),
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
@@ -35,9 +38,11 @@ class ProfileScreen extends StatelessWidget {
                     },
                     icon: Icons.person,
                   ),
-                  const UserInfoCard(
-                    margin: EdgeInsets.only(left: 24, right: 24),
-                  ),
+                  if (state.profileStats != null)
+                    UserInfoCard(
+                      margin: const EdgeInsets.only(left: 24, right: 24),
+                      stats: state.profileStats!,
+                    ),
                   SettingsItem(
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
                     text: 'Language',

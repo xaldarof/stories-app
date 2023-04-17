@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/widgets/icon_text.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
-import 'package:jokes_app/common/widgets/story_owner.dart';
+import 'package:jokes_app/domain/models/ui/profile_stats.dart';
 
 import '../../common/resource/colors.dart';
-import '../../common/resource/fonts.dart';
 
 class UserInfoCard extends StatelessWidget {
   final EdgeInsets? margin;
   final double? width;
   final double? height;
+  final ProfileStats stats;
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +23,18 @@ class UserInfoCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             color: AppColors.primaryDark),
         child: Column(
-          children: const [
+          children: [
             IconText(
               icon: Icons.favorite,
-              text: 'Liked',
+              text: 'Read count ${stats.readStoriesCount}',
             ),
             IconText(
               icon: Icons.pending_actions,
-              text: 'Published',
+              text: 'Published ${stats.storyCount}',
             ),
             IconText(
-              icon: Icons.pending_outlined,
-              text: 'Published',
+              icon: Icons.pending_actions,
+              text: 'View reached count ${stats.viewReachCount}',
             ),
           ],
         ),
@@ -51,5 +50,6 @@ class UserInfoCard extends StatelessWidget {
     this.margin,
     this.width,
     this.height,
+    required this.stats,
   });
 }

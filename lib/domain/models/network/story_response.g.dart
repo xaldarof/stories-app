@@ -15,6 +15,7 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
       author:
           StoryAuthorResponse.fromJson(json['author'] as Map<String, dynamic>),
       title: json['title'] as String,
+      viewCount: json['viewCount'] as int,
     );
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
       'categoryId': instance.categoryId,
       'author': instance.author,
       'title': instance.title,
+      'viewCount': instance.viewCount,
     };
 
 StoryAuthorResponse _$StoryAuthorResponseFromJson(Map<String, dynamic> json) =>

@@ -10,6 +10,7 @@ class StoryResponse {
   final int categoryId;
   final StoryAuthorResponse author;
   final String title;
+  final int viewCount;
 
   const StoryResponse({
     required this.id,
@@ -18,6 +19,7 @@ class StoryResponse {
     required this.categoryId,
     required this.author,
     required this.title,
+    required this.viewCount,
   });
 
   factory StoryResponse.fromJson(Map<String, dynamic> json) =>

@@ -82,7 +82,7 @@ class StoryItem extends StatelessWidget {
                     left: 24, right: 24, top: 24, bottom: 24),
                 height: 48,
                 width: context.width,
-                text: 'View more',
+                text: 'View more(${story.viewCount})',
                 onTap: () {
                   onTap.call();
                 },

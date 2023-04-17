@@ -7,6 +7,7 @@ class Story {
   final String authorName;
 
   final String title;
+  final int viewCount;
 
   const Story({
     required this.id,
@@ -16,5 +17,6 @@ class Story {
     required this.authorId,
     required this.authorName,
     required this.title,
+    required this.viewCount,
   });
 }

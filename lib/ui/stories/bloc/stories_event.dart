@@ -3,13 +3,7 @@ part of 'stories_bloc.dart';
 @immutable
 abstract class StoriesEvent {}
 
-class GetStories extends StoriesEvent {
-  final int? categoryId;
-
-  GetStories({
-    this.categoryId,
-  });
-}
+class GetStories extends StoriesEvent {}
 
 class GetCategoryStories extends StoriesEvent {
   final int? categoryId;
@@ -20,3 +14,11 @@ class GetCategoryStories extends StoriesEvent {
 }
 
 class GetCategories extends StoriesEvent {}
+
+class SetAsRead extends StoriesEvent {
+  final int storyId;
+
+  SetAsRead({
+    required this.storyId,
+  });
+}

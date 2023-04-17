@@ -17,6 +17,7 @@ class StoriesState extends Equatable {
         stories,
         categories,
         showCategories,
+        categoryId
       ];
 
   const StoriesState({

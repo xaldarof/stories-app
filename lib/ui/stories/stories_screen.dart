@@ -34,9 +34,6 @@ class _StoriesScreenState extends State<StoriesScreen> {
       create: (_) => StoriesBloc(injector.get())
         ..add(
           GetCategories(),
-        )
-        ..add(
-          GetStories(categoryId: 1),
         ),
       child: BlocBuilder<StoriesBloc, StoriesState>(
         builder: (context, state) {
@@ -88,7 +85,14 @@ class _StoriesScreenState extends State<StoriesScreen> {
                         final item = (state.stories)[i];
                         return StoryItem(
                           onTap: () {
-                            context.navigateTo(ViewStoryScreen(story: item));
+                            context.navigateTo(
+                              ViewStoryScreen(
+                                story: item,
+                                onReadFinish: () {
+                                  bloc.add(SetAsRead(storyId: item.id));
+                                },
+                              ),
+                            );
                           },
                           story: item,
                         );
