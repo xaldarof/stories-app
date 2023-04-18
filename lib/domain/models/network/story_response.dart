@@ -11,6 +11,8 @@ class StoryResponse {
   final StoryAuthorResponse author;
   final String title;
   final int viewCount;
+  final bool isPremium;
+  final bool isFrozen;
 
   const StoryResponse({
     required this.id,
@@ -20,6 +22,8 @@ class StoryResponse {
     required this.author,
     required this.title,
     required this.viewCount,
+    required this.isFrozen,
+    required this.isPremium,
   });
 
   factory StoryResponse.fromJson(Map<String, dynamic> json) =>

@@ -1,30 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/common/resource/colors.dart';
 
-class StoryOwnerIcon extends StatelessWidget {
+class StoryOwnerIcon extends StatefulWidget {
   final IconData icon;
   final double? width;
   final double? height;
+  final bool? animate;
+  final Color? borderColor;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height ?? 52,
-      width: width ?? 52,
-      decoration: BoxDecoration(
-        color: Colors.white12,
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Icon(
-        icon,
-        color: Colors.white.withAlpha(100),
-      ),
-    );
-  }
+  State<StoryOwnerIcon> createState() => _StoryOwnerIconState();
 
   const StoryOwnerIcon({
     super.key,
     required this.icon,
     this.width,
+    this.borderColor,
+    this.animate = false,
     this.height,
   });
+}
+
+class _StoryOwnerIconState extends State<StoryOwnerIcon>
+    with TickerProviderStateMixin {
+  late AnimationController _resizableController;
+
+  @override
+  void initState() {
+    _resizableController = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        milliseconds: 3000,
+      ),
+    );
+    _resizableController.addStatusListener((animationStatus) {
+      switch (animationStatus) {
+        case AnimationStatus.completed:
+          _resizableController.reverse();
+          break;
+        case AnimationStatus.dismissed:
+          _resizableController.forward();
+          break;
+        case AnimationStatus.forward:
+          break;
+        case AnimationStatus.reverse:
+          break;
+      }
+    });
+    _resizableController.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _resizableController.dispose();
+    super.dispose();
+  }
+
+  Widget _buildContainer(BuildContext context) {
+    return Container(
+      height: widget.height ?? 52,
+      width: widget.width ?? 52,
+      decoration: BoxDecoration(
+        color: AppColors.whiteAlpha52,
+        border: Border.all(
+            color: widget.borderColor ?? Colors.transparent,
+            width: _resizableController.value * 5),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Icon(
+        widget.icon,
+        color: Colors.white.withAlpha(100),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.animate == true
+        ? AnimatedBuilder(
+            animation: _resizableController,
+            builder: (context, child) {
+              return _buildContainer(context);
+            },
+          )
+        : _buildContainer(context);
+  }
 }

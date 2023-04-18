@@ -50,7 +50,9 @@ class StoryItem extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(
                         left: 24, top: 24, bottom: 12, right: 16),
-                    child: const StoryOwnerIcon(
+                    child: StoryOwnerIcon(
+                      animate: true,
+                      borderColor: story.isPremium ? AppColors.gold : null,
                       icon: Icons.wb_iridescent,
                     ),
                   ),
@@ -95,6 +97,7 @@ class StoryItem extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Button(
+                enabled: true,
                 margin: const EdgeInsets.only(
                     left: 24, right: 24, top: 24, bottom: 24),
                 height: 48,

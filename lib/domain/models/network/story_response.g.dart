@@ -16,6 +16,8 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
           StoryAuthorResponse.fromJson(json['author'] as Map<String, dynamic>),
       title: json['title'] as String,
       viewCount: json['viewCount'] as int,
+      isFrozen: json['isFrozen'] as bool,
+      isPremium: json['isPremium'] as bool,
     );
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>

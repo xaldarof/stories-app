@@ -16,4 +16,6 @@ class AppColors {
   static var white = Colors.white;
 
   static var grey = Colors.grey;
+
+  static var gold = const Color(0xFFE7BF20);
 }
