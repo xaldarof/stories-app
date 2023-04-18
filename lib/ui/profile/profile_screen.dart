@@ -4,7 +4,7 @@ import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/settings_item.dart';
 import 'package:jokes_app/di/app_di.dart';
-import 'package:jokes_app/ui/profile/bloc/profile_bloc.dart';
+import 'package:jokes_app/ui/profile/bloc/profile/profile_bloc.dart';
 import 'package:jokes_app/ui/profile/user_info_card.dart';
 
 class ProfileScreen extends StatelessWidget {

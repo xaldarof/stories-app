@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       const Spacer(),
                       const Spacer(),
                       Button(
-                        loading: state.registerStatus == RegisterStatus.loading,
+                        enabled: state.registerStatus == RegisterStatus.loading,
                         margin: const EdgeInsets.all(24),
                         onTap: () {
                           bloc.add(Register());

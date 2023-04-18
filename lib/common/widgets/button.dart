@@ -9,16 +9,17 @@ class Button extends StatelessWidget {
   final double? width;
   final double? height;
   final String text;
-  final bool? loading;
+  final bool? enabled;
+  final bool? animate;
   final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: loading == true ? 0.5 : 1,
+      opacity: enabled == false ? 0.5 : 1,
       child: ScaleTap(
-        scaleMinValue: loading == true ? 1 : null,
-        enableFeedback: loading == false,
+        scaleMinValue: enabled == false ? 1 : null,
+        enableFeedback: enabled == true,
         child: Container(
           alignment: Alignment.center,
           height: height,
@@ -27,15 +28,23 @@ class Button extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: AppColors.darkGreen),
-          child: loading == true
-              ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    color: AppColors.darkSpringGreen,
-                    strokeWidth: 2,
-                  ),
-                )
+          child: enabled == true
+              ? animate == true
+                  ? SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        color: AppColors.darkSpringGreen,
+                        strokeWidth: 2,
+                      ),
+                    )
+                  : Text(
+                      text,
+                      style: primaryTextStyle(
+                          color: AppColors.darkSpringGreen,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    )
               : Text(
                   text,
                   style: primaryTextStyle(
@@ -45,7 +54,9 @@ class Button extends StatelessWidget {
                 ),
         ),
         onPressed: () {
-          onTap.call();
+          if (enabled == true) {
+            onTap.call();
+          }
         },
       ),
     );
@@ -55,7 +66,8 @@ class Button extends StatelessWidget {
     super.key,
     this.margin,
     this.width,
-    this.loading = false,
+    this.enabled = false,
+    this.animate = true,
     required this.onTap,
     this.height,
     required this.text,

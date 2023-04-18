@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen>
                       const Spacer(),
                       const Spacer(),
                       Button(
-                        loading: state.loginStatus == LoginStatus.loading,
+                        enabled: state.loginStatus == LoginStatus.loading,
                         margin: const EdgeInsets.all(24),
                         onTap: () {
                           bloc.add(Login());

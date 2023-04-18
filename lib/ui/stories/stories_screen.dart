@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jokes_app/common/extensions/array.dart';
-import 'package:jokes_app/common/extensions/controller_ext.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/navigator.dart';

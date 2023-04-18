@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/size.dart';
+import 'package:jokes_app/common/utils/strings.dart';
 import 'package:jokes_app/common/widgets/button.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
 import 'package:jokes_app/common/widgets/story_owner.dart';
@@ -27,6 +28,22 @@ class StoryItem extends StatelessWidget {
         child: Stack(
           children: [
             Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                padding: const EdgeInsets.only(left: 12, right: 12),
+                height: 20,
+                margin: const EdgeInsets.only(right: 12, top: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.whiteAlpha52,
+                ),
+                child: Text(
+                  story.authorName,
+                  style: primaryTextStyle(color: AppColors.white, fontSize: 12),
+                ),
+              ),
+            ),
+            Align(
               alignment: Alignment.topCenter,
               child: Row(
                 children: [
@@ -34,7 +51,7 @@ class StoryItem extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         left: 24, top: 24, bottom: 12, right: 16),
                     child: const StoryOwnerIcon(
-                      icon: Icons.adb,
+                      icon: Icons.wb_iridescent,
                     ),
                   ),
                   Column(
@@ -44,10 +61,10 @@ class StoryItem extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(top: 12),
                         child: Text(
-                          story.authorName,
-                          style: primaryTextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                          story.title.cut(20),
                           overflow: TextOverflow.ellipsis,
+                          style: primaryTextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14),
                         ),
                       ),
                       Container(

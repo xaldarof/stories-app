@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/button.dart';
@@ -10,14 +10,44 @@ import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/publish/bloc/publish_bloc.dart';
 
 import '../../common/resource/decorations.dart';
+import '../stories/story_category_item.dart';
 
-class PublishScreen extends StatelessWidget {
+class PublishScreen extends StatefulWidget {
   const PublishScreen({super.key});
+
+  @override
+  State<PublishScreen> createState() => _PublishScreenState();
+}
+
+class _PublishScreenState extends State<PublishScreen> {
+  bool publishButtonEnabled = false;
+  Timer? _debounce;
+
+  _onInputValueChanged(PublishBloc bloc) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        publishButtonEnabled = bloc.bodyController.text.trim().isNotEmpty &&
+            bloc.titleController.text.trim().isNotEmpty &&
+            bloc.selectedCategoryIndex != -1;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PublishBloc>(
-      create: (_) => PublishBloc(injector.get()),
+      create: (_) => PublishBloc(
+        injector.get(),
+      )..add(
+          GetCategories(),
+        ),
       child: BlocBuilder<PublishBloc, PublishState>(
         builder: (context, state) {
           final bloc = context.read<PublishBloc>();
@@ -52,17 +82,48 @@ class PublishScreen extends StatelessWidget {
                             left: 24, right: 24, top: 24, bottom: 0),
                         multiLine: false,
                       ),
+                      SizedBox(
+                        height: 72,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 12, bottom: 12),
+                          itemCount: state.categories.length,
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (e, i) {
+                            final item = (state.categories ?? [])[i];
+                            return StoryCategoryItem(
+                              value: item,
+                              selected: bloc.selectedCategoryIndex == i,
+                              onTap: () {
+                                setState(
+                                  () {
+                                    _onInputValueChanged(bloc);
+                                    bloc.selectedCategoryIndex = i;
+                                  },
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
                       Input(
                         controller: bloc.bodyController,
                         hint: 'Body...',
+                        onChange: (text) {
+                          _onInputValueChanged(bloc);
+                        },
                         margin: const EdgeInsets.all(24),
                         multiLine: true,
                       ),
                       Button(
-                        loading: state.publishStatus == PublishStatus.loading,
+                        animate: state.publishStatus == PublishStatus.loading,
+                        enabled: publishButtonEnabled,
                         height: 52,
                         onTap: () {
-                          bloc.add(PublishStory());
+                          bloc.add(PublishStory(
+                              categoryId:
+                                  state.categories[bloc.selectedCategoryIndex].id));
                         },
                         text: 'Send to review',
                         margin: const EdgeInsets.all(24),

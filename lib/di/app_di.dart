@@ -43,8 +43,8 @@ void _setUpRepos() {
       networkDataSource: injector.get(),
       storyMapper: StoryMapper(),
       categoryMapper: CategoryMapper()));
-  injector.registerSingleton<PublishRepository>(
-      PublishRepositoryImpl(networkDataSource: injector.get()));
+  injector.registerSingleton<PublishRepository>(PublishRepositoryImpl(
+      networkDataSource: injector.get(), categoryMapper: CategoryMapper()));
   injector.registerSingleton<AuthRepository>(AuthRepositoryImpl(
       networkDataSource: injector.get(), preferences: injector.get()));
   injector.registerSingleton<MainRepository>(MainRepositoryImpl(
@@ -52,7 +52,9 @@ void _setUpRepos() {
   injector.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(
       networkDataSource: injector.get(),
       profileMapper: ProfileMapper(),
-      profileStatsMapper: ProfileStatsMapper()));
+      profileStatsMapper: ProfileStatsMapper(),
+      storyMapper: StoryMapper(),
+      categoryMapper: CategoryMapper()));
 }
 
 void _setUpDataSources() {

@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final _screens = [
     const StoriesScreen(),
-    const PublishScreen(),
+    PublishScreen(),
     const ProfileScreen(),
   ];
 

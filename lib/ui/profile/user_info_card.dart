@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/widgets/icon_text.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
 import 'package:jokes_app/domain/models/ui/profile_stats.dart';
+import 'package:jokes_app/ui/profile/user_stories_screen.dart';
+import 'package:jokes_app/ui/stories/stories_screen.dart';
 
 import '../../common/resource/colors.dart';
 
@@ -13,35 +16,42 @@ class UserInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTap(
-      child: Container(
-        alignment: Alignment.centerLeft,
-        height: height,
-        width: width,
-        margin: margin,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            color: AppColors.primaryDark),
-        child: Column(
-          children: [
-            IconText(
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: height,
+      width: width,
+      margin: margin,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: AppColors.primaryDark),
+      child: Column(
+        children: [
+          ScaleTap(
+            child: IconText(
               icon: Icons.favorite,
               text: 'Read count ${stats.readStoriesCount}',
             ),
-            IconText(
+            onPressed: () {},
+          ),
+          ScaleTap(
+            onPressed: () {
+              context.navigateTo(const UserStoriesScreen());
+            },
+            child: IconText(
+              hasAction: true,
               icon: Icons.pending_actions,
               text: 'Published ${stats.storyCount}',
             ),
-            IconText(
+          ),
+          ScaleTap(
+            onPressed: () {},
+            child: IconText(
               icon: Icons.pending_actions,
               text: 'View reached count ${stats.viewReachCount}',
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      onPressed: () {
-        //
-      },
     );
   }
 

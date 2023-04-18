@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/domain/models/ui/profile_stats.dart';
 
-import '../../../domain/models/common/domain_result.dart';
-import '../../../domain/models/ui/profile.dart';
-import '../../../domain/repositories/profile_repository.dart';
+import '../../../../domain/models/common/domain_result.dart';
+import '../../../../domain/models/ui/profile.dart';
+import '../../../../domain/repositories/profile_repository.dart';
 
 part 'profile_event.dart';
 

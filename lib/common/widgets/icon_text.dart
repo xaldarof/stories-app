@@ -7,6 +7,7 @@ import '../resource/fonts.dart';
 class IconText extends StatelessWidget {
   final IconData icon;
   final String text;
+  final bool? hasAction;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,16 @@ class IconText extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 16),
         ),
+        const Spacer(),
+        if (hasAction == true)
+          Icon(
+            Icons.chevron_right,
+            color: AppColors.white,
+          ),
+        if (hasAction == true)
+          const Padding(
+            padding: EdgeInsets.only(right: 24),
+          ),
       ],
     );
   }
@@ -34,6 +45,7 @@ class IconText extends StatelessWidget {
   const IconText({
     super.key,
     required this.icon,
+    this.hasAction = false,
     required this.text,
   });
 }
