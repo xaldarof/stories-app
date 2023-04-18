@@ -51,9 +51,12 @@ class StoryItem extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         left: 24, top: 24, bottom: 12, right: 16),
                     child: StoryOwnerIcon(
-                      animate: true,
+                      animate: story.isPremium,
+                      iconColor: story.isEnabled ? null : AppColors.blue,
                       borderColor: story.isPremium ? AppColors.gold : null,
-                      icon: Icons.wb_iridescent,
+                      icon: story.isEnabled
+                          ? Icons.public
+                          : Icons.ac_unit_rounded,
                     ),
                   ),
                   Column(
@@ -97,12 +100,14 @@ class StoryItem extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Button(
-                enabled: true,
+                enabled: story.isEnabled,
                 margin: const EdgeInsets.only(
                     left: 24, right: 24, top: 24, bottom: 24),
                 height: 48,
                 width: context.width,
-                text: 'View more(${story.viewCount})',
+                text: story.isEnabled
+                    ? 'View more(${story.viewCount})'
+                    : 'Frozen',
                 onTap: () {
                   onTap.call();
                 },

@@ -18,4 +18,6 @@ class AppColors {
   static var grey = Colors.grey;
 
   static var gold = const Color(0xFFE7BF20);
+
+  static var blue = const Color(0xFF20D0E7);
 }

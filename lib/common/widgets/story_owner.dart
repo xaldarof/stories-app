@@ -6,6 +6,7 @@ class StoryOwnerIcon extends StatefulWidget {
   final double? width;
   final double? height;
   final bool? animate;
+  final Color? iconColor;
   final Color? borderColor;
 
   @override
@@ -16,6 +17,7 @@ class StoryOwnerIcon extends StatefulWidget {
     required this.icon,
     this.width,
     this.borderColor,
+    this.iconColor,
     this.animate = false,
     this.height,
   });
@@ -70,7 +72,7 @@ class _StoryOwnerIconState extends State<StoryOwnerIcon>
       ),
       child: Icon(
         widget.icon,
-        color: Colors.white.withAlpha(100),
+        color: widget.iconColor ?? Colors.white.withAlpha(100),
       ),
     );
   }

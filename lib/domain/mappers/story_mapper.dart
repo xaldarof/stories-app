@@ -15,7 +15,7 @@ class StoryMapper extends Mapper<StoryResponse, Story> {
       authorName: data.author.username,
       title: data.title,
       viewCount: data.viewCount,
-      isEnabled: data.isFrozen,
+      isEnabled: !data.isFrozen,
       isPremium: data.isPremium,
     );
   }
