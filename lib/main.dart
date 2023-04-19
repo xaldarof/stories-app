@@ -9,7 +9,6 @@ import 'common/language/language.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
   await EncryptedSharedPreferences.initialize('1234930934-023940-2394-0324234');
   await setUpDependencies();
   runApp(
