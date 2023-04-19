@@ -6,6 +6,11 @@ import 'package:jokes_app/common/widgets/settings_item.dart';
 import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/profile/bloc/profile/profile_bloc.dart';
 import 'package:jokes_app/ui/profile/user_info_card.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:modified_localization/easy_localization.dart';
+
+import '../../generated/locale_keys.g.dart';
+import '../common/dialog/select_language_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -13,13 +18,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ProfileBloc(injector.get())
+      create: (_) =>
+      ProfileBloc(injector.get())
         ..add(
           GetProfile(),
-        )
-        ..add(
-          GetProfileStats(),
-        ),
+        )..add(
+        GetProfileStats(),
+      ),
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           return Container(
@@ -45,15 +50,24 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   SettingsItem(
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
-                    text: 'Language',
+                    text: Strings.language,
                     onTap: () {
-                      //
+                      showCupertinoModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return SelectLanguage(
+                            onSelect: (lang) {
+                              context.setLocale(lang.locale);
+                            },
+                          );
+                        },
+                      );
                     },
                     icon: Icons.language,
                   ),
                   SettingsItem(
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
-                    text: 'About',
+                    text: Strings.about,
                     onTap: () {
                       //
                     },
@@ -61,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SettingsItem(
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
-                    text: 'Share',
+                    text: Strings.share,
                     onTap: () {
                       //
                     },

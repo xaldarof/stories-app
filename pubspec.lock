@@ -241,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  easy_logger:
+    dependency: transitive
+    description:
+      name: easy_logger
+      sha256: c764a6e024846f33405a2342caf91c62e357c24b02c04dbc712ef232bf30ffb7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   encrypt:
     dependency: transitive
     description:
@@ -318,6 +326,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -488,6 +501,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  modal_bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: modal_bottom_sheet
+      sha256: ef533916a2c3089571c32bd34e410faca77a6849a3f28f748e0794525c5658a0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  modified_localization:
+    dependency: "direct main"
+    description:
+      name: modified_localization
+      sha256: "5f47cdc7afc5ad3f2506291eaaf6674b3239ce8ba51de5b2aef4189de3e0c691"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   nested:
     dependency: transitive
     description:

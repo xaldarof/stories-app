@@ -7,6 +7,7 @@ import 'package:jokes_app/common/utils/ui.dart';
 import 'package:jokes_app/common/widgets/button.dart';
 import 'package:jokes_app/common/widgets/input_widget.dart';
 import 'package:jokes_app/di/app_di.dart';
+import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/auth/register/bloc/register_bloc.dart';
 import 'package:lottie/lottie.dart';
 
@@ -85,11 +86,11 @@ class _RegisterScreenState extends State<RegisterScreen>
                       const Spacer(),
                       Input(
                           controller: bloc.usernameController,
-                          hint: 'Username',
+                          hint: Strings.username,
                           margin: const EdgeInsets.only(left: 24, right: 24)),
                       Input(
                           controller: bloc.passwordController,
-                          hint: 'Password',
+                          hint: Strings.password,
                           margin: const EdgeInsets.all(24)),
                       const Spacer(),
                       const Spacer(),
@@ -100,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                           bloc.add(Register());
                           unFocus();
                         },
-                        text: 'Register',
+                        text: Strings.register,
                         height: 56,
                       ),
                     ],

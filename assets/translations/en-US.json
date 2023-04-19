@@ -1,0 +1,22 @@
+{
+  "view_more": "View more",
+  "username": "Username",
+  "password": "Password",
+  "dont_have_account_register": "Don\\'t have account ? Register",
+  "login": "Login",
+  "stories": "Stories",
+  "register": "Register",
+  "publish": "Publish",
+  "profile": "Profile",
+  "read_count": "Read count",
+  "published": "Published",
+  "view_reach_count": "View reach count",
+  "share": "Share",
+  "about": "About",
+  "language": "Language",
+  "your_stories": "Your stories",
+  "something_went_wrong": "Ooops, something went wrong...",
+  "title": "Title...",
+  "body": "Body...",
+  "select_language": "Select language"
+}

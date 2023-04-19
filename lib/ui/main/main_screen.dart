@@ -4,6 +4,7 @@ import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/main/bloc/main_bloc.dart';
 import 'package:jokes_app/ui/main/splash_screen.dart';
+import 'package:modified_localization/easy_localization.dart';
 
 import '../../common/utils/ui.dart';
 import '../../domain/models/common/app_state.dart';
@@ -16,6 +17,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     setNavColor();
     return MaterialApp(
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (_) => MainBloc(

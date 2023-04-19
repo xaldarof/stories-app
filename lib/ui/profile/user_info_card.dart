@@ -3,6 +3,7 @@ import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/widgets/icon_text.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
 import 'package:jokes_app/domain/models/ui/profile_stats.dart';
+import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/stories/stories_screen.dart';
 
@@ -29,7 +30,7 @@ class UserInfoCard extends StatelessWidget {
           ScaleTap(
             child: IconText(
               icon: Icons.favorite,
-              text: 'Read count ${stats.readStoriesCount}',
+              text: '${Strings.readCount} ${stats.readStoriesCount}',
             ),
             onPressed: () {},
           ),
@@ -40,14 +41,14 @@ class UserInfoCard extends StatelessWidget {
             child: IconText(
               hasAction: true,
               icon: Icons.pending_actions,
-              text: 'Published ${stats.storyCount}',
+              text: '${Strings.published} ${stats.storyCount}',
             ),
           ),
           ScaleTap(
             onPressed: () {},
             child: IconText(
               icon: Icons.pending_actions,
-              text: 'View reached count ${stats.viewReachCount}',
+              text: '${Strings.viewReachCount} ${stats.viewReachCount}',
             ),
           ),
         ],

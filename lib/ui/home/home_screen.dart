@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/ui.dart';
+import 'package:jokes_app/generated/locale_keys.g.dart';
 
 import '../../common/resource/colors.dart';
 import '../profile/profile_screen.dart';
@@ -19,19 +20,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final _screens = [
     const StoriesScreen(),
-    PublishScreen(),
+    const PublishScreen(),
     const ProfileScreen(),
-  ];
-
-  final _screenTitles = [
-    'Stories',
-    'Publish',
-    'Profile',
   ];
 
   @override
   Widget build(BuildContext context) {
     setNavColor();
+    final screenTitles = [
+      Strings.stories,
+      Strings.publish,
+      Strings.profile,
+    ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
@@ -46,25 +46,25 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: AppColors.darkSpringGreen,
         unselectedItemColor: Colors.white.withAlpha(72),
         unselectedLabelStyle: const TextStyle(color: Colors.black12),
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            label: 'Stories',
-            icon: Icon(Icons.pending),
+            label: Strings.stories,
+            icon: const Icon(Icons.pending),
           ),
           BottomNavigationBarItem(
-            label: 'Publish',
-            icon: Icon(Icons.add),
+            label: Strings.publish,
+            icon: const Icon(Icons.add),
           ),
           BottomNavigationBarItem(
-            label: 'Profile',
-            icon: Icon(Icons.person),
+            label: Strings.profile,
+            icon: const Icon(Icons.person),
           ),
         ],
       ),
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          _screenTitles[selectedIndex],
+          screenTitles[selectedIndex],
           style: primaryTextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryColorBlack,

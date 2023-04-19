@@ -1,0 +1,22 @@
+{
+  "view_more": "Koproq korish",
+  "username": "Foydalanuvchi nomi",
+  "password": "Parol",
+  "dont_have_account_register": "Akkauntingiz mavjud emasmi ? Royhatdan o'ting",
+  "login": "Kirish",
+  "stories": "Xikoyalar",
+  "register": "Royhatdan o'tish",
+  "publish": "Nashr qilish",
+  "profile": "Profil",
+  "read_count": "O'qilganlar soni",
+  "published": "Nashr qilindi",
+  "view_reach_count": "Koʻrish soni",
+  "share": "Ulashish",
+  "about": "Dasturchi haqida",
+  "language": "Til",
+  "your_stories": "Sizning hikoyalaringiz",
+  "something_went_wrong": "Nimadir xato ketdi...",
+  "title": "Sarlavha...",
+  "body": "Tekst...",
+  "select_language": "Tilni tanlang"
+}

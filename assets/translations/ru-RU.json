@@ -1,0 +1,22 @@
+{
+  "view_more": "Посмотреть больше",
+  "username": "Имя пользователя",
+  "password": "Пароль",
+  "dont_have_account_register": "Нет аккаунта? Зарегистрируйтесь\n",
+  "login": "Логин",
+  "stories": "Истории",
+  "register": "Регистрация",
+  "publish": "Публикация",
+  "profile": "Профиль",
+  "read_count": "Количество прочтений",
+  "published": "Опубликовано",
+  "view_reach_count": "Количество охватов",
+  "share": "Поделиться",
+  "about": "О разработчике",
+  "language": "Язык",
+  "your_stories": "Ваши истории",
+  "something_went_wrong": "Упс, что-то пошло не так...",
+  "title": "Заголовок...",
+  "body": "Текст...",
+  "select_language": "Выберите язык"
+}

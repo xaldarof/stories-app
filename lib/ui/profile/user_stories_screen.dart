@@ -9,6 +9,7 @@ import '../../common/resource/colors.dart';
 import '../../common/resource/decorations.dart';
 import '../../common/widgets/story_item.dart';
 import '../../di/app_di.dart';
+import '../../generated/locale_keys.g.dart';
 import '../stories/story_category_item.dart';
 import '../stories/view_story_screen.dart';
 import 'bloc/user_stories/user_stories_event.dart';
@@ -37,7 +38,7 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
-              title: const Text('Your stories'),
+              title: Text(Strings.yourStories),
               bottom: (state.showCategories && state.categories.isNotEmpty)
                   ? PreferredSize(
                       preferredSize: Size(context.width, 42),

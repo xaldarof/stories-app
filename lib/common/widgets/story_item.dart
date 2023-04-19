@@ -6,6 +6,7 @@ import 'package:jokes_app/common/widgets/button.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
 import 'package:jokes_app/common/widgets/story_owner.dart';
 import 'package:jokes_app/common/widgets/story_type_.dart';
+import 'package:jokes_app/generated/locale_keys.g.dart';
 
 import '../../domain/models/ui/story.dart';
 import '../resource/colors.dart';
@@ -106,7 +107,7 @@ class StoryItem extends StatelessWidget {
                 height: 48,
                 width: context.width,
                 text: story.isEnabled
-                    ? 'View more(${story.viewCount})'
+                    ? '${Strings.viewMore}(${story.viewCount})'
                     : 'Frozen',
                 onTap: () {
                   onTap.call();

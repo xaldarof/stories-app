@@ -10,6 +10,7 @@ import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/publish/bloc/publish_bloc.dart';
 
 import '../../common/resource/decorations.dart';
+import '../../generated/locale_keys.g.dart';
 import '../stories/story_category_item.dart';
 
 class PublishScreen extends StatefulWidget {
@@ -56,10 +57,10 @@ class _PublishScreenState extends State<PublishScreen> {
               BlocListener<PublishBloc, PublishState>(
                 listener: (context, state) {
                   if (state.publishStatus == PublishStatus.fail) {
-                    context.showSnackBar('Ooops, something went wrong');
+                    context.showSnackBar(Strings.somethingWentWrong);
                   }
                   if (state.publishStatus == PublishStatus.success) {
-                    context.showSnackBar('Sent to review');
+                    context.showSnackBar(Strings.published);
                   }
                 },
                 listenWhen: (prev, curr) =>
@@ -77,7 +78,7 @@ class _PublishScreenState extends State<PublishScreen> {
                     children: [
                       Input(
                         controller: bloc.titleController,
-                        hint: 'Title...',
+                        hint: Strings.title,
                         margin: const EdgeInsets.only(
                             left: 24, right: 24, top: 24, bottom: 0),
                         multiLine: false,
@@ -109,7 +110,7 @@ class _PublishScreenState extends State<PublishScreen> {
                       ),
                       Input(
                         controller: bloc.bodyController,
-                        hint: 'Body...',
+                        hint: Strings.body,
                         onChange: (text) {
                           _onInputValueChanged(bloc);
                         },
@@ -122,10 +123,10 @@ class _PublishScreenState extends State<PublishScreen> {
                         height: 52,
                         onTap: () {
                           bloc.add(PublishStory(
-                              categoryId:
-                                  state.categories[bloc.selectedCategoryIndex].id));
+                              categoryId: state
+                                  .categories[bloc.selectedCategoryIndex].id));
                         },
-                        text: 'Send to review',
+                        text: Strings.published,
                         margin: const EdgeInsets.all(24),
                       ),
                     ],
