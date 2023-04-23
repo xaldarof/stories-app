@@ -4,6 +4,7 @@ import 'package:jokes_app/core/session/manager/session_manager.dart';
 import 'package:jokes_app/core/session/manager/session_manager_impl.dart';
 import 'package:jokes_app/data/api/api_client.dart';
 import 'package:jokes_app/data/data_sources/auth_network_data_source_impl.dart';
+import 'package:jokes_app/data/data_sources/profile_cache_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/profile_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/publish_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/stories_network_data_source_impl.dart';
@@ -14,6 +15,7 @@ import 'package:jokes_app/data/repositories/publish_repository_impl.dart';
 import 'package:jokes_app/data/repositories/stories_repository_impl.dart';
 import 'package:jokes_app/data/repositories/view_story_repository_impl.dart';
 import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/view_story_network_data_source.dart';
@@ -66,7 +68,8 @@ void _setUpRepos() {
       profileMapper: ProfileMapper(),
       profileStatsMapper: ProfileStatsMapper(),
       storyMapper: StoryMapper(),
-      categoryMapper: CategoryMapper()));
+      categoryMapper: CategoryMapper(),
+      cacheDataSource: injector.get()));
 }
 
 void _setUpDataSources() {
@@ -82,4 +85,6 @@ void _setUpDataSources() {
       ProfileNetworkDataSourceImpl(client: injector.get()));
   injector.registerSingleton<ViewStoryNetworkDataSource>(
       ViewStoryNetworkDataSourceImpl(client: injector.get()));
+  injector.registerSingleton<ProfileCacheDataSource>(
+      ProfileCacheDataSourceImpl(preferences: injector.get()));
 }

@@ -4,7 +4,8 @@ import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/settings_item.dart';
 import 'package:jokes_app/di/app_di.dart';
-import 'package:jokes_app/ui/common/dialog/about_dialog.dart';
+import 'package:jokes_app/ui/common/dialog/about.dart';
+import 'package:jokes_app/ui/common/dialog/logout.dart';
 import 'package:jokes_app/ui/profile/bloc/profile/profile_bloc.dart';
 import 'package:jokes_app/ui/profile/user_info_card.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -28,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
         ),
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
+          final bloc = context.read<ProfileBloc>();
           return Container(
             height: context.height,
             decoration: const DefaultBackgroundDecoration(),
@@ -40,7 +42,16 @@ class ProfileScreen extends StatelessWidget {
                     margin: const EdgeInsets.all(24),
                     text: state.profile?.username ?? "",
                     onTap: () {
-                      //
+                      showCupertinoModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return LogOutContent(
+                            onPositive: () {
+                              bloc.add(LogOut());
+                            },
+                          );
+                        },
+                      );
                     },
                     icon: Icons.person,
                   ),

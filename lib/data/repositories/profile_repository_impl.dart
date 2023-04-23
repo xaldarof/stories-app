@@ -1,3 +1,4 @@
+import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
@@ -13,6 +14,7 @@ import '../../domain/models/ui/story.dart';
 
 class ProfileRepositoryImpl extends ProfileRepository {
   final ProfileNetworkDataSource _networkDataSource;
+  final ProfileCacheDataSource _cacheDataSource;
   final ProfileMapper _profileMapper;
   final ProfileStatsMapper _profileStatsMapper;
   final StoryMapper _storyMapper;
@@ -71,18 +73,6 @@ class ProfileRepositoryImpl extends ProfileRepository {
     }
   }
 
-  ProfileRepositoryImpl({
-    required ProfileNetworkDataSource networkDataSource,
-    required ProfileMapper profileMapper,
-    required ProfileStatsMapper profileStatsMapper,
-    required StoryMapper storyMapper,
-    required CategoryMapper categoryMapper,
-  })  : _networkDataSource = networkDataSource,
-        _profileMapper = profileMapper,
-        _profileStatsMapper = profileStatsMapper,
-        _storyMapper = storyMapper,
-        _categoryMapper = categoryMapper;
-
   @override
   Future<void> setAsRead(int storyId) async {
     try {
@@ -91,4 +81,23 @@ class ProfileRepositoryImpl extends ProfileRepository {
       //
     }
   }
+
+  @override
+  Future<void> logout() async {
+    await _cacheDataSource.clearAllCache();
+  }
+
+  ProfileRepositoryImpl({
+    required ProfileNetworkDataSource networkDataSource,
+    required ProfileCacheDataSource cacheDataSource,
+    required ProfileMapper profileMapper,
+    required ProfileStatsMapper profileStatsMapper,
+    required StoryMapper storyMapper,
+    required CategoryMapper categoryMapper,
+  })  : _networkDataSource = networkDataSource,
+        _cacheDataSource = cacheDataSource,
+        _profileMapper = profileMapper,
+        _profileStatsMapper = profileStatsMapper,
+        _storyMapper = storyMapper,
+        _categoryMapper = categoryMapper;
 }

@@ -10,4 +10,6 @@ abstract class ProfileRepository {
   Stream<DomainResult> getCategories();
 
   Future<void> setAsRead(int storyId);
+
+  Future<void> logout();
 }

@@ -17,6 +17,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this._repository) : super(const ProfileState()) {
     on<GetProfile>(_getProfile);
     on<GetProfileStats>(_getProfileStats);
+    on<LogOut>(_logout);
+  }
+
+  Future<void> _logout(LogOut event, Emitter emitter) async {
+    _repository.logout();
   }
 
   Future<void> _getProfile(GetProfile event, Emitter emitter) {

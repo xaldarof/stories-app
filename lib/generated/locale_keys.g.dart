@@ -27,5 +27,8 @@ abstract class Strings {
   static String get selectLanguage => 'select_language'.tr();
   static String get frozen => 'frozen'.tr();
   static String get aboutContent => 'about_content'.tr();
+  static String get yes => 'yes'.tr();
+  static String get no => 'no'.tr();
+  static String get doYouWantLogout => 'do_you_want_logout'.tr();
 
 }

@@ -21,6 +21,7 @@ extension DateTimeExt on DateTime {
 extension DateInt on int {
   String toDate() {
     var date = DateTime.fromMillisecondsSinceEpoch(this);
+    date = date.copyWith(hour: date.hour + 5);
     return "${date.day}.${date.month}.${date.year} ${date.hour}:${date.minute}:${date.second}";
   }
 }
@@ -29,6 +30,7 @@ extension DateFormatExt on String {
   String toDate() {
     try {
       DateTime now = DateTime.parse(this);
+      now = now.copyWith(hour: now.hour + 5);
       var formatter = DateFormat('dd.MM.yyyy HH:mm');
       var formatted = formatter.format(now);
       return formatted;

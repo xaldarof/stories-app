@@ -18,5 +18,5 @@ class ViewStoryNetworkDataSourceImpl extends ViewStoryNetworkDataSource {
 
   ViewStoryNetworkDataSourceImpl({
     required DioClient client,
-  }) : _client = client; //
+  }) : _client = client;
 }
