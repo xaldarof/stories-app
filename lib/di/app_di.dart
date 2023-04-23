@@ -7,13 +7,16 @@ import 'package:jokes_app/data/data_sources/auth_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/profile_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/publish_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/stories_network_data_source_impl.dart';
+import 'package:jokes_app/data/data_sources/view_story_network_data_source_impl.dart';
 import 'package:jokes_app/data/repositories/auth_repository_impl.dart';
-import 'package:jokes_app/data/repositories/profle_repository_impl.dart';
+import 'package:jokes_app/data/repositories/profile_repository_impl.dart';
 import 'package:jokes_app/data/repositories/publish_repository_impl.dart';
 import 'package:jokes_app/data/repositories/stories_repository_impl.dart';
+import 'package:jokes_app/data/repositories/view_story_repository_impl.dart';
 import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/view_story_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/category_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
@@ -22,6 +25,7 @@ import 'package:jokes_app/domain/repositories/auth_repository.dart';
 import 'package:jokes_app/domain/repositories/main_repository.dart';
 import 'package:jokes_app/domain/repositories/profile_repository.dart';
 import 'package:jokes_app/domain/repositories/publish_repository.dart';
+import 'package:jokes_app/domain/repositories/view_story_repository.dart';
 
 import '../data/data_sources/main_data_source_impl.dart';
 import '../data/repositories/main_repository_impl.dart';
@@ -55,6 +59,8 @@ void _setUpRepos() {
       networkDataSource: injector.get(), preferences: injector.get()));
   injector.registerSingleton<MainRepository>(MainRepositoryImpl(
       dataSource: injector.get(), preferences: injector.get()));
+  injector.registerSingleton<ViewStoryRepository>(
+      ViewStoryRepositoryImpl(networkDataSource: injector.get()));
   injector.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(
       networkDataSource: injector.get(),
       profileMapper: ProfileMapper(),
@@ -74,4 +80,6 @@ void _setUpDataSources() {
       MainDataSourceImpl(preferences: injector.get()));
   injector.registerSingleton<ProfileNetworkDataSource>(
       ProfileNetworkDataSourceImpl(client: injector.get()));
+  injector.registerSingleton<ViewStoryNetworkDataSource>(
+      ViewStoryNetworkDataSourceImpl(client: injector.get()));
 }

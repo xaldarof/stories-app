@@ -12,7 +12,7 @@ import '../../common/widgets/story_item.dart';
 import '../../di/app_di.dart';
 import '../../generated/locale_keys.g.dart';
 import '../stories/story_category_item.dart';
-import '../stories/view_story_screen.dart';
+import '../view_story/view_story_screen.dart';
 import 'bloc/user_stories/user_stories_event.dart';
 
 class UserStoriesScreen extends StatefulWidget {
@@ -112,6 +112,9 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
                                 story: item,
                                 onReadFinish: () {
                                   bloc.add(SetAsRead(storyId: item.id));
+                                },
+                                onUnpublish: () {
+                                  // bloc.add(Un)
                                 },
                               ),
                             );

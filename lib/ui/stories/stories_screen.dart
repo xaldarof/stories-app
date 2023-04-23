@@ -8,7 +8,7 @@ import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/stories/bloc/stories_bloc.dart';
 import 'package:jokes_app/ui/stories/story_category_item.dart';
-import 'package:jokes_app/ui/stories/view_story_screen.dart';
+import 'package:jokes_app/ui/view_story/view_story_screen.dart';
 
 import '../../common/widgets/story_item.dart';
 
@@ -91,6 +91,9 @@ class _StoriesScreenState extends State<StoriesScreen> {
                                 story: item,
                                 onReadFinish: () {
                                   bloc.add(SetAsRead(storyId: item.id));
+                                },
+                                onUnpublish: () {
+                                  //
                                 },
                               ),
                             );

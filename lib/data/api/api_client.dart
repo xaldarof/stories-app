@@ -78,7 +78,7 @@ class DioClient {
         cancelToken: cancelToken);
   }
 
-  Future<Response<T>> patch<T>(
+  Future<Response<T>> put<T>(
     String path, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -86,8 +86,9 @@ class DioClient {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
-  }) {
-    return _dio.patch(path, data: data, queryParameters: queryParameters);
+  }) async {
+    _dio.options = await _getOptions();
+    return _dio.put(path, data: data, queryParameters: queryParameters);
   }
 }
 
