@@ -6,10 +6,10 @@ class ViewStoryRepositoryImpl extends ViewStoryRepository {
   final ViewStoryNetworkDataSource _networkDataSource;
 
   @override
-  Stream<DomainResult> unpublish(int storyId) async* {
+  Stream<DomainResult> unpublish(int storyId, bool state) async* {
     try {
       yield DomainLoading();
-      final res = await _networkDataSource.unpublish(storyId);
+      final res = await _networkDataSource.unpublish(storyId, state);
       if (res) {
         yield DomainSuccess();
       } else {

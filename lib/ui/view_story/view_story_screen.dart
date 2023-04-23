@@ -45,11 +45,21 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                 if (widget.story.canModify &&
                     state.unpublishStatus != ViewStoryStatus.success)
                   IconButton(
-                      onPressed: () {
-                        bloc.add(UnPublish(storyId: widget.story.id));
-                        widget.onUnpublish.call();
-                      },
-                      icon: const Icon(Icons.unpublished_outlined))
+                    onPressed: () {
+                      bloc.add(ToggleVisibility(
+                          storyId: widget.story.id,
+                          enabled: !widget.story.isPublished));
+                      widget.onUnpublish.call();
+                    },
+                    icon: Icon(
+                      widget.story.isPublished
+                          ? Icons.unpublished_outlined
+                          : Icons.public,
+                      color: widget.story.isPublished
+                          ? AppColors.red
+                          : AppColors.darkSpringGreen,
+                    ),
+                  )
               ],
               backgroundColor: Colors.transparent,
               title: Text(widget.story.authorName),

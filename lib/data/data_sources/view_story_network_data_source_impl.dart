@@ -6,8 +6,13 @@ class ViewStoryNetworkDataSourceImpl extends ViewStoryNetworkDataSource {
   final DioClient _client;
 
   @override
-  Future<bool> unpublish(int storyId) async {
-    final response = await _client.put("api/v1/story/unpublish/$storyId/");
+  Future<bool> unpublish(int storyId, bool state) async {
+    final response = await _client.put(
+      "api/v1/story/visible/$storyId",
+      queryParameters: {
+        "state": state == true ? 1 : 0,
+      },
+    );
     return response.isSuccessful;
   }
 

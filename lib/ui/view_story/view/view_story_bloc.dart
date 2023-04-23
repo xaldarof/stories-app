@@ -16,12 +16,12 @@ class ViewStoryBloc extends Bloc<ViewStoryEvent, ViewStoryState> {
   ViewStoryBloc(
     this._repository,
   ) : super(const ViewStoryState()) {
-    on<UnPublish>(_unpublish);
+    on<ToggleVisibility>(_unpublish);
   }
 
-  Future<void> _unpublish(UnPublish event, Emitter emitter) async {
+  Future<void> _unpublish(ToggleVisibility event, Emitter emitter) async {
     return emitter.forEach(
-      _repository.unpublish(event.storyId),
+      _repository.unpublish(event.storyId, event.enabled),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(unpublishStatus: ViewStoryStatus.loading);

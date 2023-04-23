@@ -18,6 +18,7 @@ class StoryMapper extends Mapper<StoryResponse, Story> {
       isEnabled: !data.isFrozen,
       isPremium: data.isPremium,
       canModify: data.isOwner,
+      isPublished: data.isPublished == true,
     );
   }
 }

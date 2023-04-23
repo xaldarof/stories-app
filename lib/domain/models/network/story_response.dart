@@ -14,6 +14,7 @@ class StoryResponse {
   final bool isPremium;
   final bool isFrozen;
   final bool isOwner;
+  final bool? isPublished;
 
   const StoryResponse({
     required this.id,
@@ -24,6 +25,7 @@ class StoryResponse {
     required this.title,
     required this.viewCount,
     required this.isFrozen,
+    required this.isPublished,
     required this.isPremium,
     required this.isOwner,
   });

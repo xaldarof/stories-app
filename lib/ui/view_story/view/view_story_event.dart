@@ -3,10 +3,12 @@ part of 'view_story_bloc.dart';
 @immutable
 abstract class ViewStoryEvent {}
 
-class UnPublish extends ViewStoryEvent {
+class ToggleVisibility extends ViewStoryEvent {
   final int storyId;
+  final bool enabled;
 
-  UnPublish({
+  ToggleVisibility({
     required this.storyId,
+    required this.enabled,
   });
 }
