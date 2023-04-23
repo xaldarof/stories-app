@@ -126,7 +126,7 @@ class _PublishScreenState extends State<PublishScreen> {
                               categoryId: state
                                   .categories[bloc.selectedCategoryIndex].id));
                         },
-                        text: Strings.published,
+                        text: Strings.publish,
                         margin: const EdgeInsets.all(24),
                       ),
                     ],

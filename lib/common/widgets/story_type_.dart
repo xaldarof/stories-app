@@ -12,15 +12,16 @@ class StoryTypeIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.only(left: 12, right: 12),
+      padding: const EdgeInsets.only(left: 0, right: 12),
       height: 20,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: Colors.brown,
-      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.circular(24),
+      //   color: Colors.brown,
+      // ),
       child: Text(
         value.toLowerCase(),
-        style: primaryTextStyle(color: AppColors.white, fontSize: 12),
+        style: primaryTextStyle(
+            color: AppColors.white.withAlpha(152), fontSize: 12),
       ),
     );
   }

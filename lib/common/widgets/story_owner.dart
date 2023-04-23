@@ -72,7 +72,7 @@ class _StoryOwnerIconState extends State<StoryOwnerIcon>
       ),
       child: Icon(
         widget.icon,
-        color: widget.iconColor ?? Colors.white.withAlpha(100),
+        color: widget.iconColor ?? AppColors.darkSpringGreen,
       ),
     );
   }
