@@ -2,16 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jokes_app/core/session/manager/session_manager.dart';
 
 extension ResponseExt on Response {
   bool get isSuccessful => statusCode == 200 || statusCode == 201;
 }
 
 class DioClient {
+  final SessionManager _sessionManager;
   final String _baseUrl = "http://127.0.0.1:8000/";
   late Dio _dio;
 
-  DioClient() {
+  DioClient(this._sessionManager) {
     _dio = Dio();
     if (kDebugMode) {
       if (_dio.interceptors.isEmpty == true) {
@@ -21,31 +23,28 @@ class DioClient {
             compact: false,
           ),
         );
-        _dio.interceptors.add(AuthInterceptor());
+        _dio.interceptors.add(AuthInterceptor(sessionManager: _sessionManager));
       }
     }
   }
 
   Future<BaseOptions> _getOptions() async {
-    final token =
-        (await EncryptedSharedPreferences.getInstance()).getString('token');
-
     return BaseOptions(
-        baseUrl: _baseUrl,
-        responseType: ResponseType.plain,
-        connectTimeout: 120000,
-        receiveTimeout: 120000,
-        headers: {
-          "Authorization":
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyMDIzMTI5LCJpYXQiOjE2ODE1OTExMjksImp0aSI6Ijc2MWNhNTFlMGI1YzRkYTM5ZmU4YmYxNDMxMjg4MjEzIiwidXNlcl9pZCI6Mn0.U55w4YEbN9SX-Lk7O6qPCBUcYIWX32vvI2TMdXRmLy0"
-        },
-        validateStatus: (code) {
-          if (code! >= 200 && code <= 400) {
-            return true;
-          } else {
-            return false;
-          }
-        });
+      baseUrl: _baseUrl,
+      responseType: ResponseType.plain,
+      connectTimeout: 120000,
+      receiveTimeout: 120000,
+      headers: {
+        "Authorization": "${_sessionManager.accessToken}",
+      },
+      validateStatus: (code) {
+        if (code! >= 200 && code <= 400) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+    );
   }
 
   CancelToken cancelToken() {
@@ -93,11 +92,17 @@ class DioClient {
 }
 
 class AuthInterceptor extends Interceptor {
+  final SessionManager _sessionManager;
+
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      //logged out
+      _sessionManager.endLocalSession();
     }
     super.onError(err, handler);
   }
+
+  AuthInterceptor({
+    required SessionManager sessionManager,
+  }) : _sessionManager = sessionManager;
 }

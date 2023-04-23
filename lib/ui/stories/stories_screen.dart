@@ -5,6 +5,7 @@ import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/di/app_di.dart';
+import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/stories/bloc/stories_bloc.dart';
 import 'package:jokes_app/ui/stories/story_category_item.dart';
 import 'package:jokes_app/ui/stories/view_story_screen.dart';
@@ -84,7 +85,6 @@ class _StoriesScreenState extends State<StoriesScreen> {
                       itemBuilder: (e, i) {
                         final item = (state.stories)[i];
                         return StoryItem(
-
                           onTap: () {
                             context.navigateTo(
                               ViewStoryScreen(
@@ -96,6 +96,12 @@ class _StoriesScreenState extends State<StoriesScreen> {
                             );
                           },
                           story: item,
+                          onTapOwner: () {
+                            context.navigateTo(UserStoriesScreen(
+                              userId: item.authorId,
+                              username: item.authorName,
+                            ));
+                          },
                         );
                       },
                     ),

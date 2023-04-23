@@ -22,7 +22,7 @@ extension ContextExt on BuildContext {
       Color backColor = AppColors.darkGreen;
 
       if (status == MessageStatus.fail) {
-        backColor = AppColors.darkGreen;
+        backColor = AppColors.red;
       }
 
       Flushbar(

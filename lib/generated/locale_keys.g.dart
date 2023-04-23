@@ -25,5 +25,7 @@ abstract class Strings {
   static String get title => 'title'.tr();
   static String get body => 'body'.tr();
   static String get selectLanguage => 'select_language'.tr();
+  static String get frozen => 'frozen'.tr();
+  static String get aboutContent => 'about_content'.tr();
 
 }

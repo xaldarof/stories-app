@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/ui/profile/bloc/user_stories/user_stories_bloc.dart';
@@ -15,7 +16,14 @@ import '../stories/view_story_screen.dart';
 import 'bloc/user_stories/user_stories_event.dart';
 
 class UserStoriesScreen extends StatefulWidget {
-  const UserStoriesScreen({super.key});
+  final int userId;
+  final String username;
+
+  const UserStoriesScreen({
+    super.key,
+    required this.userId,
+    required this.username,
+  });
 
   @override
   State<UserStoriesScreen> createState() => _UserStoriesScreenState();
@@ -29,6 +37,9 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
     return BlocProvider(
       create: (_) => UserStoriesBloc(injector.get())
         ..add(
+          SetUserId(id: widget.userId),
+        )
+        ..add(
           GetCategories(),
         ),
       child: BlocBuilder<UserStoriesBloc, UserStoriesState>(
@@ -38,7 +49,11 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
-              title: Text(Strings.yourStories),
+              title: Text(
+                "${Strings.stories} ${widget.username}",
+                style:
+                    primaryTextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               bottom: (state.showCategories && state.categories.isNotEmpty)
                   ? PreferredSize(
                       preferredSize: Size(context.width, 42),
@@ -48,16 +63,19 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (e, i) {
-                            final item = (state.categories ?? [])[i];
+                            final item = (state.categories)[i];
                             return StoryCategoryItem(
                               value: item,
                               selected: selectedCategoryIndex == i,
                               onTap: () {
-                                bloc.add(
-                                    GetCategoryStories(categoryId: item.id));
-                                setState(() {
-                                  selectedCategoryIndex = i;
-                                });
+                                bloc.add(GetCategoryStories(
+                                    categoryId: item.id,
+                                    userId: widget.userId));
+                                setState(
+                                  () {
+                                    selectedCategoryIndex = i;
+                                  },
+                                );
                               },
                             );
                           },
@@ -93,12 +111,15 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
                               ViewStoryScreen(
                                 story: item,
                                 onReadFinish: () {
-                                  //
+                                  bloc.add(SetAsRead(storyId: item.id));
                                 },
                               ),
                             );
                           },
                           story: item,
+                          onTapOwner: () {
+                            //
+                          },
                         );
                       },
                     ),

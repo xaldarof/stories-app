@@ -18,6 +18,7 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
       viewCount: json['viewCount'] as int,
       isFrozen: json['isFrozen'] as bool,
       isPremium: json['isPremium'] as bool,
+      isOwner: json['isOwner'] as bool,
     );
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>

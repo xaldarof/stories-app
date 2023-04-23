@@ -43,10 +43,11 @@ class ProfileRepositoryImpl extends ProfileRepository {
   }
 
   @override
-  Stream<DomainResult> getStories(int? categoryId, int page) async* {
+  Stream<DomainResult> getStories(
+      int userId, int? categoryId, int page) async* {
     try {
       yield DomainLoading();
-      final res = await _networkDataSource.getStories(categoryId, page);
+      final res = await _networkDataSource.getStories(userId, categoryId, page);
       if (res != null) {
         final mapped = res.map((e) => _storyMapper.map(e));
         yield DomainSuccess<List<Story>>(data: mapped.toList());
@@ -81,4 +82,13 @@ class ProfileRepositoryImpl extends ProfileRepository {
         _profileStatsMapper = profileStatsMapper,
         _storyMapper = storyMapper,
         _categoryMapper = categoryMapper;
+
+  @override
+  Future<void> setAsRead(int storyId) async {
+    try {
+      _networkDataSource.setAsRead(storyId);
+    } catch (e) {
+      //
+    }
+  }
 }

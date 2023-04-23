@@ -32,13 +32,15 @@ class ProfileNetworkDataSourceImpl extends ProfileNetworkDataSource {
   }
 
   @override
-  Future<List<StoryResponse>?> getStories(int? categoryId, int page) async {
+  Future<List<StoryResponse>?> getStories(
+      int userId, int? categoryId, int page) async {
     try {
       final response = await _client.get(
-        "api/v1/stories/mine",
+        "api/v1/stories/user",
         queryParameters: {
           "categoryId": categoryId,
           "page": page,
+          "userId": userId,
         },
       );
       final decoded = BaseListResponse.fromJson(jsonDecode(response.data));
@@ -61,5 +63,15 @@ class ProfileNetworkDataSourceImpl extends ProfileNetworkDataSource {
       printMessage(e.toString());
       return null;
     }
+  }
+
+  @override
+  Future<void> setAsRead(int storyId) {
+    return _client.post(
+      "api/v1/story/views",
+      data: {
+        "story_id": storyId,
+      },
+    );
   }
 }

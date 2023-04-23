@@ -51,7 +51,9 @@ class StoriesNetworkDataSourceImpl extends StoriesNetworkDataSource {
   Future<void> setAsRead(int storyId) {
     return _client.post(
       "api/v1/story/views",
-      data: {"story_id": storyId},
+      data: {
+        "story_id": storyId,
+      },
     );
   }
 }

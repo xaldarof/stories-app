@@ -4,6 +4,7 @@ import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/settings_item.dart';
 import 'package:jokes_app/di/app_di.dart';
+import 'package:jokes_app/ui/common/dialog/about_dialog.dart';
 import 'package:jokes_app/ui/profile/bloc/profile/profile_bloc.dart';
 import 'package:jokes_app/ui/profile/user_info_card.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -18,13 +19,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-      ProfileBloc(injector.get())
+      create: (_) => ProfileBloc(injector.get())
         ..add(
           GetProfile(),
-        )..add(
-        GetProfileStats(),
-      ),
+        )
+        ..add(
+          GetProfileStats(),
+        ),
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           return Container(
@@ -69,7 +70,12 @@ class ProfileScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
                     text: Strings.about,
                     onTap: () {
-                      //
+                      showCupertinoModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return const About();
+                        },
+                      );
                     },
                     icon: Icons.info_outlined,
                   ),

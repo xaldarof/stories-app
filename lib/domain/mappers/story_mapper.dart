@@ -17,6 +17,7 @@ class StoryMapper extends Mapper<StoryResponse, Story> {
       viewCount: data.viewCount,
       isEnabled: !data.isFrozen,
       isPremium: data.isPremium,
+      canModify: data.isOwnerg,
     );
   }
 }

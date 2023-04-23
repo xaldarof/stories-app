@@ -1,5 +1,7 @@
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jokes_app/core/session/manager/session_manager.dart';
+import 'package:jokes_app/core/session/manager/session_manager_impl.dart';
 import 'package:jokes_app/data/api/api_client.dart';
 import 'package:jokes_app/data/data_sources/auth_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/profile_network_data_source_impl.dart';
@@ -32,7 +34,11 @@ final injector = GetIt.instance;
 Future<void> setUpDependencies() async {
   injector.registerSingleton<EncryptedSharedPreferences>(
       await EncryptedSharedPreferences.getInstance());
-  injector.registerSingleton<DioClient>(DioClient());
+  injector.registerSingleton<SessionManager>(
+      SessionManagerImpl(preferences: injector.get()));
+  injector.registerSingleton<AuthInterceptor>(
+      AuthInterceptor(sessionManager: injector.get()));
+  injector.registerSingleton<DioClient>(DioClient(injector.get()));
 
   _setUpDataSources();
   _setUpRepos();

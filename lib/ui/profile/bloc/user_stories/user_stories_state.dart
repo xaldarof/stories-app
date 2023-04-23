@@ -16,6 +16,7 @@ class UserStoriesState extends Equatable {
   final List<Category> categories;
   final bool showCategories;
   final int? categoryId;
+  final int? userId;
 
   @override
   List<Object?> get props => [
@@ -24,7 +25,8 @@ class UserStoriesState extends Equatable {
         stories,
         categories,
         showCategories,
-        categoryId
+        categoryId,
+        userId,
       ];
 
   const UserStoriesState({
@@ -34,6 +36,7 @@ class UserStoriesState extends Equatable {
     this.categories = const [],
     this.showCategories = true,
     this.categoryId,
+    this.userId,
   });
 
   UserStoriesState copyWith({
@@ -43,6 +46,7 @@ class UserStoriesState extends Equatable {
     List<Category>? categories,
     bool? showCategories,
     int? categoryId,
+    int? userId,
   }) {
     return UserStoriesState(
       storiesStatus: storiesStatus ?? this.storiesStatus,
@@ -51,6 +55,7 @@ class UserStoriesState extends Equatable {
       categories: categories ?? this.categories,
       showCategories: showCategories ?? this.showCategories,
       categoryId: categoryId ?? this.categoryId,
+      userId: userId ?? this.userId,
     );
   }
 }

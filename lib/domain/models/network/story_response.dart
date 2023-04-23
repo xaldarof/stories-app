@@ -13,6 +13,7 @@ class StoryResponse {
   final int viewCount;
   final bool isPremium;
   final bool isFrozen;
+  final bool isOwner;
 
   const StoryResponse({
     required this.id,
@@ -24,6 +25,7 @@ class StoryResponse {
     required this.viewCount,
     required this.isFrozen,
     required this.isPremium,
+    required this.isOwner,
   });
 
   factory StoryResponse.fromJson(Map<String, dynamic> json) =>

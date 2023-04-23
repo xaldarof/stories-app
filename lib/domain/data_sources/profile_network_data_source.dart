@@ -8,7 +8,10 @@ abstract class ProfileNetworkDataSource {
 
   Future<ProfileStatsResponse> getStats();
 
-  Future<List<StoryResponse>?> getStories(int? categoryId, int page);
+  Future<List<StoryResponse>?> getStories(
+      int userId, int? categoryId, int page);
 
   Future<List<CategoryResponse>?> getCategories();
+
+  Future<void> setAsRead(int storyId);
 }

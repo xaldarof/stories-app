@@ -14,22 +14,26 @@ import '../resource/colors.dart';
 class StoryItem extends StatelessWidget {
   final Function() onTap;
   final Story story;
+  final Function() onTapOwner;
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTap(
-      child: Container(
-        height: 280,
-        margin: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          color: AppColors.primaryDark,
-          border: Border.all(color: AppColors.whiteAlpha52),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
+    return Container(
+      height: 280,
+      margin: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.primaryDark,
+        border: Border.all(color: AppColors.whiteAlpha52),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: ScaleTap(
+              onPressed: () {
+                onTapOwner.call();
+              },
               child: Container(
                 padding: const EdgeInsets.only(left: 12, right: 12),
                 height: 20,
@@ -44,13 +48,18 @@ class StoryItem extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                        left: 24, top: 24, bottom: 12, right: 16),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                      left: 24, top: 24, bottom: 12, right: 16),
+                  child: ScaleTap(
+                    onPressed: () {
+                      onTapOwner.call();
+                    },
                     child: StoryOwnerIcon(
                       animate: story.isPremium,
                       iconColor: story.isEnabled ? null : AppColors.blue,
@@ -60,66 +69,63 @@ class StoryItem extends StatelessWidget {
                           : Icons.ac_unit_rounded,
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: Text(
-                          story.title.cut(20),
-                          overflow: TextOverflow.ellipsis,
-                          style: primaryTextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 14),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 4),
-                        child: StoryTypeIcon(
-                          value: story.timeCreate,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                alignment: Alignment.topLeft,
-                margin: const EdgeInsets.only(left: 24, right: 24, top: 92),
-                child: Text(
-                  textAlign: TextAlign.start,
-                  story.body,
-                  style: primaryTextStyle(),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 5,
                 ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 12),
+                      child: Text(
+                        story.title.cut(20),
+                        overflow: TextOverflow.ellipsis,
+                        style: primaryTextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 4),
+                      child: StoryTypeIcon(
+                        value: story.timeCreate,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(left: 24, right: 24, top: 92),
+              child: Text(
+                textAlign: TextAlign.start,
+                story.body,
+                style: primaryTextStyle(),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 5,
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Button(
-                enabled: story.isEnabled,
-                margin: const EdgeInsets.only(
-                    left: 24, right: 24, top: 24, bottom: 24),
-                height: 48,
-                width: context.width,
-                text: story.isEnabled
-                    ? '${Strings.viewMore}(${story.viewCount})'
-                    : 'Frozen',
-                onTap: () {
-                  onTap.call();
-                },
-              ),
-            )
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Button(
+              enabled: story.isEnabled,
+              margin: const EdgeInsets.only(
+                  left: 24, right: 24, top: 24, bottom: 24),
+              height: 48,
+              width: context.width,
+              text: story.isEnabled
+                  ? '${Strings.viewMore}(${story.viewCount})'
+                  : Strings.frozen,
+              onTap: () {
+                onTap.call();
+              },
+            ),
+          )
+        ],
       ),
-      onLongPress: () {
-        onTap.call();
-      },
     );
   }
 
@@ -127,5 +133,6 @@ class StoryItem extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.story,
+    required this.onTapOwner,
   });
 }

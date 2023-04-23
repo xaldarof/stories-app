@@ -42,7 +42,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     return emitter.forEach(
       _repository.getStats(),
       onData: (data) {
-        printMessage('get stats : ${data}');
+        printMessage('get stats : $data');
         if (data is DomainLoading) {
           return state.copyWith(profileStatsStatus: ProfileStatus.loading);
         }

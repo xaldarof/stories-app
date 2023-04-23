@@ -9,6 +9,7 @@ class Story {
   final int viewCount;
   final bool isPremium;
   final bool isEnabled;
+  final bool canModify;
 
   const Story({
     required this.id,
@@ -20,6 +21,7 @@ class Story {
     required this.title,
     required this.isEnabled,
     required this.isPremium,
+    required this.canModify,
     required this.viewCount,
   });
 }

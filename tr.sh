@@ -1,0 +1,1 @@
+flutter pub run modified_localization:generate -o locale_keys.g.dart --source-dir assets/translations

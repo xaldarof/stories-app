@@ -11,7 +11,7 @@ class MainRepositoryImpl extends MainRepository {
   @override
   Stream<AppState> getAppState() async* {
     yield* _dataSource.getToken().map((event) {
-      final token = _preferences.getString(event);
+      final token = _preferences.getString(Keys.token);
       return token == null ? AppState.unAuthorized : AppState.logged;
     });
   }

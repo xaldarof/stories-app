@@ -22,6 +22,9 @@ class UserStoriesBloc extends Bloc<UserStoriesEvent, UserStoriesState> {
     on<GetStories>(_getStories);
     on<GetCategories>(_getCategories);
     on<GetCategoryStories>(_getCategoryStories);
+    on<SetUserId>(_setUserId);
+    on<SetAsRead>(_setAsRead);
+//
     scrollController.addListener(() {
       if (state.showCategories == true) {
         emit(state.copyWith(showCategories: false));
@@ -38,6 +41,10 @@ class UserStoriesBloc extends Bloc<UserStoriesEvent, UserStoriesState> {
     });
   }
 
+  Future<void> _setAsRead(SetAsRead event, Emitter emitter) async {
+    _repository.setAsRead(event.storyId);
+  }
+
   Future<void> _getCategoryStories(
       GetCategoryStories event, Emitter emitter) async {
     page = 1;
@@ -45,9 +52,13 @@ class UserStoriesBloc extends Bloc<UserStoriesEvent, UserStoriesState> {
     add(GetStories());
   }
 
+  Future<void> _setUserId(SetUserId event, Emitter emitter) async {
+    emitter(state.copyWith(userId: event.id));
+  }
+
   Future<void> _getStories(GetStories event, Emitter emitter) {
     return emitter.forEach(
-      _repository.getStories(state.categoryId, page),
+      _repository.getStories(state.userId ?? -1, state.categoryId, page),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(storiesStatus: UserStoriesStatus.loading);

@@ -5,6 +5,9 @@ abstract class ProfileRepository {
 
   Stream<DomainResult> getStats();
 
-  Stream<DomainResult> getStories(int? categoryId, int page);
+  Stream<DomainResult> getStories(int userId, int? categoryId, int page);
+
   Stream<DomainResult> getCategories();
+
+  Future<void> setAsRead(int storyId);
 }

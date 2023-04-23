@@ -6,7 +6,7 @@ class MainDataSourceImpl extends MainDataSource {
   final EncryptedSharedPreferences _preferences;
 
   @override
-  Stream<String> getToken() => _preferences.listen(key: Keys.token);
+  Stream<String> getToken() => _preferences.stream;
 
   MainDataSourceImpl({
     required EncryptedSharedPreferences preferences,
