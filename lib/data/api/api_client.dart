@@ -10,7 +10,7 @@ extension ResponseExt on Response {
 
 class DioClient {
   final SessionManager _sessionManager;
-  final String _baseUrl = "http://127.0.0.1:8000/";
+  final String _baseUrl = "http://xaldarof8.pythonanywhere.com/";
   late Dio _dio;
 
   DioClient(this._sessionManager) {
