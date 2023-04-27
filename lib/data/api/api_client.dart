@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/core/session/manager/session_manager.dart';
 
 extension ResponseExt on Response {
@@ -35,7 +36,7 @@ class DioClient {
       connectTimeout: 120000,
       receiveTimeout: 120000,
       headers: {
-        "Authorization": "${_sessionManager.accessToken}",
+        "Authorization": _sessionManager.accessToken,
       },
       validateStatus: (code) {
         if (code! >= 200 && code <= 400) {

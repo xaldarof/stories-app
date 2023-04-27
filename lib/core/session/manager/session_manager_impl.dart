@@ -21,5 +21,7 @@ class SessionManagerImpl extends SessionManager {
   }
 
   @override
-  String? get accessToken => "Bearer ${_preferences.getString(Keys.token)}";
+  String? get accessToken => _preferences.getString(Keys.token) != null
+      ? "Bearer ${_preferences.getString(Keys.token)}"
+      : null;
 }

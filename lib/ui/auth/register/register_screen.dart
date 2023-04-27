@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jokes_app/assets.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
+import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/common/utils/ui.dart';
 import 'package:jokes_app/common/widgets/button.dart';
 import 'package:jokes_app/common/widgets/input_widget.dart';
@@ -46,6 +47,10 @@ class _RegisterScreenState extends State<RegisterScreen>
                 listener: (context, state) {
                   if (state.registerStatus == RegisterStatus.success) {
                     context.navigateTo(const HomeScreen(), removeStack: true);
+                  }
+                  if (state.registerStatus == RegisterStatus.fail) {
+                    context.showSnackBar(Strings.somethingWentWrong,
+                        status: MessageStatus.fail);
                   }
                 },
               ),
@@ -95,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       const Spacer(),
                       const Spacer(),
                       Button(
-                        enabled: state.registerStatus == RegisterStatus.loading,
+                        enabled: state.registerStatus != RegisterStatus.loading,
                         margin: const EdgeInsets.all(24),
                         onTap: () {
                           bloc.add(Register());
