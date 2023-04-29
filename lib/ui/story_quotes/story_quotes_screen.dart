@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
+import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
+import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/story_quotes/bloc/story_quotes_bloc.dart';
 
 import '../../common/resource/colors.dart';
@@ -39,7 +41,8 @@ class StoryQuotesScreen extends StatelessWidget {
                 final item = state.quotes[i];
                 return ListTile(
                   onTap: () {
-                    //
+                    context.navigateTo(UserStoriesScreen(
+                        userId: item.userId, username: item.username));
                   },
                   title: Row(
                     children: [

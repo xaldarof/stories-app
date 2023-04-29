@@ -58,7 +58,6 @@ class TypewriterAnimatedText extends AnimatedText {
     ).animate(controller);
   }
 
-
   @override
   Widget completeText(BuildContext context) => RichText(
         text: TextSpan(
