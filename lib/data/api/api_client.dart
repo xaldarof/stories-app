@@ -30,7 +30,7 @@ class DioClient {
 
   Future<BaseOptions> _getOptions() async {
     return BaseOptions(
-      baseUrl: _debugUrl,
+      baseUrl: _prodUrl,
       responseType: ResponseType.plain,
       connectTimeout: 120000,
       receiveTimeout: 120000,
