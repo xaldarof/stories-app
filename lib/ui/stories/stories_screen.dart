@@ -4,11 +4,13 @@ import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/size.dart';
+import 'package:jokes_app/common/widgets/loading.dart';
 import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/stories/bloc/stories_bloc.dart';
 import 'package:jokes_app/ui/stories/story_category_item.dart';
 import 'package:jokes_app/ui/view_story/view_story_screen.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../common/widgets/story_item.dart';
 
@@ -68,16 +70,8 @@ class _StoriesScreenState extends State<StoriesScreen> {
               height: context.height,
               width: context.width,
               decoration: const DefaultBackgroundDecoration(),
-              child: (state.categories.isEmpty)
-                  ? SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.darkSpringGreen,
-                        ),
-                      ),
-                    )
+              child: (state.stories.isEmpty)
+                  ? const Loading()
                   : ListView.builder(
                       controller: bloc.scrollController,
                       physics: const BouncingScrollPhysics(),

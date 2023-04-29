@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/button.dart';
@@ -26,7 +27,7 @@ class _PublishScreenState extends State<PublishScreen> {
 
   _onInputValueChanged(PublishBloc bloc) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
+    _debounce = Timer(const Duration(milliseconds: 100), () {
       setState(() {
         publishButtonEnabled = bloc.bodyController.text.trim().isNotEmpty &&
             bloc.titleController.text.trim().isNotEmpty &&
@@ -77,11 +78,27 @@ class _PublishScreenState extends State<PublishScreen> {
                   child: Column(
                     children: [
                       Input(
+                        onChange: (str) {
+                          _onInputValueChanged(bloc);
+                        },
+                        maxLength: 100,
                         controller: bloc.titleController,
                         hint: Strings.title,
                         margin: const EdgeInsets.only(
                             left: 24, right: 24, top: 24, bottom: 0),
                         multiLine: false,
+                      ),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          Container(
+                            margin: const EdgeInsets.only(right: 32, top: 16),
+                            child: Text(
+                              "${bloc.titleController.text.length.toString()}/100",
+                              style: primaryTextStyle(),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 72,
@@ -109,6 +126,7 @@ class _PublishScreenState extends State<PublishScreen> {
                         ),
                       ),
                       Input(
+                        maxLength: 1000,
                         controller: bloc.bodyController,
                         hint: Strings.body,
                         onChange: (text) {
@@ -116,6 +134,18 @@ class _PublishScreenState extends State<PublishScreen> {
                         },
                         margin: const EdgeInsets.all(24),
                         multiLine: true,
+                      ),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          Container(
+                            margin: const EdgeInsets.only(right: 32),
+                            child: Text(
+                              "${bloc.bodyController.text.length.toString()}/1000",
+                              style: primaryTextStyle(),
+                            ),
+                          ),
+                        ],
                       ),
                       Button(
                         animate: state.publishStatus == PublishStatus.loading,

@@ -12,6 +12,7 @@ class Input extends StatelessWidget {
   double verticalPadding = 0.0;
   double blur;
   double spread;
+  final int? maxLength;
   final TextEditingController? controller;
   final Function(String)? onSubmit;
   final Function(String)? onChange;
@@ -34,6 +35,7 @@ class Input extends StatelessWidget {
       ),
       margin: margin,
       child: TextField(
+        maxLength: maxLength,
         style: primaryTextStyle(),
         cursorColor: AppColors.darkSpringGreen,
         onSubmitted: (str) {
@@ -48,6 +50,7 @@ class Input extends StatelessWidget {
         textAlign: TextAlign.start,
         controller: controller,
         decoration: InputDecoration(
+          counterText: "",
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(24),
             borderSide: BorderSide(
@@ -84,6 +87,7 @@ class Input extends StatelessWidget {
     this.blur = 200.0,
     this.onSubmit,
     this.onChange,
+    this.maxLength,
     this.spread = 12.0,
     required this.margin,
   });

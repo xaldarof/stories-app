@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/size.dart';
+import 'package:jokes_app/common/widgets/loading.dart';
 import 'package:jokes_app/ui/profile/bloc/user_stories/user_stories_bloc.dart';
 import 'package:jokes_app/ui/profile/bloc/user_stories/user_stories_state.dart';
 
@@ -88,16 +89,8 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
               height: context.height,
               width: context.width,
               decoration: const DefaultBackgroundDecoration(),
-              child: (state.categories.isEmpty)
-                  ? SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.darkSpringGreen,
-                        ),
-                      ),
-                    )
+              child: (state.stories.isEmpty)
+                  ? const Loading()
                   : ListView.builder(
                       padding: const EdgeInsets.only(top: 152),
                       controller: bloc.scrollController,
