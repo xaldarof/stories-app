@@ -9,7 +9,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/HopeQuotes/Quotes-app-)
 
 :octocat: **Backend developer.**
-[![Go](https://img.shields.io/badge/python-%2300ADD8.svg?style=for-the-badge&logo=python&logoColor=white)](https://github.com/xaldarof)
+[![Go](https://img.shields.io/badge/django-%2300ADD8.svg?style=for-the-badge&logo=django&logoColor=white)](https://github.com/xaldarof)
 
 👨‍🚀 **Mobile application developer.**
 [![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)](https://github.com/xaldarof)
