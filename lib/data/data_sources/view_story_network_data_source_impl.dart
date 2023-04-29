@@ -19,4 +19,16 @@ class ViewStoryNetworkDataSourceImpl extends ViewStoryNetworkDataSource {
   ViewStoryNetworkDataSourceImpl({
     required DioClient client,
   }) : _client = client;
+
+  @override
+  Future<bool> createQuote(int storyId, String body) async {
+    final response = await _client.post(
+      "api/v1/story/quotes",
+      data: {
+        "storyId": storyId,
+        "body": body,
+      },
+    );
+    return response.isSuccessful;
+  }
 }

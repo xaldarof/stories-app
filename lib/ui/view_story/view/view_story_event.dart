@@ -12,3 +12,13 @@ class ToggleVisibility extends ViewStoryEvent {
     required this.enabled,
   });
 }
+
+class CreateQuote extends ViewStoryEvent {
+  final int storyId;
+  final String body;
+
+  CreateQuote({
+    required this.storyId,
+    required this.body,
+  });
+}

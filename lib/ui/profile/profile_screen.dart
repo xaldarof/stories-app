@@ -55,10 +55,9 @@ class ProfileScreen extends StatelessWidget {
                     },
                     icon: Icons.person,
                   ),
-                  if (state.profileStats != null)
                     UserInfoCard(
                       margin: const EdgeInsets.only(left: 24, right: 24),
-                      stats: state.profileStats!,
+                      stats: state.profileStats,
                     ),
                   SettingsItem(
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),

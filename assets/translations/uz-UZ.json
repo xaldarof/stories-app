@@ -23,5 +23,7 @@
   "about_content": "Salom hamkasblar,\n\nMening ismim Temur Xoldarov, men dasturiy ta'minot ishlab chiqaruvchisiman. Men dasturiy ta'minotni ishlab chiqish sohasida bilim va tajribaga egaman va bu sohada faol ishlayman.\n\nMen har birimiz dasturiy ta'minotni ishlab chiqishda o'ziga xos tajriba va bilimga ega ekanligini tushunaman va men siz bilan o'z tajribam va g'oyalarimni baham ko'rmoqchiman. Ishonamanki, o'zaro ta'sir va g'oyalar almashinuvi bizga yanada innovatsion va yaxshiroq dasturiy ta'minotni yaratishda yordam beradi.\n\nMen bu matnni nusxa ko'chirish uchun emas, balki siz uchun ilhom va qo'llab-quvvatlash manbai bo'lishini istardim. Har birimiz dasturiy ta'minotni ishlab chiqishda o'ziga xos yo'limizni topishimiz kerak va umid qilamanki, mening tajribam sizga ushbu sohada rivojlanishingizga yordam beradi.\n\nMen barcha ishlab chiquvchilarni umumiy maqsadimiz - yaxshiroq dasturiy ta'minot yaratishda hamkorlik qilishga va bilim va tajriba almashishga chaqiraman.\n\nHurmat bilan,\nTemur Xoldarov",
   "yes": "Xa",
   "no": "Yoq",
-  "do_you_want_logout": "Chiqishni xoxlaysizmi ?"
+  "do_you_want_logout": "Chiqishni xoxlaysizmi ?",
+  "quotes": "Aforizmlar",
+  "add_to_quotes": "Aforizmlarga qoshish"
 }

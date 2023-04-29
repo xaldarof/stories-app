@@ -30,5 +30,7 @@ abstract class Strings {
   static String get yes => 'yes'.tr();
   static String get no => 'no'.tr();
   static String get doYouWantLogout => 'do_you_want_logout'.tr();
+  static String get quotes => 'quotes'.tr();
+  static String get addToQuotes => 'add_to_quotes'.tr();
 
 }

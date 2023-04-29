@@ -17,6 +17,7 @@ class ViewStoryBloc extends Bloc<ViewStoryEvent, ViewStoryState> {
     this._repository,
   ) : super(const ViewStoryState()) {
     on<ToggleVisibility>(_unpublish);
+    on<CreateQuote>(_createQuote);
   }
 
   Future<void> _unpublish(ToggleVisibility event, Emitter emitter) async {
@@ -31,6 +32,24 @@ class ViewStoryBloc extends Bloc<ViewStoryEvent, ViewStoryState> {
         }
         if (data is DomainSuccess) {
           return state.copyWith(unpublishStatus: ViewStoryStatus.success);
+        }
+        return state;
+      },
+    );
+  }
+
+  Future<void> _createQuote(CreateQuote event, Emitter emitter) async {
+    return emitter.forEach(
+      _repository.createQuote(event.storyId, event.body),
+      onData: (data) {
+        if (data is DomainLoading) {
+          return state.copyWith(quoteCreateStatus: ViewStoryStatus.loading);
+        }
+        if (data is DomainFail) {
+          return state.copyWith(quoteCreateStatus: ViewStoryStatus.fail);
+        }
+        if (data is DomainSuccess) {
+          return state.copyWith(quoteCreateStatus: ViewStoryStatus.success);
         }
         return state;
       },

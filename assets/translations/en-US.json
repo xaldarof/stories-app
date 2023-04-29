@@ -23,6 +23,7 @@
   "about_content": "Hello colleagues,\n\nMy name is Temur Kholdarov and I am a software developer. I have knowledge and experience in the field of software development and actively work in this area.\n\nI understand that each of us has our unique experience and knowledge in software development, and I would like to share my experience and ideas with you. I believe that interaction and exchange of ideas can help us create more innovative and better software.\n\nI would like this text to be a source of inspiration and support for you, not for copying. Each of us should find our unique path in software development, and I hope that my experience can help you develop in this field.\n\nI call on all developers to collaborate and exchange knowledge and experience in our common goal - creating better software.\n\nSincerely,\nTemur Kholdarov",
   "yes": "Yes",
   "no": "No",
-  "do_you_want_logout": "Do you really want to logout ? "
-
+  "do_you_want_logout": "Do you really want to logout ? ",
+  "quotes": "Quotes",
+  "add_to_quotes": "Add to quotes"
 }

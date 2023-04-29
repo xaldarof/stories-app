@@ -23,4 +23,19 @@ class ViewStoryRepositoryImpl extends ViewStoryRepository {
   ViewStoryRepositoryImpl({
     required ViewStoryNetworkDataSource networkDataSource,
   }) : _networkDataSource = networkDataSource;
+
+  @override
+  Stream<DomainResult> createQuote(int storyId, String body) async* {
+    try {
+      yield DomainLoading();
+      final res = await _networkDataSource.createQuote(storyId, body);
+      if (res) {
+        yield DomainSuccess();
+      } else {
+        yield DomainFail();
+      }
+    } catch (e) {
+      yield DomainFail();
+    }
+  }
 }

@@ -8,16 +8,20 @@ enum ViewStoryStatus {
 
 class ViewStoryState {
   final ViewStoryStatus? unpublishStatus;
+  final ViewStoryStatus? quoteCreateStatus;
 
   const ViewStoryState({
     this.unpublishStatus,
+    this.quoteCreateStatus,
   });
 
   ViewStoryState copyWith({
     ViewStoryStatus? unpublishStatus,
+    ViewStoryStatus? quoteCreateStatus,
   }) {
     return ViewStoryState(
       unpublishStatus: unpublishStatus ?? this.unpublishStatus,
+      quoteCreateStatus: quoteCreateStatus ?? this.quoteCreateStatus,
     );
   }
 }

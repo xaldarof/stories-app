@@ -34,7 +34,6 @@ dependencies:
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
   another_flushbar: ^1.12.29
-  animated_text_kit: ^4.2.2
   lottie: ^2.3.2
   simple_assets_generator: ^1.0.8
   json_annotation: ^4.7.0

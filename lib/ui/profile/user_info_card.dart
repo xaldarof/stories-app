@@ -14,7 +14,7 @@ class UserInfoCard extends StatelessWidget {
   final EdgeInsets? margin;
   final double? width;
   final double? height;
-  final ProfileStats stats;
+  final ProfileStats? stats;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class UserInfoCard extends StatelessWidget {
               ScaleTap(
                 child: IconText(
                   icon: Icons.favorite,
-                  text: '${Strings.readCount} ${stats.readStoriesCount}',
+                  text: '${Strings.readCount} ${stats?.readStoriesCount ?? ""}',
                 ),
                 onPressed: () {
                   //
@@ -49,14 +49,14 @@ class UserInfoCard extends StatelessWidget {
                 child: IconText(
                   hasAction: true,
                   icon: Icons.pending_actions,
-                  text: '${Strings.published} ${stats.storyCount}',
+                  text: '${Strings.published} ${stats?.storyCount ?? ""}',
                 ),
               ),
               ScaleTap(
                 onPressed: () {},
                 child: IconText(
                   icon: Icons.pending_actions,
-                  text: '${Strings.viewReachCount} ${stats.viewReachCount}',
+                  text: '${Strings.viewReachCount} ${stats?.viewReachCount ?? ""}',
                 ),
               ),
             ],

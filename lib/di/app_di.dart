@@ -18,19 +18,24 @@ import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/story_quotes_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/view_story_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/category_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
 import 'package:jokes_app/domain/mappers/story_mapper.dart';
+import 'package:jokes_app/domain/mappers/story_quote_mapper.dart';
 import 'package:jokes_app/domain/repositories/auth_repository.dart';
 import 'package:jokes_app/domain/repositories/main_repository.dart';
 import 'package:jokes_app/domain/repositories/profile_repository.dart';
 import 'package:jokes_app/domain/repositories/publish_repository.dart';
+import 'package:jokes_app/domain/repositories/story_quotes_repository.dart';
 import 'package:jokes_app/domain/repositories/view_story_repository.dart';
 
 import '../data/data_sources/main_data_source_impl.dart';
+import '../data/data_sources/story_quotes_network_data_source_impl.dart';
 import '../data/repositories/main_repository_impl.dart';
+import '../data/repositories/story_quotes_repository_impl.dart';
 import '../domain/data_sources/main_data_source.dart';
 import '../domain/data_sources/stories_network_data_source.dart';
 import '../domain/repositories/stories_repository.dart';
@@ -63,6 +68,8 @@ void _setUpRepos() {
       dataSource: injector.get(), preferences: injector.get()));
   injector.registerSingleton<ViewStoryRepository>(
       ViewStoryRepositoryImpl(networkDataSource: injector.get()));
+  injector.registerSingleton<StoryQuotesRepository>(StoryQuotesRepositoryImpl(
+      networkDataSource: injector.get(), storyQuoteMapper: StoryQuoteMapper()));
   injector.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(
       networkDataSource: injector.get(),
       profileMapper: ProfileMapper(),
@@ -87,4 +94,6 @@ void _setUpDataSources() {
       ViewStoryNetworkDataSourceImpl(client: injector.get()));
   injector.registerSingleton<ProfileCacheDataSource>(
       ProfileCacheDataSourceImpl(preferences: injector.get()));
+  injector.registerSingleton<StoryQuotesNetworkDataSource>(
+      StoryQuotesNetworkDataSourceImpl(client: injector.get()));
 }

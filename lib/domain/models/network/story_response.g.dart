@@ -17,9 +17,9 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       viewCount: json['viewCount'] as int,
       isFrozen: json['isFrozen'] as bool,
+      isPublished: json['isPublished'] as bool?,
       isPremium: json['isPremium'] as bool,
       isOwner: json['isOwner'] as bool,
-      isPublished: json['isPublished'] as bool?,
     );
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
@@ -31,6 +31,10 @@ Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
       'author': instance.author,
       'title': instance.title,
       'viewCount': instance.viewCount,
+      'isPremium': instance.isPremium,
+      'isFrozen': instance.isFrozen,
+      'isOwner': instance.isOwner,
+      'isPublished': instance.isPublished,
     };
 
 StoryAuthorResponse _$StoryAuthorResponseFromJson(Map<String, dynamic> json) =>

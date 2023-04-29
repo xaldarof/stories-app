@@ -24,10 +24,10 @@
 - Paging
 - Authorization
 - Localization
+
 # Screenshots
 
 ![alt text](https://github.com/xaldarof/stories-app/blob/main/screenshots/screens.png)
-
 
 ## Created & Maintained By
 

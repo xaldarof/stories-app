@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
-import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:flutter/foundation.dart';
-import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/core/session/manager/session_manager.dart';
 
 extension ResponseExt on Response {
@@ -11,7 +9,8 @@ extension ResponseExt on Response {
 
 class DioClient {
   final SessionManager _sessionManager;
-  final String _baseUrl = "http://xaldarof8.pythonanywhere.com/";
+  final String _debugUrl = "http://127.0.0.1:8000/";
+  final String _prodUrl = "http://xaldarof8.pythonanywhere.com/";
   late Dio _dio;
 
   DioClient(this._sessionManager) {
@@ -31,7 +30,7 @@ class DioClient {
 
   Future<BaseOptions> _getOptions() async {
     return BaseOptions(
-      baseUrl: _baseUrl,
+      baseUrl: _debugUrl,
       responseType: ResponseType.plain,
       connectTimeout: 120000,
       receiveTimeout: 120000,
