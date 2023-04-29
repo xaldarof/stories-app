@@ -19,21 +19,11 @@
 - Bloc
 - Dio
 - Json parsing
-- FCM
-- Hive
-- Sqllite
-- Unit testing
 - Animations
 - Custom widgets
-- BlurHash
-- Custom dismissible widgets
 - Paging
-- Caching
 - Authorization
-- Push notifications
-- Firebase crashlytics
-- Cache Synchronization
-
+- Localization
 # Screenshots
 
 ![alt text](https://github.com/xaldarof/stories-app/blob/main/screenshots/screens.png)
