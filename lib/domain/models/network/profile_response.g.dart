@@ -6,8 +6,8 @@ part of 'profile_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
-    ProfileResponse(
+UserResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
+    UserResponse(
       id: json['id'] as int,
       username: json['username'] as String,
       email: json['email'] as String?,
@@ -16,7 +16,7 @@ ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
       dateJoined: json['dateJoined'] as String,
     );
 
-Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
+Map<String, dynamic> _$ProfileResponseToJson(UserResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'username': instance.username,

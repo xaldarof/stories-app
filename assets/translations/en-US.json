@@ -25,5 +25,6 @@
   "no": "No",
   "do_you_want_logout": "Do you really want to logout ? ",
   "quotes": "Quotes",
-  "add_to_quotes": "Add to quotes"
+  "add_to_quotes": "Add to quotes",
+  "global": "Global"
 }

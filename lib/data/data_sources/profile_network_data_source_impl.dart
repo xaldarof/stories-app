@@ -14,9 +14,9 @@ class ProfileNetworkDataSourceImpl extends ProfileNetworkDataSource {
   final DioClient _client;
 
   @override
-  Future<ProfileResponse> getProfile() async {
+  Future<UserResponse> getProfile() async {
     final response = await _client.get("api/profile/");
-    final decoded = ProfileResponse.fromJson(jsonDecode(response.data));
+    final decoded = UserResponse.fromJson(jsonDecode(response.data));
     return decoded;
   }
 

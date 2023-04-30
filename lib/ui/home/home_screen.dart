@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/ui.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
+import 'package:jokes_app/ui/global/global_screen.dart';
 
 import '../../common/resource/colors.dart';
 import '../profile/profile_screen.dart';
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final _screens = [
     const StoriesScreen(),
+    const GlobalScreen(),
     const PublishScreen(),
     const ProfileScreen(),
   ];
@@ -29,11 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
     setNavColor();
     final screenTitles = [
       Strings.stories,
+      Strings.global,
       Strings.publish,
       Strings.profile,
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.black,
         currentIndex: selectedIndex,
         onTap: (index) {
@@ -50,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             label: Strings.stories,
             icon: const Icon(Icons.pending),
+          ),
+          BottomNavigationBarItem(
+            label: Strings.global,
+            icon: const Icon(Icons.public),
           ),
           BottomNavigationBarItem(
             label: Strings.publish,

@@ -4,7 +4,7 @@ import '../models/network/profile_stats_response.dart';
 import '../models/network/story_response.dart';
 
 abstract class ProfileNetworkDataSource {
-  Future<ProfileResponse> getProfile();
+  Future<UserResponse> getProfile();
 
   Future<ProfileStatsResponse> getStats();
 

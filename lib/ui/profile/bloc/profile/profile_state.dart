@@ -9,7 +9,7 @@ enum ProfileStatus {
 class ProfileState extends Equatable {
   final ProfileStatus? profileStatus;
   final ProfileStatus? profileStatsStatus;
-  final Profile? profile;
+  final User? profile;
   final ProfileStats? profileStats;
 
   @override
@@ -28,7 +28,7 @@ class ProfileState extends Equatable {
   ProfileState copyWith({
     ProfileStatus? profileStatus,
     ProfileStatus? profileStatsStatus,
-    Profile? profile,
+    User? profile,
     ProfileStats? profileStats,
   }) {
     return ProfileState(

@@ -4,17 +4,20 @@ import 'package:jokes_app/core/session/manager/session_manager.dart';
 import 'package:jokes_app/core/session/manager/session_manager_impl.dart';
 import 'package:jokes_app/data/api/api_client.dart';
 import 'package:jokes_app/data/data_sources/auth_network_data_source_impl.dart';
+import 'package:jokes_app/data/data_sources/global_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/profile_cache_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/profile_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/publish_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/stories_network_data_source_impl.dart';
 import 'package:jokes_app/data/data_sources/view_story_network_data_source_impl.dart';
 import 'package:jokes_app/data/repositories/auth_repository_impl.dart';
+import 'package:jokes_app/data/repositories/global_repository_impl.dart';
 import 'package:jokes_app/data/repositories/profile_repository_impl.dart';
 import 'package:jokes_app/data/repositories/publish_repository_impl.dart';
 import 'package:jokes_app/data/repositories/stories_repository_impl.dart';
 import 'package:jokes_app/data/repositories/view_story_repository_impl.dart';
 import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/global_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
@@ -26,6 +29,7 @@ import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
 import 'package:jokes_app/domain/mappers/story_mapper.dart';
 import 'package:jokes_app/domain/mappers/story_quote_mapper.dart';
 import 'package:jokes_app/domain/repositories/auth_repository.dart';
+import 'package:jokes_app/domain/repositories/global_repository.dart';
 import 'package:jokes_app/domain/repositories/main_repository.dart';
 import 'package:jokes_app/domain/repositories/profile_repository.dart';
 import 'package:jokes_app/domain/repositories/publish_repository.dart';
@@ -72,11 +76,13 @@ void _setUpRepos() {
       networkDataSource: injector.get(), storyQuoteMapper: StoryQuoteMapper()));
   injector.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(
       networkDataSource: injector.get(),
-      profileMapper: ProfileMapper(),
+      profileMapper: UserMapper(),
       profileStatsMapper: ProfileStatsMapper(),
       storyMapper: StoryMapper(),
       categoryMapper: CategoryMapper(),
       cacheDataSource: injector.get()));
+  injector.registerSingleton<GlobalRepository>(GlobalRepositoryImpl(
+      networkDataSource: injector.get(), userMapper: UserMapper()));
 }
 
 void _setUpDataSources() {
@@ -96,4 +102,6 @@ void _setUpDataSources() {
       ProfileCacheDataSourceImpl(preferences: injector.get()));
   injector.registerSingleton<StoryQuotesNetworkDataSource>(
       StoryQuotesNetworkDataSourceImpl(client: injector.get()));
+  injector.registerSingleton<GlobalNetworkDataSource>(
+      GlobalNetworkDataSourceImpl(client: injector.get()));
 }

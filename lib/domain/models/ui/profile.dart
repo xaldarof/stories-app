@@ -1,4 +1,4 @@
-class Profile {
+class User {
   final int id;
 
   final String username;
@@ -11,7 +11,7 @@ class Profile {
 
   final String dateJoined;
 
-  const Profile({
+  const User({
     required this.id,
     required this.username,
     this.email,

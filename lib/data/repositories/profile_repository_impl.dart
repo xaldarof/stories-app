@@ -15,7 +15,7 @@ import '../../domain/models/ui/story.dart';
 class ProfileRepositoryImpl extends ProfileRepository {
   final ProfileNetworkDataSource _networkDataSource;
   final ProfileCacheDataSource _cacheDataSource;
-  final ProfileMapper _profileMapper;
+  final UserMapper _profileMapper;
   final ProfileStatsMapper _profileStatsMapper;
   final StoryMapper _storyMapper;
   final CategoryMapper _categoryMapper;
@@ -26,7 +26,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
       yield DomainLoading();
       final res = await _networkDataSource.getProfile();
       final ui = _profileMapper.map(res);
-      yield DomainSuccess<Profile>(data: ui);
+      yield DomainSuccess<User>(data: ui);
     } catch (e) {
       yield DomainFail();
     }
@@ -90,7 +90,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   ProfileRepositoryImpl({
     required ProfileNetworkDataSource networkDataSource,
     required ProfileCacheDataSource cacheDataSource,
-    required ProfileMapper profileMapper,
+    required UserMapper profileMapper,
     required ProfileStatsMapper profileStatsMapper,
     required StoryMapper storyMapper,
     required CategoryMapper categoryMapper,

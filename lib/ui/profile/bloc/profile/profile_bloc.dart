@@ -31,7 +31,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         if (data is DomainLoading) {
           return state.copyWith(profileStatus: ProfileStatus.loading);
         }
-        if (data is DomainSuccess<Profile>) {
+        if (data is DomainSuccess<User>) {
           return state.copyWith(
               profileStatus: ProfileStatus.success, profile: data.data);
         }
