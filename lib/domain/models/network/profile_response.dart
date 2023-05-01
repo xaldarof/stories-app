@@ -15,12 +15,14 @@ class UserResponse {
   final String? lastName;
 
   final String dateJoined;
+  final int? score;
 
   const UserResponse({
     required this.id,
     required this.username,
     this.email,
     this.firstName,
+    this.score,
     this.lastName,
     required this.dateJoined,
   });

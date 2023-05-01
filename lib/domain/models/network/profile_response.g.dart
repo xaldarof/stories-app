@@ -14,6 +14,7 @@ UserResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       dateJoined: json['dateJoined'] as String,
+      score: json['score'] as int?,
     );
 
 Map<String, dynamic> _$ProfileResponseToJson(UserResponse instance) =>

@@ -17,6 +17,7 @@ class UserItem extends StatelessWidget {
     if (index == 1) color = AppColors.gold.withAlpha(152);
     if (index == 2) color = AppColors.gold.withAlpha(100);
     if (index == 3) color = AppColors.gold.withAlpha(62);
+    if (index > 3) color = AppColors.whiteAlpha52;
     return ScaleTap(
       onPressed: () {
         onTap.call();
@@ -25,13 +26,20 @@ class UserItem extends StatelessWidget {
         alignment: Alignment.center,
         margin: const EdgeInsets.only(top: 24, left: 24, right: 24),
         decoration: BoxDecoration(
-          color: color,
+          color: AppColors.primaryDark,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.whiteAlpha52),
+          border: Border.all(color: color),
         ),
         height: 62,
         child: Row(
           children: [
+            const Padding(
+              padding: EdgeInsets.all(6),
+            ),
+            Text(
+              index.toString(),
+              style: primaryTextStyle(fontWeight: FontWeight.bold),
+            ),
             Container(
               margin: const EdgeInsets.all(16),
               child: Text(
@@ -42,9 +50,20 @@ class UserItem extends StatelessWidget {
             const Spacer(),
             Container(
               margin: const EdgeInsets.all(16),
-              child: Text(
-                index.toString(),
-                style: primaryTextStyle(fontWeight: FontWeight.bold),
+              child: Row(
+                children: [
+                  Text(
+                    user.score?.toString() ?? "",
+                    style: primaryTextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(4),
+                  ),
+                  Icon(
+                    Icons.sports_score_rounded,
+                    color: AppColors.white,
+                  ),
+                ],
               ),
             ),
           ],

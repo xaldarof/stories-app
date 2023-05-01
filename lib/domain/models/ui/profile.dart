@@ -11,10 +11,13 @@ class User {
 
   final String dateJoined;
 
+  final int? score;
+
   const User({
     required this.id,
     required this.username,
     this.email,
+    this.score,
     this.firstName,
     this.lastName,
     required this.dateJoined,

@@ -26,7 +26,6 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     return emitter.forEach(
       _repository.getTopUsers(),
       onData: (data) {
-        printMessage('Status : ${data}');
         if (data is DomainLoading) {
           return state.copyWith(topUsersStatus: GlobalStatus.loading);
         }
