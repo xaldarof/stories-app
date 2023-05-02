@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 
-class StoryOwnerIcon extends StatefulWidget {
+class CircleIcon extends StatefulWidget {
   final IconData icon;
   final double? width;
   final double? height;
@@ -10,9 +10,9 @@ class StoryOwnerIcon extends StatefulWidget {
   final Color? borderColor;
 
   @override
-  State<StoryOwnerIcon> createState() => _StoryOwnerIconState();
+  State<CircleIcon> createState() => _CircleIconState();
 
-  const StoryOwnerIcon({
+  const CircleIcon({
     super.key,
     required this.icon,
     this.width,
@@ -23,7 +23,7 @@ class StoryOwnerIcon extends StatefulWidget {
   });
 }
 
-class _StoryOwnerIconState extends State<StoryOwnerIcon>
+class _CircleIconState extends State<CircleIcon>
     with TickerProviderStateMixin {
   late AnimationController _resizableController;
 

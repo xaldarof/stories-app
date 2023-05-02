@@ -1,8 +1,10 @@
 import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
+import 'package:jokes_app/domain/mappers/notification_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
+import 'package:jokes_app/domain/models/ui/notification.dart';
 import 'package:jokes_app/domain/models/ui/profile.dart';
 import 'package:jokes_app/domain/models/ui/profile_stats.dart';
 import 'package:jokes_app/domain/repositories/profile_repository.dart';
@@ -19,6 +21,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   final ProfileStatsMapper _profileStatsMapper;
   final StoryMapper _storyMapper;
   final CategoryMapper _categoryMapper;
+  final NotificationMapper _notificationMapper;
 
   @override
   Stream<DomainResult> getProfile() async* {
@@ -87,6 +90,18 @@ class ProfileRepositoryImpl extends ProfileRepository {
     await _cacheDataSource.clearAllCache();
   }
 
+  @override
+  Stream<DomainResult> getNotifications() async* {
+    try {
+      yield DomainLoading();
+      final res = await _networkDataSource.getNotifications();
+      final ui = res.map((e) => _notificationMapper.map(e));
+      yield DomainSuccess<List<UserNotification>>(data: ui.toList());
+    } catch (e) {
+      yield DomainFail();
+    }
+  }
+
   ProfileRepositoryImpl({
     required ProfileNetworkDataSource networkDataSource,
     required ProfileCacheDataSource cacheDataSource,
@@ -94,10 +109,27 @@ class ProfileRepositoryImpl extends ProfileRepository {
     required ProfileStatsMapper profileStatsMapper,
     required StoryMapper storyMapper,
     required CategoryMapper categoryMapper,
+    required NotificationMapper notificationMapper,
   })  : _networkDataSource = networkDataSource,
         _cacheDataSource = cacheDataSource,
         _profileMapper = profileMapper,
         _profileStatsMapper = profileStatsMapper,
         _storyMapper = storyMapper,
-        _categoryMapper = categoryMapper;
+        _categoryMapper = categoryMapper,
+        _notificationMapper = notificationMapper;
+
+  @override
+  Stream<DomainResult> setNotificationRead(int notificationId) async* {
+    try {
+      yield DomainLoading();
+      final res = await _networkDataSource.setNotificationRead(notificationId);
+      if (res) {
+        yield DomainSuccess();
+      } else {
+        yield DomainFail();
+      }
+    } catch (e) {
+      yield DomainFail();
+    }
+  }
 }

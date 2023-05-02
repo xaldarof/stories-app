@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
+import 'package:jokes_app/common/widgets/loading.dart';
+import 'package:jokes_app/common/widgets/not_found.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/story_quotes/bloc/story_quotes_bloc.dart';
@@ -35,49 +37,53 @@ class StoryQuotesScreen extends StatelessWidget {
                     primaryTextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            body: ListView.separated(
-              itemCount: state.quotes.length,
-              itemBuilder: (e, i) {
-                final item = state.quotes[i];
-                return ListTile(
-                  onTap: () {
-                    context.navigateTo(UserStoriesScreen(
-                        userId: item.userId, username: item.username));
-                  },
-                  title: Row(
-                    children: [
-                      Container(
-                        padding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 2),
-                        height: 20,
-                        margin: const EdgeInsets.only(
-                            right: 12, top: 16, bottom: 12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: item.isOwner
-                              ? AppColors.darkGreen
-                              : AppColors.whiteAlpha52,
+            body: state.quotes.isEmpty
+                ? state.quotesStatus == StoryQuotesStatus.success
+                    ? const NotFound()
+                    : const Loading()
+                : ListView.separated(
+                    itemCount: state.quotes.length,
+                    itemBuilder: (e, i) {
+                      final item = state.quotes[i];
+                      return ListTile(
+                        onTap: () {
+                          context.navigateTo(UserStoriesScreen(
+                              userId: item.userId, username: item.username));
+                        },
+                        title: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(
+                                  left: 12, right: 12, top: 2),
+                              height: 20,
+                              margin: const EdgeInsets.only(
+                                  right: 12, top: 16, bottom: 12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: item.isOwner
+                                    ? AppColors.darkGreen
+                                    : AppColors.whiteAlpha52,
+                              ),
+                              child: Text(
+                                item.username,
+                                style: primaryTextStyle(
+                                    color: AppColors.white, fontSize: 12),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          item.username,
-                          style: primaryTextStyle(
-                              color: AppColors.white, fontSize: 12),
+                        subtitle: Text(
+                          item.body,
+                          style: primaryTextStyle(),
                         ),
-                      ),
-                    ],
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Divider(
+                        color: AppColors.whiteAlpha52,
+                      );
+                    },
                   ),
-                  subtitle: Text(
-                    item.body,
-                    style: primaryTextStyle(),
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  color: AppColors.whiteAlpha52,
-                );
-              },
-            ),
           );
         },
       ),

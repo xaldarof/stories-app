@@ -5,6 +5,7 @@ import 'package:jokes_app/common/resource/decorations.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/loading.dart';
+import 'package:jokes_app/common/widgets/not_found.dart';
 import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/stories/bloc/stories_bloc.dart';
@@ -49,7 +50,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (e, i) {
-                        final item = (state.categories ?? [])[i];
+                        final item = (state.categories)[i];
                         return StoryCategoryItem(
                           value: item,
                           selected: selectedCategoryIndex == i,
@@ -71,7 +72,9 @@ class _StoriesScreenState extends State<StoriesScreen> {
               width: context.width,
               decoration: const DefaultBackgroundDecoration(),
               child: (state.stories.isEmpty)
-                  ? const Loading()
+                  ? state.storiesStatus == StoriesStatus.success
+                      ? const NotFound()
+                      : const Loading()
                   : ListView.builder(
                       controller: bloc.scrollController,
                       physics: const BouncingScrollPhysics(),

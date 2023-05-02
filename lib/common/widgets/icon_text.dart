@@ -15,7 +15,7 @@ class IconText extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.all(14),
-          child: StoryOwnerIcon(
+          child: CircleIcon(
             width: 48,
             height: 48,
             icon: icon,

@@ -8,6 +8,7 @@ class ProfileStatsMapper extends Mapper<ProfileStatsResponse, ProfileStats> {
     return ProfileStats(
         readStoriesCount: data.readStoriesCount,
         storyCount: data.storyCount,
+        unreadNotificationCount: data.unreadNotificationCount,
         viewReachCount: data.viewReachCount);
   }
 }

@@ -60,7 +60,7 @@ class StoryItem extends StatelessWidget {
                     onPressed: () {
                       onTapOwner.call();
                     },
-                    child: StoryOwnerIcon(
+                    child: CircleIcon(
                       animate: story.isPremium,
                       iconColor: story.isEnabled ? null : AppColors.blue,
                       borderColor: story.isPremium ? AppColors.gold : null,

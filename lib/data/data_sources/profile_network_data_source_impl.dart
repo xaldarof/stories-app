@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:jokes_app/data/api/api_client.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
+import 'package:jokes_app/domain/models/network/notification_response.dart';
 import 'package:jokes_app/domain/models/network/profile_response.dart';
 import 'package:jokes_app/domain/models/network/profile_stats_response.dart';
 
@@ -73,5 +74,24 @@ class ProfileNetworkDataSourceImpl extends ProfileNetworkDataSource {
         "story_id": storyId,
       },
     );
+  }
+
+  @override
+  Future<List<NotificationResponse>> getNotifications() async {
+    final response = await _client.get("api/v1/user/notification");
+    final decoded = BaseListResponse.fromJson(jsonDecode(response.data));
+    final list = decoded.data.map((e) => NotificationResponse.fromJson(e));
+    return list.toList();
+  }
+
+  @override
+  Future<bool> setNotificationRead(int notificationId) async {
+    final response = await _client.post(
+      "api/v1/user/notification",
+      data: {
+        "id": notificationId,
+      },
+    );
+    return response.isSuccessful;
   }
 }

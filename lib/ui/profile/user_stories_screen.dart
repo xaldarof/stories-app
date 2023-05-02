@@ -9,6 +9,7 @@ import 'package:jokes_app/ui/profile/bloc/user_stories/user_stories_state.dart';
 
 import '../../common/resource/colors.dart';
 import '../../common/resource/decorations.dart';
+import '../../common/widgets/not_found.dart';
 import '../../common/widgets/story_item.dart';
 import '../../di/app_di.dart';
 import '../../generated/locale_keys.g.dart';
@@ -90,7 +91,9 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
               width: context.width,
               decoration: const DefaultBackgroundDecoration(),
               child: (state.stories.isEmpty)
-                  ? const Loading()
+                  ? state.storiesStatus == UserStoriesStatus.success
+                      ? const NotFound()
+                      : const Loading()
                   : ListView.builder(
                       padding: const EdgeInsets.only(top: 152),
                       controller: bloc.scrollController,

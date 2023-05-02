@@ -6,6 +6,7 @@ import 'package:jokes_app/common/widgets/scale_tap.dart';
 import 'package:jokes_app/domain/models/ui/profile_stats.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/profile/bloc/profile/profile_bloc.dart';
+import 'package:jokes_app/ui/profile/notifications/notifications_screen.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 
 import '../../common/resource/colors.dart';
@@ -56,7 +57,18 @@ class UserInfoCard extends StatelessWidget {
                 onPressed: () {},
                 child: IconText(
                   icon: Icons.pending_actions,
-                  text: '${Strings.viewReachCount} ${stats?.viewReachCount ?? ""}',
+                  text:
+                      '${Strings.viewReachCount} ${stats?.viewReachCount ?? ""}',
+                ),
+              ),
+              ScaleTap(
+                onPressed: () {
+                  context.navigateTo(const NotificationsScreen());
+                },
+                child: IconText(
+                  icon: Icons.notifications,
+                  text:
+                      '${Strings.notifications} ${stats?.unreadNotificationCount ?? ""}',
                 ),
               ),
             ],

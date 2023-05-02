@@ -75,19 +75,14 @@ class _RegisterScreenState extends State<RegisterScreen>
                     children: [
                       const Spacer(),
                       SizedBox(
-                          height: 100,
-                          child: ColorFiltered(
-                            colorFilter: const ColorFilter.mode(
-                              Colors.red,
-                              BlendMode.modulate,
-                            ),
-                            child: Lottie.asset(
-                              Assets.writeJson,
-                              frameRate: FrameRate.max,
-                              width: 152,
-                              height: 152,
-                            ),
-                          )),
+                        height: 100,
+                        child: Lottie.asset(
+                          Assets.writeJson,
+                          frameRate: FrameRate.max,
+                          width: 152,
+                          height: 152,
+                        ),
+                      ),
                       const Spacer(),
                       Input(
                           controller: bloc.usernameController,

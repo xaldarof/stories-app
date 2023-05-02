@@ -24,6 +24,7 @@ import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/story_quotes_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/view_story_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/category_mapper.dart';
+import 'package:jokes_app/domain/mappers/notification_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';
 import 'package:jokes_app/domain/mappers/story_mapper.dart';
@@ -74,13 +75,17 @@ void _setUpRepos() {
       ViewStoryRepositoryImpl(networkDataSource: injector.get()));
   injector.registerSingleton<StoryQuotesRepository>(StoryQuotesRepositoryImpl(
       networkDataSource: injector.get(), storyQuoteMapper: StoryQuoteMapper()));
-  injector.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(
+  injector.registerSingleton<ProfileRepository>(
+    ProfileRepositoryImpl(
       networkDataSource: injector.get(),
       profileMapper: UserMapper(),
       profileStatsMapper: ProfileStatsMapper(),
       storyMapper: StoryMapper(),
       categoryMapper: CategoryMapper(),
-      cacheDataSource: injector.get()));
+      cacheDataSource: injector.get(),
+      notificationMapper: NotificationMapper(),
+    ),
+  );
   injector.registerSingleton<GlobalRepository>(GlobalRepositoryImpl(
       networkDataSource: injector.get(), userMapper: UserMapper()));
 }

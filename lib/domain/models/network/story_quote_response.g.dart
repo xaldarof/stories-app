@@ -12,9 +12,9 @@ StoryQuoteResponse _$StoryQuoteResponseFromJson(Map<String, dynamic> json) =>
       storyId: json['storyId'] as int,
       body: json['body'] as String,
       timeCreate: json['timeCreate'] as String,
-      isOwner: json['isOwner'] as bool,
       author: StoryQuoteAuthorResponse.fromJson(
           json['author'] as Map<String, dynamic>),
+      isOwner: json['isOwner'] as bool,
     );
 
 Map<String, dynamic> _$StoryQuoteResponseToJson(StoryQuoteResponse instance) =>
@@ -24,6 +24,7 @@ Map<String, dynamic> _$StoryQuoteResponseToJson(StoryQuoteResponse instance) =>
       'body': instance.body,
       'author': instance.author,
       'timeCreate': instance.timeCreate,
+      'isOwner': instance.isOwner,
     };
 
 StoryQuoteAuthorResponse _$StoryQuoteAuthorResponseFromJson(

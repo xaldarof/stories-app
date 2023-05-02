@@ -28,5 +28,5 @@ class UserResponse {
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
-      _$ProfileResponseFromJson(json);
+      _$UserResponseFromJson(json);
 }

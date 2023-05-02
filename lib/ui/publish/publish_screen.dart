@@ -109,7 +109,7 @@ class _PublishScreenState extends State<PublishScreen> {
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (e, i) {
-                            final item = (state.categories ?? [])[i];
+                            final item = (state.categories)[i];
                             return StoryCategoryItem(
                               value: item,
                               selected: bloc.selectedCategoryIndex == i,

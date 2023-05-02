@@ -12,6 +12,7 @@ ProfileStatsResponse _$ProfileStatsResponseFromJson(
       readStoriesCount: json['readStoriesCount'] as int,
       storyCount: json['storyCount'] as int,
       viewReachCount: json['viewReachCount'] as int,
+      unreadNotificationCount: json['unreadNotificationCount'] as int,
     );
 
 Map<String, dynamic> _$ProfileStatsResponseToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$ProfileStatsResponseToJson(
       'readStoriesCount': instance.readStoriesCount,
       'storyCount': instance.storyCount,
       'viewReachCount': instance.viewReachCount,
+      'unreadNotificationCount': instance.unreadNotificationCount,
     };

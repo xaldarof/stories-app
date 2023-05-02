@@ -26,5 +26,7 @@
   "do_you_want_logout": "Chiqishni xoxlaysizmi ?",
   "quotes": "Aforizmlar",
   "add_to_quotes": "Aforizmlarga qoshish",
-  "global": "Global"
+  "global": "Global",
+  "notifications": "Bildirishnomalar",
+  "tap_to_mark_as_read": "Oqish uchun bosing"
 }

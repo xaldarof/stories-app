@@ -33,5 +33,7 @@ abstract class Strings {
   static String get quotes => 'quotes'.tr();
   static String get addToQuotes => 'add_to_quotes'.tr();
   static String get global => 'global'.tr();
+  static String get notifications => 'notifications'.tr();
+  static String get tapToMarkAsRead => 'tap_to_mark_as_read'.tr();
 
 }

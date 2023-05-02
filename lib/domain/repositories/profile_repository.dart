@@ -11,5 +11,9 @@ abstract class ProfileRepository {
 
   Future<void> setAsRead(int storyId);
 
+  Stream<DomainResult> setNotificationRead(int notificationId);
+
   Future<void> logout();
+
+  Stream<DomainResult> getNotifications();
 }
