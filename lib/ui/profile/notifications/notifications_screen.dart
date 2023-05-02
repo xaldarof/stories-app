@@ -44,9 +44,11 @@ class NotificationsScreen extends StatelessWidget {
                         return NotificationItem(
                           notification: state.notifications[i],
                           onTap: () {
-                            context
-                                .read<NotificationsBloc>()
-                                .add(SetRead(id: state.notifications[i].id));
+                            if (!state.notifications[i].isRead) {
+                              context
+                                  .read<NotificationsBloc>()
+                                  .add(SetRead(id: state.notifications[i].id));
+                            }
                           },
                         );
                       },
