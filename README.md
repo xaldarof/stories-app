@@ -24,6 +24,7 @@
 - Paging
 - Authorization
 - Localization
+- FCM
 
 # Screenshots
 
