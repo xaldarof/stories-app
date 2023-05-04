@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>316938718389-ncjfer143644npd1nppbc537sorgcp1q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.316938718389-ncjfer143644npd1nppbc537sorgcp1q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDqArGmbyB0smc8H3twKFqRci9GH2WrjWg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>316938718389</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>xaldarof.stories.app</string>
+	<key>PROJECT_ID</key>
+	<string>stories-96d17</string>
+	<key>STORAGE_BUCKET</key>
+	<string>stories-96d17.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:316938718389:ios:52f3c7c3551d4f6381c2fc</string>
+</dict>
+</plist>
