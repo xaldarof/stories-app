@@ -33,21 +33,43 @@ class _ImageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Screenshot(
-      controller: screenshotController,
-      child: Container(
-        margin: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.whiteAlpha52),
-        ),
-        alignment: Alignment.center,
-        height: 200,
-        width: context.width,
-        child: Text(
-          text,
-          style: primaryTextStyle(),
+    return Container(
+      height: 252,
+      margin: const EdgeInsets.all(16),
+      child: Screenshot(
+        controller: screenshotController,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          alignment: Alignment.center,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  maxLines: 8,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  text,
+                  style: primaryTextStyle(),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Text(
+                  maxLines: 10,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  "Stories app",
+                  style: primaryTextStyle(
+                      color: AppColors.whiteAlpha52, fontSize: 12),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -72,62 +94,56 @@ class _DialogContent extends StatefulWidget {
 }
 
 class _DialogContentState extends State<_DialogContent> {
-  Color _backgroundColor = Colors.transparent;
+  Color _backgroundColor = Colors.black;
   ScreenshotController screenshotController = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 400,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
         borderRadius: BorderRadius.circular(24),
       ),
-      margin: const EdgeInsets.all(24),
-      height: 350,
-      child: Stack(
+      margin: const EdgeInsets.all(12),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Column(
-              children: [
-                _ImageContent(
-                  color: _backgroundColor,
-                  text: widget.text,
-                  screenshotController: screenshotController,
-                ),
-                Flexible(
-                  child: _ImageBackgroundPicker(
-                    onPick: (color) {
-                      setState(
-                        () {
-                          _backgroundColor = color;
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+          _ImageContent(
+            color: _backgroundColor,
+            text: widget.text,
+            screenshotController: screenshotController,
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              margin: const EdgeInsets.all(16),
-              child: FloatingActionButton(
-                splashColor: AppColors.darkSpringGreen,
-                backgroundColor: AppColors.darkGreen,
-                child: const Icon(Icons.save),
-                onPressed: () async {
-                  final path = await screenshotController.captureAndSave(
-                      (await FileUtils.generateFilePath("png")));
-                  if (path != null) {
-                    Share.shareXFiles([XFile(path)]);
-                  }
+          _ImageBackgroundPicker(
+            onPick: (color) {
+              setState(
+                () {
+                  _backgroundColor = color;
                 },
-              ),
-            ),
+              );
+            },
           ),
+          Row(
+            children: [
+              const Spacer(),
+              Container(
+                margin: const EdgeInsets.only(top: 12, right: 16, bottom: 16),
+                child: FloatingActionButton(
+                  splashColor: AppColors.darkSpringGreen,
+                  backgroundColor: AppColors.darkGreen,
+                  child: const Icon(Icons.save),
+                  onPressed: () async {
+                    final path = await screenshotController.captureAndSave(
+                        (await FileUtils.generateFilePath("png")));
+                    if (path != null) {
+                      Share.shareXFiles([XFile(path)]);
+                    }
+                  },
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -147,6 +163,7 @@ class _ImageBackgroundPicker extends StatefulWidget {
 
 class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker> {
   final _colors = [];
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -158,8 +175,6 @@ class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker> {
     }
     super.initState();
   }
-
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -175,9 +190,11 @@ class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker> {
           return ScaleTap(
             onPressed: () {
               widget.onPick.call(item);
-              setState(() {
-                selectedIndex = i;
-              });
+              setState(
+                () {
+                  selectedIndex = i;
+                },
+              );
             },
             child: Container(
               margin: const EdgeInsets.all(4),

@@ -50,11 +50,12 @@ class StoryQuotesScreen extends StatelessWidget {
                       return StoryQuoteItem(
                         item: item,
                         onTap: () {
+                          showGenerateQuoteDialog(
+                              context, item.body);
+                        },
+                        onTapOwner: () {
                           context.navigateTo(UserStoriesScreen(
                               userId: item.userId, username: item.username));
-                        },
-                        onLongPress: () {
-                          showGenerateQuoteDialog(context, item.body);
                         },
                       );
                     },
