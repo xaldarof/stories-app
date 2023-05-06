@@ -3,9 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
-import 'package:jokes_app/common/utils/size.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -96,6 +94,19 @@ class _DialogContent extends StatefulWidget {
 class _DialogContentState extends State<_DialogContent> {
   Color _backgroundColor = Colors.black;
   ScreenshotController screenshotController = ScreenshotController();
+  int _selectedIndex = 0;
+  final List<Color> _colors = [];
+
+  @override
+  void initState() {
+    _colors.add(Colors.black);
+    _colors.add(Colors.white);
+    for (int i = 0; i < 50; i++) {
+      _colors.add(Color.fromARGB(Random().nextInt(255), Random().nextInt(255),
+          Random().nextInt(255), Random().nextInt(255)));
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,19 +121,30 @@ class _DialogContentState extends State<_DialogContent> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _ImageContent(
-            color: _backgroundColor,
-            text: widget.text,
-            screenshotController: screenshotController,
+          ScaleTap(
+            onPressed: () {
+              setState(() {
+                _selectedIndex = Random().nextInt(50);
+                _backgroundColor = _colors[_selectedIndex];
+              });
+            },
+            child: _ImageContent(
+              color: _backgroundColor,
+              text: widget.text,
+              screenshotController: screenshotController,
+            ),
           ),
           _ImageBackgroundPicker(
-            onPick: (color) {
+            onPick: (color, index) {
               setState(
                 () {
                   _backgroundColor = color;
+                  _selectedIndex = index;
                 },
               );
             },
+            selectedIndex: _selectedIndex,
+            colors: _colors,
           ),
           Row(
             children: [
@@ -132,10 +154,10 @@ class _DialogContentState extends State<_DialogContent> {
                 child: FloatingActionButton(
                   splashColor: AppColors.darkSpringGreen,
                   backgroundColor: AppColors.darkGreen,
-                  child: const Icon(Icons.save),
+                  child: const Icon(Icons.send),
                   onPressed: () async {
                     final path = await screenshotController.captureAndSave(
-                        (await FileUtils.generateFilePath("png")));
+                        (await FileUtils.generateFilePath("jpeg")));
                     if (path != null) {
                       Share.shareXFiles([XFile(path)]);
                     }
@@ -151,28 +173,27 @@ class _DialogContentState extends State<_DialogContent> {
 }
 
 class _ImageBackgroundPicker extends StatefulWidget {
-  final Function(Color color) onPick;
+  final Function(Color color, int index) onPick;
+  final int selectedIndex;
+  final List<Color> colors;
 
   @override
   State<_ImageBackgroundPicker> createState() => _ImageBackgroundPickerState();
 
   const _ImageBackgroundPicker({
     required this.onPick,
+    required this.selectedIndex,
+    required this.colors,
   });
 }
 
-class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker> {
-  final _colors = [];
-  int selectedIndex = 0;
+class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker>
+    with TickerProviderStateMixin {
+  late TabController tabController;
 
   @override
   void initState() {
-    _colors.add(Colors.black);
-    _colors.add(Colors.white);
-    for (int i = 0; i < 50; i++) {
-      _colors.add(Color.fromARGB(Random().nextInt(255), Random().nextInt(255),
-          Random().nextInt(255), Random().nextInt(255)));
-    }
+    tabController = TabController(length: 50, vsync: this);
     super.initState();
   }
 
@@ -184,17 +205,12 @@ class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(left: 16, right: 16),
         scrollDirection: Axis.horizontal,
-        itemCount: _colors.length,
+        itemCount: widget.colors.length,
         itemBuilder: (e, i) {
-          final item = _colors[i];
+          final item = widget.colors[i];
           return ScaleTap(
             onPressed: () {
-              widget.onPick.call(item);
-              setState(
-                () {
-                  selectedIndex = i;
-                },
-              );
+              widget.onPick.call(item, i);
             },
             child: Container(
               margin: const EdgeInsets.all(4),
@@ -209,7 +225,7 @@ class _ImageBackgroundPickerState extends State<_ImageBackgroundPicker> {
                 width: 16,
                 decoration: BoxDecoration(
                   color: item,
-                  border: selectedIndex == i
+                  border: widget.selectedIndex == i
                       ? Border.all(color: Colors.black, width: 2)
                       : null,
                   borderRadius: BorderRadius.circular(12),

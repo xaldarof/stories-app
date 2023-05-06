@@ -50,8 +50,7 @@ class StoryQuotesScreen extends StatelessWidget {
                       return StoryQuoteItem(
                         item: item,
                         onTap: () {
-                          showGenerateQuoteDialog(
-                              context, item.body);
+                          showGenerateQuoteDialog(context, item.body);
                         },
                         onTapOwner: () {
                           context.navigateTo(UserStoriesScreen(
