@@ -4,9 +4,11 @@ import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/widgets/loading.dart';
 import 'package:jokes_app/common/widgets/not_found.dart';
+import 'package:jokes_app/common/widgets/story_quote_item.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 import 'package:jokes_app/ui/story_quotes/bloc/story_quotes_bloc.dart';
+import 'package:jokes_app/ui/story_quotes/generate_quote_image_dialog.dart';
 
 import '../../common/resource/colors.dart';
 import '../../di/app_di.dart';
@@ -45,37 +47,15 @@ class StoryQuotesScreen extends StatelessWidget {
                     itemCount: state.quotes.length,
                     itemBuilder: (e, i) {
                       final item = state.quotes[i];
-                      return ListTile(
+                      return StoryQuoteItem(
+                        item: item,
                         onTap: () {
                           context.navigateTo(UserStoriesScreen(
                               userId: item.userId, username: item.username));
                         },
-                        title: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  left: 12, right: 12, top: 2),
-                              height: 20,
-                              margin: const EdgeInsets.only(
-                                  right: 12, top: 16, bottom: 12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: item.isOwner
-                                    ? AppColors.darkGreen
-                                    : AppColors.whiteAlpha52,
-                              ),
-                              child: Text(
-                                item.username,
-                                style: primaryTextStyle(
-                                    color: AppColors.white, fontSize: 12),
-                              ),
-                            ),
-                          ],
-                        ),
-                        subtitle: Text(
-                          item.body,
-                          style: primaryTextStyle(),
-                        ),
+                        onLongPress: () {
+                          showGenerateQuoteDialog(context, item.body);
+                        },
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) {

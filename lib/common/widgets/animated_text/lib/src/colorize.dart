@@ -111,7 +111,7 @@ class ColorizeAnimatedText extends AnimatedText {
   }
 }
 
-/// Animation that displays [text] elements, shimmering transition between [colors].
+/// Animation that displays [text] elements, shimmering transition between [_colors].
 ///
 /// ![Colorize example](https://raw.githubusercontent.com/aagarwal1012/Animated-Text-Kit/master/display/colorize.gif)
 @Deprecated('Use AnimatedTextKit with ColorizeAnimatedText instead.')
