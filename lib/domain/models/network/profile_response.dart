@@ -16,6 +16,7 @@ class UserResponse {
 
   final String dateJoined;
   final int? score;
+  final bool? isMe;
 
   const UserResponse({
     required this.id,
@@ -24,6 +25,7 @@ class UserResponse {
     this.firstName,
     this.score,
     this.lastName,
+    this.isMe,
     required this.dateJoined,
   });
 

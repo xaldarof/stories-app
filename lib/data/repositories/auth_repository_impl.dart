@@ -4,6 +4,7 @@ import 'package:jokes_app/common/resource/keys.dart';
 import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:jokes_app/domain/repositories/auth_repository.dart';
+import 'package:modified_localization/easy_localization.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthNetworkDataSource _networkDataSource;
@@ -15,7 +16,7 @@ class AuthRepositoryImpl extends AuthRepository {
       yield DomainLoading();
       final fcmToken = await FirebaseMessaging.instance.getToken();
       final res = await _networkDataSource.login(
-          username, password, fcmToken ?? "nothing");
+          username.trim(), password.trim(), fcmToken ?? "nothing");
       _preferences.setString(Keys.token, res.access);
 
       yield DomainSuccess();
@@ -30,7 +31,7 @@ class AuthRepositoryImpl extends AuthRepository {
       yield DomainLoading();
       final fcmToken = await FirebaseMessaging.instance.getToken();
       final res = await _networkDataSource.register(
-          username, password, fcmToken ?? "nothing");
+          username.trim(), password.trim(), fcmToken ?? "nothing");
       _preferences.setString(Keys.token, res.access);
 
       yield DomainSuccess();

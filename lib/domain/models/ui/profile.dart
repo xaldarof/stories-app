@@ -13,6 +13,8 @@ class User {
 
   final int? score;
 
+  final bool? isMe;
+
   const User({
     required this.id,
     required this.username,
@@ -20,6 +22,7 @@ class User {
     this.score,
     this.firstName,
     this.lastName,
+    this.isMe,
     required this.dateJoined,
   });
 }

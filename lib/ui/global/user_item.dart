@@ -36,6 +36,16 @@ class UserItem extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(6),
             ),
+            if (user.isMe == true)
+              Icon(
+                Icons.circle,
+                color: AppColors.darkSpringGreen,
+                size: 12,
+              ),
+            if (user.isMe == true)
+              const Padding(
+                padding: EdgeInsets.all(4),
+              ),
             Text(
               index.toString(),
               style: primaryTextStyle(fontWeight: FontWeight.bold),

@@ -14,6 +14,7 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       score: json['score'] as int?,
       lastName: json['lastName'] as String?,
       dateJoined: json['dateJoined'] as String,
+      isMe: json['isMe'] as bool?,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
