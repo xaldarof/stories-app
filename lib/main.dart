@@ -6,7 +6,6 @@ import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/di/app_di.dart';
-import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/main/main_screen.dart';
 import 'package:modified_localization/easy_localization.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -29,6 +28,8 @@ void main() async {
     sound: true,
   );
 
+
+
   FirebaseMessaging.onMessage.listen(
     (RemoteMessage message) {
       printMessage(message.toString());
@@ -38,11 +39,11 @@ void main() async {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                Strings.congratulations,
+                message.notification?.title ?? "",
                 style: primaryTextStyle(color: AppColors.white),
               ),
               Text(
-                Strings.youReachMoreThanView(message.notification?.body ?? ""),
+                message.notification?.body ?? "",
                 style: primaryTextStyle(color: AppColors.white),
               ),
             ],
