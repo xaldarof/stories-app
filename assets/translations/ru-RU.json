@@ -28,5 +28,7 @@
   "add_to_quotes": "Добавить в цитаты",
   "global": "Глобальный",
   "notifications": "Уведомлении",
-  "tap_to_mark_as_read": "Нажмите чтобы прочитать"
+  "tap_to_mark_as_read": "Нажмите чтобы прочитать",
+  "congratulations": "Поздравляем !",
+  "you_reach_more_than_view": "Ваше посты набрали целых {} просмотров"
 }

@@ -28,5 +28,7 @@
   "add_to_quotes": "Aforizmlarga qoshish",
   "global": "Global",
   "notifications": "Bildirishnomalar",
-  "tap_to_mark_as_read": "Oqish uchun bosing"
+  "tap_to_mark_as_read": "Oqish uchun bosing",
+  "congratulations": "Tabriklaymiz !",
+  "you_reach_more_than_view": "Sizning hikoyalaringiz korilganlik soni {} ta boldi"
 }

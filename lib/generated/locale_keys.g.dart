@@ -35,5 +35,9 @@ abstract class Strings {
   static String get global => 'global'.tr();
   static String get notifications => 'notifications'.tr();
   static String get tapToMarkAsRead => 'tap_to_mark_as_read'.tr();
+  static String get congratulations => 'congratulations'.tr();
+  static String youReachMoreThanView(String arg0) {
+    return 'you_reach_more_than_view'.tr(args: [arg0]);
+  }
 
 }

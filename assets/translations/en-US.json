@@ -28,5 +28,7 @@
   "add_to_quotes": "Add to quotes",
   "global": "Global",
   "notifications": "Notifications",
-  "tap_to_mark_as_read": "Tap to read"
+  "tap_to_mark_as_read": "Tap to read",
+  "congratulations": "Congratulations !",
+  "you_reach_more_than_view": "Your stories reached {} views"
 }

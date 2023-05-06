@@ -6,6 +6,7 @@ import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/di/app_di.dart';
+import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/main/main_screen.dart';
 import 'package:modified_localization/easy_localization.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -37,11 +38,11 @@ void main() async {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                message.notification?.title ?? "",
+                Strings.congratulations,
                 style: primaryTextStyle(color: AppColors.white),
               ),
               Text(
-                message.notification?.body ?? "",
+                Strings.youReachMoreThanView(message.notification?.body ?? ""),
                 style: primaryTextStyle(color: AppColors.white),
               ),
             ],
