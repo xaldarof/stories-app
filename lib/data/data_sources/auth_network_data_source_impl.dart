@@ -8,12 +8,14 @@ class AuthNetworkDataSourceImpl extends AuthNetworkDataSource {
   final DioClient _client;
 
   @override
-  Future<AuthResponse> login(String username, String password) async {
+  Future<AuthResponse> login(
+      String username, String password, String fcmToken) async {
     final response = await _client.post(
       "api/token/",
       data: {
         "username": username,
         "password": password,
+        "fcmToken": fcmToken,
       },
     );
     final decoded = AuthResponse.fromJson(jsonDecode(response.data));
@@ -21,12 +23,14 @@ class AuthNetworkDataSourceImpl extends AuthNetworkDataSource {
   }
 
   @override
-  Future<AuthResponse> register(String username, String password) async {
+  Future<AuthResponse> register(
+      String username, String password, String fcmToken) async {
     final response = await _client.post(
       "api/register/",
       data: {
         "username": username,
         "password": password,
+        "fcmToken": fcmToken,
       },
     );
     final decoded = AuthResponse.fromJson(jsonDecode(response.data));

@@ -28,9 +28,6 @@ void main() async {
     sound: true,
   );
 
-  final res = await FirebaseMessaging.instance.getToken();
-  printMessage("Token : $res");
-
   FirebaseMessaging.onMessage.listen(
     (RemoteMessage message) {
       printMessage(message.toString());

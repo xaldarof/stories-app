@@ -1,4 +1,5 @@
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:jokes_app/common/resource/keys.dart';
 import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
@@ -12,7 +13,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Stream<DomainResult> login(String username, String password) async* {
     try {
       yield DomainLoading();
-      final res = await _networkDataSource.login(username, password);
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      final res = await _networkDataSource.login(
+          username, password, fcmToken ?? "nothing");
       _preferences.setString(Keys.token, res.access);
 
       yield DomainSuccess();
@@ -25,7 +28,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Stream<DomainResult> register(String username, String password) async* {
     try {
       yield DomainLoading();
-      final res = await _networkDataSource.register(username, password);
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      final res = await _networkDataSource.register(
+          username, password, fcmToken ?? "nothing");
       _preferences.setString(Keys.token, res.access);
 
       yield DomainSuccess();
