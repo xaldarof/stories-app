@@ -63,10 +63,10 @@ class ProfileRepositoryImpl extends ProfileRepository {
   }
 
   @override
-  Stream<DomainResult> getCategories() async* {
+  Stream<DomainResult> getCategories(int userId) async* {
     try {
       yield DomainLoading();
-      final res = await _networkDataSource.getCategories();
+      final res = await _networkDataSource.getCategories(userId);
       if (res != null) {
         final mapped = res.map((e) => _categoryMapper.map(e));
         yield DomainSuccess<List<Category>>(data: mapped.toList());

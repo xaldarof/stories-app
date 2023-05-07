@@ -54,9 +54,14 @@ class ProfileNetworkDataSourceImpl extends ProfileNetworkDataSource {
   }
 
   @override
-  Future<List<CategoryResponse>?> getCategories() async {
+  Future<List<CategoryResponse>?> getCategories(int userId) async {
     try {
-      final response = await _client.get("api/v1/categories");
+      final response = await _client.get(
+        "api/v1/user/categories/",
+        queryParameters: {
+          "userId": userId,
+        },
+      );
       final decoded = BaseListResponse.fromJson(jsonDecode(response.data));
       final list = decoded.data.map((e) => CategoryResponse.fromJson(e));
       return list.toList();

@@ -79,7 +79,7 @@ class UserStoriesBloc extends Bloc<UserStoriesEvent, UserStoriesState> {
 
   Future<void> _getCategories(GetCategories event, Emitter emitter) {
     return emitter.forEach(
-      _repository.getCategories(),
+      _repository.getCategories(event.userId),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(categoryStatus: UserStoriesStatus.loading);

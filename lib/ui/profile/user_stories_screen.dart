@@ -42,7 +42,9 @@ class _UserStoriesScreenState extends State<UserStoriesScreen> {
           SetUserId(id: widget.userId),
         )
         ..add(
-          GetCategories(),
+          GetCategories(
+            userId: widget.userId,
+          ),
         ),
       child: BlocBuilder<UserStoriesBloc, UserStoriesState>(
         builder: (context, state) {

@@ -5,6 +5,10 @@ import 'package:jokes_app/domain/models/ui/category.dart';
 class CategoryMapper extends Mapper<CategoryResponse, Category> {
   @override
   Category map(CategoryResponse data) {
-    return Category(id: data.id, name: "#${data.name}");
+    return Category(
+      id: data.id,
+      name: "#${data.name}(${data.count})",
+      count: data.count,
+    );
   }
 }

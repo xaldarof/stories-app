@@ -6,10 +6,12 @@ part 'category_response.g.dart';
 class CategoryResponse {
   final int id;
   final String name;
+  final int count;
 
   const CategoryResponse({
     required this.id,
     required this.name,
+    required this.count,
   });
 
   factory CategoryResponse.fromJson(Map<String, dynamic> json) =>

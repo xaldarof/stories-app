@@ -12,7 +12,13 @@ class GetCategoryStories extends UserStoriesEvent {
   });
 }
 
-class GetCategories extends UserStoriesEvent {}
+class GetCategories extends UserStoriesEvent {
+  final int userId;
+
+  GetCategories({
+    required this.userId,
+  });
+}
 
 class SetAsRead extends UserStoriesEvent {
   final int storyId;
