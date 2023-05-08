@@ -1,11 +1,13 @@
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:jokes_app/common/resource/keys.dart';
 import 'package:jokes_app/domain/data_sources/main_data_source.dart';
+import 'package:jokes_app/domain/data_sources/main_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/app_state.dart';
 import 'package:jokes_app/domain/repositories/main_repository.dart';
 
 class MainRepositoryImpl extends MainRepository {
   final MainDataSource _dataSource;
+  final MainNetworkDataSource _networkDataSource;
   final EncryptedSharedPreferences _preferences;
 
   @override
@@ -16,14 +18,26 @@ class MainRepositoryImpl extends MainRepository {
     });
   }
 
-  MainRepositoryImpl({
-    required MainDataSource dataSource,
-    required EncryptedSharedPreferences preferences,
-  })  : _dataSource = dataSource,
-        _preferences = preferences;
-
   @override
   Future<bool> isAuthorized() async {
     return _preferences.getString(Keys.token) == null ? false : true;
   }
+
+  @override
+  Future<bool> refreshFCMToken(String token) async {
+    try {
+      final res = _networkDataSource.refreshFCMToken(token);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  MainRepositoryImpl({
+    required MainDataSource dataSource,
+    required MainNetworkDataSource networkDataSource,
+    required EncryptedSharedPreferences preferences,
+  })  : _dataSource = dataSource,
+        _networkDataSource = networkDataSource,
+        _preferences = preferences;
 }

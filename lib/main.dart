@@ -21,15 +21,6 @@ void main() async {
   late final FirebaseMessaging messaging;
   messaging = FirebaseMessaging.instance;
 
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    badge: true,
-    provisional: false,
-    sound: true,
-  );
-
-
-
   FirebaseMessaging.onMessage.listen(
     (RemoteMessage message) {
       printMessage(message.toString());

@@ -62,7 +62,8 @@ class TypewriterAnimatedText extends AnimatedText {
   Widget completeText(BuildContext context) => RichText(
         text: TextSpan(
           children: [
-            if (selectionActions == null) TextSpan(text: text),
+            if (selectionActions == null)
+              TextSpan(text: text, style: textStyle),
             if (selectionActions != null)
               WidgetSpan(
                 child: SelectableText(
@@ -87,7 +88,7 @@ class TypewriterAnimatedText extends AnimatedText {
               style: const TextStyle(color: Colors.transparent),
             )
           ],
-          style: DefaultTextStyle.of(context).style.merge(textStyle),
+          style: textStyle,
         ),
         textAlign: textAlign,
       );
@@ -116,14 +117,14 @@ class TypewriterAnimatedText extends AnimatedText {
     return RichText(
       text: TextSpan(
         children: [
-          TextSpan(text: visibleString),
+          TextSpan(text: visibleString,style: textStyle),
           TextSpan(
             text: cursor,
             style:
                 showCursor ? null : const TextStyle(color: Colors.transparent),
           )
         ],
-        style: DefaultTextStyle.of(context).style.merge(textStyle),
+        style: textStyle,
       ),
       textAlign: textAlign,
     );

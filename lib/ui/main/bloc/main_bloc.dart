@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/domain/models/common/app_state.dart';
@@ -25,6 +26,10 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<GetAppStatus>(_getAppStatus,
         transformer: debounceSequential(const Duration(seconds: 3)));
 
+    FirebaseMessaging.instance.onTokenRefresh.listen((event) {
+      _repository.refreshFCMToken(event);
+    });
+
     stream.listen((event) {
       if (state.appState == AppState.unAuthorized) {
         navigatorKey.currentContext
@@ -37,7 +42,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     return emitter.forEach(
       _repository.getAppState(),
       onData: (data) {
-        printMessage("App status : ${data}");
         return state.copyWith(appState: data);
       },
     );

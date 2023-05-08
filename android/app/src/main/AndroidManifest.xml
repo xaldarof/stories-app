@@ -2,6 +2,7 @@
     package="com.example.jokes_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"

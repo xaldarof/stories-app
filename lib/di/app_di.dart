@@ -18,6 +18,7 @@ import 'package:jokes_app/data/repositories/stories_repository_impl.dart';
 import 'package:jokes_app/data/repositories/view_story_repository_impl.dart';
 import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/global_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/main_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
 import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
 import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
@@ -38,6 +39,7 @@ import 'package:jokes_app/domain/repositories/story_quotes_repository.dart';
 import 'package:jokes_app/domain/repositories/view_story_repository.dart';
 
 import '../data/data_sources/main_data_source_impl.dart';
+import '../data/data_sources/main_network_data_source_impl.dart';
 import '../data/data_sources/story_quotes_network_data_source_impl.dart';
 import '../data/repositories/main_repository_impl.dart';
 import '../data/repositories/story_quotes_repository_impl.dart';
@@ -70,7 +72,9 @@ void _setUpRepos() {
   injector.registerSingleton<AuthRepository>(AuthRepositoryImpl(
       networkDataSource: injector.get(), preferences: injector.get()));
   injector.registerSingleton<MainRepository>(MainRepositoryImpl(
-      dataSource: injector.get(), preferences: injector.get()));
+      dataSource: injector.get(),
+      preferences: injector.get(),
+      networkDataSource: injector.get()));
   injector.registerSingleton<ViewStoryRepository>(
       ViewStoryRepositoryImpl(networkDataSource: injector.get()));
   injector.registerSingleton<StoryQuotesRepository>(StoryQuotesRepositoryImpl(
@@ -109,4 +113,6 @@ void _setUpDataSources() {
       StoryQuotesNetworkDataSourceImpl(client: injector.get()));
   injector.registerSingleton<GlobalNetworkDataSource>(
       GlobalNetworkDataSourceImpl(client: injector.get()));
+  injector.registerSingleton<MainNetworkDataSource>(
+      MainNetworkDataSourceImpl(client: injector.get()));
 }
