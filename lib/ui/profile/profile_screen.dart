@@ -10,7 +10,9 @@ import 'package:jokes_app/ui/profile/bloc/profile/profile_bloc.dart';
 import 'package:jokes_app/ui/profile/user_info_card.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:modified_localization/easy_localization.dart';
+import 'package:share_plus/share_plus.dart';
 
+import '../../common/resource/constants.dart';
 import '../../generated/locale_keys.g.dart';
 import '../common/dialog/select_language_dialog.dart';
 
@@ -55,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                     },
                     icon: Icons.person,
                   ),
-                  UserInfoCard(
+                  UserStatisticsCard(
                     margin: const EdgeInsets.only(left: 24, right: 24),
                     stats: state.profileStats,
                   ),
@@ -93,9 +95,12 @@ class ProfileScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
                     text: Strings.share,
                     onTap: () {
-                      //
+                      Share.share(Constants.appUrl);
                     },
                     icon: Icons.share,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(16),
                   ),
                 ],
               ),

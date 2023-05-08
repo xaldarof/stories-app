@@ -11,7 +11,7 @@ import 'package:jokes_app/ui/profile/user_stories_screen.dart';
 
 import '../../common/resource/colors.dart';
 
-class UserInfoCard extends StatelessWidget {
+class UserStatisticsCard extends StatelessWidget {
   final EdgeInsets? margin;
   final double? width;
   final double? height;
@@ -78,7 +78,7 @@ class UserInfoCard extends StatelessWidget {
     );
   }
 
-  const UserInfoCard({
+  const UserStatisticsCard({
     super.key,
     this.margin,
     this.width,
