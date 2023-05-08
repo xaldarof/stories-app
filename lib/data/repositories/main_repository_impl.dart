@@ -26,8 +26,8 @@ class MainRepositoryImpl extends MainRepository {
   @override
   Future<bool> refreshFCMToken(String token) async {
     try {
-      final res = _networkDataSource.refreshFCMToken(token);
-      return true;
+      final res = await _networkDataSource.refreshFCMToken(token);
+      return res;
     } catch (e) {
       return false;
     }
