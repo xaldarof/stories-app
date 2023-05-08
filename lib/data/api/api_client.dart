@@ -11,6 +11,7 @@ class DioClient {
   final SessionManager _sessionManager;
   final String _debugUrl = "http://127.0.0.1:8000/";
   final String _prodUrl = "http://xaldarof8.pythonanywhere.com/";
+  final bool _isDebug = false;
   late Dio _dio;
 
   DioClient(this._sessionManager) {
@@ -30,7 +31,7 @@ class DioClient {
 
   Future<BaseOptions> _getOptions() async {
     return BaseOptions(
-      baseUrl: _prodUrl,
+      baseUrl: _isDebug ? _debugUrl : _prodUrl,
       responseType: ResponseType.plain,
       connectTimeout: 120000,
       receiveTimeout: 120000,

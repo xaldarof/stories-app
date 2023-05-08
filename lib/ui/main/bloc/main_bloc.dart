@@ -26,8 +26,13 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<GetAppStatus>(_getAppStatus,
         transformer: debounceSequential(const Duration(seconds: 3)));
 
-    FirebaseMessaging.instance.onTokenRefresh.listen((event) {
-      _repository.refreshFCMToken(event);
+    FirebaseMessaging.instance.onTokenRefresh.listen((event) async {
+      final res = await _repository.refreshFCMToken(event);
+      if (res) {
+        printMessage("Token refreshed");
+      } else {
+        printMessage("Something went wrong !");
+      }
     });
 
     stream.listen((event) {
