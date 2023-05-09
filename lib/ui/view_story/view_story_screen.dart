@@ -7,10 +7,12 @@ import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/di/app_di.dart';
 import 'package:jokes_app/ui/story_quotes/story_quotes_screen.dart';
 import 'package:jokes_app/ui/view_story/view/view_story_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../common/widgets/animated_text/lib/animated_text_kit.dart';
 import '../../domain/models/ui/story.dart';
 import '../../generated/locale_keys.g.dart';
+import '../common/dialog/about.dart';
 
 class ViewStoryScreen extends StatefulWidget {
   final Story story;
@@ -55,6 +57,25 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                 listenWhen: (prev, curr) =>
                     prev.quoteCreateStatus != curr.quoteCreateStatus,
               ),
+              BlocListener<ViewStoryBloc, ViewStoryState>(
+                listener: (context, state) {
+                  if (state.sendReportStatus == ViewStoryStatus.success) {
+                    showCupertinoModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return About(
+                          text: Strings.reportSent,
+                        );
+                      },
+                    );
+                  }
+                  if (state.sendReportStatus == ViewStoryStatus.fail) {
+                    context.showSnackBar(Strings.somethingWentWrong);
+                  }
+                },
+                listenWhen: (prev, curr) =>
+                    prev.sendReportStatus != curr.sendReportStatus,
+              ),
             ],
             child: Scaffold(
               backgroundColor: AppColors.primaryColorBlack,
@@ -67,10 +88,20 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                           title: widget.story.title, storyId: widget.story.id));
                     },
                     icon: Icon(
-                      Icons.favorite_border,
+                      Icons.format_quote,
                       color: AppColors.gold,
                     ),
                   ),
+                  if (!widget.story.canModify)
+                    IconButton(
+                      onPressed: () {
+                        bloc.add(SendReport(storyId: widget.story.id));
+                      },
+                      icon: Icon(
+                        Icons.mood_bad,
+                        color: AppColors.gold,
+                      ),
+                    ),
                   if (widget.story.canModify &&
                       state.unpublishStatus != ViewStoryStatus.success)
                     IconButton(

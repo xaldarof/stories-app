@@ -39,5 +39,6 @@ abstract class Strings {
   static String youReachMoreThanView(String arg0) {
     return 'you_reach_more_than_view'.tr(args: [arg0]);
   }
+  static String get reportSent => 'report_sent'.tr();
 
 }

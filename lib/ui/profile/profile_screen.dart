@@ -85,7 +85,9 @@ class ProfileScreen extends StatelessWidget {
                       showCupertinoModalBottomSheet(
                         context: context,
                         builder: (context) {
-                          return const About();
+                          return About(
+                            text: Strings.aboutContent,
+                          );
                         },
                       );
                     },

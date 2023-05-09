@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:meta/meta.dart';
 
@@ -18,6 +19,17 @@ class ViewStoryBloc extends Bloc<ViewStoryEvent, ViewStoryState> {
   ) : super(const ViewStoryState()) {
     on<ToggleVisibility>(_unpublish);
     on<CreateQuote>(_createQuote);
+    on<SendReport>(_sendReport);
+  }
+
+  Future<void> _sendReport(SendReport event, Emitter emitter) async {
+    emitter(state.copyWith(sendReportStatus: ViewStoryStatus.loading));
+    final res = await _repository.sendReport(event.storyId);
+    if (res) {
+      emitter(state.copyWith(sendReportStatus: ViewStoryStatus.success));
+    } else {
+      emitter(state.copyWith(sendReportStatus: ViewStoryStatus.fail));
+    }
   }
 
   Future<void> _unpublish(ToggleVisibility event, Emitter emitter) async {

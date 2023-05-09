@@ -30,5 +30,6 @@
   "notifications": "Bildirishnomalar",
   "tap_to_mark_as_read": "Oqish uchun bosing",
   "congratulations": "Tabriklaymiz !",
-  "you_reach_more_than_view": "Sizning hikoyalaringiz korilganlik soni {} ta boldi"
+  "you_reach_more_than_view": "Sizning hikoyalaringiz korilganlik soni {} ta boldi",
+  "report_sent": "Hisobot jonatildi, biz bu hisobotni tez orada ko'rib chiqamiz, agar bu yerda qandaydur notogri narsalar yozilgan bo'lsa biz bu foydalanuvchiga ban berishim va bu hikoyani o'chirib tashlaymiz"
 }

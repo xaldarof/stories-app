@@ -38,4 +38,14 @@ class ViewStoryRepositoryImpl extends ViewStoryRepository {
       yield DomainFail();
     }
   }
+
+  @override
+  Future<bool> sendReport(int storyId) async {
+    try {
+      final res = await _networkDataSource.report(storyId);
+      return res;
+    } catch (e) {
+      return false;
+    }
+  }
 }

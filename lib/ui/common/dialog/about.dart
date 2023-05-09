@@ -4,6 +4,8 @@ import 'package:jokes_app/common/resource/fonts.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
 
 class About extends StatelessWidget {
+  final String text;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -15,7 +17,7 @@ class About extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(24),
         child: Text(
-          Strings.aboutContent,
+          text,
           style: primaryTextStyle(),
         ),
       ),
@@ -23,6 +25,6 @@ class About extends StatelessWidget {
   }
 
   const About({
-    super.key,
+    required this.text,
   });
 }

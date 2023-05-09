@@ -30,5 +30,6 @@
   "notifications": "Notifications",
   "tap_to_mark_as_read": "Tap to read",
   "congratulations": "Congratulations !",
-  "you_reach_more_than_view": "Your stories reached {} views"
+  "you_reach_more_than_view": "Your stories reached {} views",
+  "report_sent": "Your report has been sent. We will review it, and if there is something inappropriate, we may ban the user and delete this story."
 }

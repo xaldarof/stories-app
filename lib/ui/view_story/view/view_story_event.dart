@@ -13,6 +13,14 @@ class ToggleVisibility extends ViewStoryEvent {
   });
 }
 
+class SendReport extends ViewStoryEvent {
+  final int storyId;
+
+  SendReport({
+    required this.storyId,
+  });
+}
+
 class CreateQuote extends ViewStoryEvent {
   final int storyId;
   final String body;

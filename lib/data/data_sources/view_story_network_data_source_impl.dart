@@ -31,4 +31,15 @@ class ViewStoryNetworkDataSourceImpl extends ViewStoryNetworkDataSource {
     );
     return response.isSuccessful;
   }
+
+  @override
+  Future<bool> report(int storyId) async {
+    final res = await _client.post(
+      "api/v1/stories/report",
+      data: {
+        "storyId": storyId,
+      },
+    );
+    return res.isSuccessful;
+  }
 }
