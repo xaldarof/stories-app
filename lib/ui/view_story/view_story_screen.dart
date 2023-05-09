@@ -33,6 +33,7 @@ class ViewStoryScreen extends StatefulWidget {
 class _ViewStoryScreenState extends State<ViewStoryScreen> {
   bool _titleAnimFinish = false;
   bool _dateAnimFinish = false;
+  bool _contentAnimFinish = false;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +93,7 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                       color: AppColors.gold,
                     ),
                   ),
-                  if (!widget.story.canModify)
+                  if (!widget.story.canModify && _contentAnimFinish)
                     IconButton(
                       onPressed: () {
                         bloc.add(SendReport(storyId: widget.story.id));
@@ -191,40 +192,44 @@ class _ViewStoryScreenState extends State<ViewStoryScreen> {
                             totalRepeatCount: 1,
                             onFinished: () {
                               widget.onReadFinish.call();
+                              setState(() {
+                                _contentAnimFinish = true;
+                              });
                             },
                             animatedTexts: [
                               TypewriterAnimatedText(
-                                  speed: const Duration(milliseconds: 30),
-                                  widget.story.body,
-                                  textStyle: primaryTextStyle(fontSize: 16),
-                                  selectionActions: (selectedText) {
-                                return [
-                                  InkWell(
-                                    onTap: () {
-                                      bloc.add(CreateQuote(
-                                          storyId: widget.story.id,
-                                          body: selectedText));
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          color: AppColors.primaryColor,
-                                          padding: const EdgeInsets.all(12),
-                                          child: Text(
-                                            Strings.addToQuotes,
-                                            style: primaryTextStyle(
-                                                color:
-                                                    AppColors.darkSpringGreen),
+                                speed: const Duration(milliseconds: 30),
+                                widget.story.body,
+                                textStyle: primaryTextStyle(fontSize: 16),
+                                selectionActions: (selectedText) {
+                                  return [
+                                    InkWell(
+                                      onTap: () {
+                                        bloc.add(CreateQuote(
+                                            storyId: widget.story.id,
+                                            body: selectedText));
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            color: AppColors.primaryColor,
+                                            padding: const EdgeInsets.all(12),
+                                            child: Text(
+                                              Strings.addToQuotes,
+                                              style: primaryTextStyle(
+                                                  color: AppColors
+                                                      .darkSpringGreen),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ];
-                              }),
+                                  ];
+                                },
+                              ),
                             ],
                             onTap: () {
                               //

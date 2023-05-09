@@ -11,7 +11,7 @@ class DioClient {
   final SessionManager _sessionManager;
   final String _debugUrl = "http://127.0.0.1:8000/";
   final String _prodUrl = "http://xaldarof8.pythonanywhere.com/";
-  final bool _isDebug = true;
+  final bool _isDebug = false;
   late Dio _dio;
 
   DioClient(this._sessionManager) {
