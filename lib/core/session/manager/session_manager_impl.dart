@@ -21,6 +21,21 @@ class SessionManagerImpl extends SessionManager {
   }
 
   @override
+  String get authorization => "Authorization";
+
+  @override
+  int get timeout => 30000;
+
+  @override
+  bool validate(int code) {
+    if (code >= 200 && code <= 400) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
   String? get accessToken => _preferences.getString(Keys.token) != null
       ? "Bearer ${_preferences.getString(Keys.token)}"
       : null;

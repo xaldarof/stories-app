@@ -16,35 +16,25 @@ class DioClient {
 
   DioClient(this._sessionManager) {
     _dio = Dio();
-    if (kDebugMode) {
-      if (_dio.interceptors.isEmpty == true) {
-        _dio.interceptors.add(
-          DioLoggingInterceptor(
-            level: Level.body,
-            compact: false,
-          ),
-        );
-        _dio.interceptors.add(AuthInterceptor(sessionManager: _sessionManager));
-      }
-    }
+    _dio.interceptors.add(
+      DioLoggingInterceptor(
+        level: Level.body,
+        compact: false,
+      ),
+    );
+    _dio.interceptors.add(AuthInterceptor(sessionManager: _sessionManager));
   }
 
   Future<BaseOptions> _getOptions() async {
     return BaseOptions(
       baseUrl: _isDebug ? _debugUrl : _prodUrl,
       responseType: ResponseType.plain,
-      connectTimeout: 120000,
-      receiveTimeout: 120000,
+      connectTimeout: _sessionManager.timeout,
+      receiveTimeout: _sessionManager.timeout,
       headers: {
-        "Authorization": _sessionManager.accessToken,
+        _sessionManager.authorization: _sessionManager.accessToken,
       },
-      validateStatus: (code) {
-        if (code! >= 200 && code <= 400) {
-          return true;
-        } else {
-          return false;
-        }
-      },
+      validateStatus: (code) => _sessionManager.validate(code ?? 0),
     );
   }
 

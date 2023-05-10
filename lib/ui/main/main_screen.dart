@@ -18,6 +18,9 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setNavColor();
+    FirebaseMessaging.instance.getToken().then((value) {
+      printMessage("Current token : ${value}");
+    });
     return BlocProvider<MainBloc>(
       create: (_) => MainBloc(injector.get())
         ..add(
