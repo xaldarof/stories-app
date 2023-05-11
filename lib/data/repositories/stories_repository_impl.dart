@@ -1,4 +1,4 @@
-import 'package:jokes_app/domain/data_sources/stories_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/stories_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:jokes_app/domain/models/ui/category.dart';
 import 'package:jokes_app/domain/models/ui/story.dart';

@@ -1,4 +1,4 @@
-import '../models/network/category_response.dart';
+import '../../models/network/category_response.dart';
 
 abstract class PublishNetworkDataSource {
   Future<bool> publishStory(String body, String title, int categoryId);

@@ -1,5 +1,5 @@
-import 'package:jokes_app/domain/data_sources/profile_cache_data_source.dart';
-import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/cache/profile_cache_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/profile_network_data_source.dart';
 import 'package:jokes_app/domain/mappers/notification_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_mapper.dart';
 import 'package:jokes_app/domain/mappers/profile_stats_mapper.dart';

@@ -1,4 +1,4 @@
-import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/publish_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:jokes_app/domain/repositories/publish_repository.dart';
 

@@ -3,6 +3,8 @@ import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:jokes_app/core/session/manager/session_manager.dart';
 
+import 'interceptors.dart';
+
 extension ResponseExt on Response {
   bool get isSuccessful => statusCode == 200 || statusCode == 201;
 }
@@ -81,20 +83,4 @@ class DioClient {
     _dio.options = await _getOptions();
     return _dio.put(path, data: data, queryParameters: queryParameters);
   }
-}
-
-class AuthInterceptor extends Interceptor {
-  final SessionManager _sessionManager;
-
-  @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401) {
-      _sessionManager.endLocalSession();
-    }
-    super.onError(err, handler);
-  }
-
-  AuthInterceptor({
-    required SessionManager sessionManager,
-  }) : _sessionManager = sessionManager;
 }

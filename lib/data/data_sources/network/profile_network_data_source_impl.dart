@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:jokes_app/data/api/api_client.dart';
-import 'package:jokes_app/domain/data_sources/profile_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/profile_network_data_source.dart';
 import 'package:jokes_app/domain/models/network/notification_response.dart';
 import 'package:jokes_app/domain/models/network/profile_response.dart';
 import 'package:jokes_app/domain/models/network/profile_stats_response.dart';
 
-import '../../common/utils/printer.dart';
-import '../../domain/models/common/base_response.dart';
-import '../../domain/models/network/category_response.dart';
-import '../../domain/models/network/story_response.dart';
+import '../../../common/utils/printer.dart';
+import '../../../domain/models/common/base_response.dart';
+import '../../../domain/models/network/category_response.dart';
+import '../../../domain/models/network/story_response.dart';
 
 class ProfileNetworkDataSourceImpl extends ProfileNetworkDataSource {
   final DioClient _client;

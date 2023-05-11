@@ -80,7 +80,7 @@ extension DateTimeExtNullable on DateTime? {
 
 extension DateTimeExtStrList on List<String> {
   String? lastDate() {
-    if (this.isNotEmpty) {
+    if (isNotEmpty) {
       try {
         var max = DateFormat("dd-MM-yyyy").parse(this[0]);
 

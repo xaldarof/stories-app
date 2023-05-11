@@ -1,7 +1,7 @@
 import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
 import 'package:jokes_app/common/resource/keys.dart';
-import 'package:jokes_app/domain/data_sources/main_data_source.dart';
-import 'package:jokes_app/domain/data_sources/main_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/cache/main_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/main_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/app_state.dart';
 import 'package:jokes_app/domain/repositories/main_repository.dart';
 

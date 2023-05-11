@@ -3,7 +3,7 @@ import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:jokes_app/domain/models/ui/profile.dart';
 import 'package:jokes_app/domain/repositories/global_repository.dart';
 
-import '../../domain/data_sources/global_network_data_source.dart';
+import '../../domain/data_sources/network/global_network_data_source.dart';
 
 class GlobalRepositoryImpl extends GlobalRepository {
   final GlobalNetworkDataSource _networkDataSource;

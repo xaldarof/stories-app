@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:jokes_app/data/api/api_client.dart';
-import 'package:jokes_app/domain/data_sources/publish_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/publish_network_data_source.dart';
 import 'package:jokes_app/domain/models/network/category_response.dart';
 
-import '../../common/utils/printer.dart';
-import '../../domain/models/common/base_response.dart';
+import '../../../common/utils/printer.dart';
+import '../../../domain/models/common/base_response.dart';
 
 class PublishNetworkDataSourceImpl extends PublishNetworkDataSource {
   final DioClient _client;

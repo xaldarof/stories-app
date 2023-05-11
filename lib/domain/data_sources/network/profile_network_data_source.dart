@@ -1,9 +1,9 @@
 import 'package:jokes_app/domain/models/network/notification_response.dart';
 
-import '../models/network/category_response.dart';
-import '../models/network/profile_response.dart';
-import '../models/network/profile_stats_response.dart';
-import '../models/network/story_response.dart';
+import '../../models/network/category_response.dart';
+import '../../models/network/profile_response.dart';
+import '../../models/network/profile_stats_response.dart';
+import '../../models/network/story_response.dart';
 
 abstract class ProfileNetworkDataSource {
   Future<UserResponse> getProfile();

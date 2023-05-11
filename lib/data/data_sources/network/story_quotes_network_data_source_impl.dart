@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:jokes_app/data/api/api_client.dart';
-import 'package:jokes_app/domain/data_sources/story_quotes_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/story_quotes_network_data_source.dart';
 import 'package:jokes_app/domain/models/common/base_response.dart';
 import 'package:jokes_app/domain/models/network/story_quote_response.dart';
 

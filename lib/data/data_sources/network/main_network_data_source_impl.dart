@@ -1,6 +1,6 @@
 import 'package:jokes_app/data/api/api_client.dart';
 
-import '../../domain/data_sources/main_network_data_source.dart';
+import '../../../domain/data_sources/network/main_network_data_source.dart';
 
 class MainNetworkDataSourceImpl extends MainNetworkDataSource {
   final DioClient _client;

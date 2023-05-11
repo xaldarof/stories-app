@@ -1,6 +1,6 @@
 import 'package:jokes_app/data/api/api_client.dart';
 
-import '../../domain/data_sources/view_story_network_data_source.dart';
+import '../../../domain/data_sources/network/view_story_network_data_source.dart';
 
 class ViewStoryNetworkDataSourceImpl extends ViewStoryNetworkDataSource {
   final DioClient _client;

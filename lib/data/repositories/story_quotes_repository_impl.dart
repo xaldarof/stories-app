@@ -2,7 +2,7 @@ import 'package:jokes_app/domain/models/common/domain_result.dart';
 import 'package:jokes_app/domain/models/ui/story_quote.dart';
 import 'package:jokes_app/domain/repositories/story_quotes_repository.dart';
 
-import '../../domain/data_sources/story_quotes_network_data_source.dart';
+import '../../domain/data_sources/network/story_quotes_network_data_source.dart';
 import '../../domain/mappers/story_quote_mapper.dart';
 
 class StoryQuotesRepositoryImpl extends StoryQuotesRepository {

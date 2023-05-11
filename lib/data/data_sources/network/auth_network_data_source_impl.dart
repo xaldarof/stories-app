@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:jokes_app/data/api/api_client.dart';
-import 'package:jokes_app/domain/data_sources/auth_network_data_source.dart';
+import 'package:jokes_app/domain/data_sources/network/auth_network_data_source.dart';
 import 'package:jokes_app/domain/models/network/auth_response.dart';
 
 class AuthNetworkDataSourceImpl extends AuthNetworkDataSource {
