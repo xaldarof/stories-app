@@ -16,7 +16,7 @@ class AuthRepositoryImpl extends AuthRepository {
       yield DomainLoading();
       final fcmToken = await FirebaseMessaging.instance.getToken();
       final res = await _networkDataSource.login(
-          username.trim(), password.trim(), fcmToken ?? "nothing");
+          username.trim(), password.trim(), fcmToken ?? "");
       _preferences.setString(Keys.token, res.access);
 
       yield DomainSuccess();
@@ -31,7 +31,7 @@ class AuthRepositoryImpl extends AuthRepository {
       yield DomainLoading();
       final fcmToken = await FirebaseMessaging.instance.getToken();
       final res = await _networkDataSource.register(
-          username.trim(), password.trim(), fcmToken ?? "nothing");
+          username.trim(), password.trim(), fcmToken ?? "");
       _preferences.setString(Keys.token, res.access);
 
       yield DomainSuccess();
