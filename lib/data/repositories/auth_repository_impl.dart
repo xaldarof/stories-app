@@ -14,6 +14,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Stream<DomainResult> login(String username, String password) async* {
     try {
       yield DomainLoading();
+      if (username.trim().isEmpty) yield DomainFail();
+      if (password.trim().isEmpty) yield DomainFail();
+
       final fcmToken = await FirebaseMessaging.instance.getToken();
       final res = await _networkDataSource.login(
           username.trim(), password.trim(), fcmToken ?? "");
@@ -29,6 +32,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Stream<DomainResult> register(String username, String password) async* {
     try {
       yield DomainLoading();
+      if (username.trim().isEmpty) yield DomainFail();
+      if (password.trim().isEmpty) yield DomainFail();
+
       final fcmToken = await FirebaseMessaging.instance.getToken();
       final res = await _networkDataSource.register(
           username.trim(), password.trim(), fcmToken ?? "");
