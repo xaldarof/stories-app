@@ -21,11 +21,13 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
   bool endOfPaginationReached = false;
 
   StoriesBloc(this._repository) : super(const StoriesState()) {
+    on<LoadStories>(_loadStories);
     on<GetStories>(_getStories);
     on<GetCategories>(_getCategories);
     on<GetCategoryStories>(_getCategoryStories);
     on<SetAsRead>(_setAsRead);
 
+    add(GetStories());
     scrollController.addListener(() {
       if (state.showCategories == true) {
         emit(state.copyWith(showCategories: false));
@@ -36,7 +38,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
     });
     scrollController.onBottomReached(() {
       if (!endOfPaginationReached) {
-        page++;
+        add(LoadStories());
         add(GetStories());
       }
     });
@@ -46,6 +48,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
       GetCategoryStories event, Emitter emitter) async {
     page = 1;
     emitter(state.copyWith(stories: [], categoryId: event.categoryId));
+    add(LoadStories());
     add(GetStories());
   }
 
@@ -53,9 +56,9 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
     _repository.setAsRead(event.storyId);
   }
 
-  Future<void> _getStories(GetStories event, Emitter emitter) {
+  Future<void> _loadStories(LoadStories event, Emitter emitter) {
     return emitter.forEach(
-      _repository.getStories(state.categoryId, page),
+      _repository.loadStories(state.categoryId ?? 0, page),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(storiesStatus: StoriesStatus.loading);
@@ -63,13 +66,22 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
         if (data is DomainFail) {
           return state.copyWith(storiesStatus: StoriesStatus.fail);
         }
-        if (data is DomainSuccess<List<Story>>) {
-          endOfPaginationReached = ((data.data?.length ?? 0) < 10);
-          return state.copyWith(
-              storiesStatus: StoriesStatus.success,
-              stories: (state.stories) + (data.data ?? []));
+        if (data is DomainSuccess<int>) {
+          endOfPaginationReached = ((data.data ?? 0) < 10);
+          page++;
+          add(GetStories());
+          return state.copyWith(storiesStatus: StoriesStatus.success);
         }
         return state;
+      },
+    );
+  }
+
+  Future<void> _getStories(GetStories event, Emitter emitter) {
+    return emitter.forEach(
+      _repository.getStories(state.categoryId ?? 0),
+      onData: (data) {
+        return state.copyWith(stories: data);
       },
     );
   }
@@ -86,7 +98,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
         }
         if (data is DomainSuccess<List<Category>>) {
           emitter(state.copyWith(categoryId: data.data?.first.id ?? 1));
-          add(GetStories());
+          add(LoadStories());
           return state.copyWith(
               categoryStatus: StoriesStatus.success, categories: data.data);
         }
