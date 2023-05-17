@@ -19,7 +19,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   final ProfileCacheDataSource _cacheDataSource;
   final UserMapper _profileMapper;
   final ProfileStatsMapper _profileStatsMapper;
-  final StoryMapper _storyMapper;
+  final StoryResponseToUiMapper _storyMapper;
   final CategoryMapper _categoryMapper;
   final NotificationMapper _notificationMapper;
 
@@ -107,7 +107,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
     required ProfileCacheDataSource cacheDataSource,
     required UserMapper profileMapper,
     required ProfileStatsMapper profileStatsMapper,
-    required StoryMapper storyMapper,
+    required StoryResponseToUiMapper storyMapper,
     required CategoryMapper categoryMapper,
     required NotificationMapper notificationMapper,
   })  : _networkDataSource = networkDataSource,

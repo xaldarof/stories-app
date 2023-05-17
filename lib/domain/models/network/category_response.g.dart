@@ -17,4 +17,5 @@ Map<String, dynamic> _$CategoryResponseToJson(CategoryResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'count': instance.count,
     };

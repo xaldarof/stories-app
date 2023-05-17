@@ -66,7 +66,7 @@ Future<void> setUpDependencies() async {
 void _setUpRepos() {
   injector.registerSingleton<StoriesRepository>(StoriesRepositoryImpl(
       networkDataSource: injector.get(),
-      storyMapper: StoryMapper(),
+      storyMapper: StoryResponseToUiMapper(),
       categoryMapper: CategoryMapper()));
   injector.registerSingleton<PublishRepository>(PublishRepositoryImpl(
       networkDataSource: injector.get(), categoryMapper: CategoryMapper()));
@@ -85,7 +85,7 @@ void _setUpRepos() {
       networkDataSource: injector.get(),
       profileMapper: UserMapper(),
       profileStatsMapper: ProfileStatsMapper(),
-      storyMapper: StoryMapper(),
+      storyMapper: StoryResponseToUiMapper(),
       categoryMapper: CategoryMapper(),
       cacheDataSource: injector.get(),
       notificationMapper: NotificationMapper(),

@@ -9,7 +9,7 @@ import '../../domain/mappers/story_mapper.dart';
 
 class StoriesRepositoryImpl extends StoriesRepository {
   final StoriesNetworkDataSource _networkDataSource;
-  final StoryMapper _storyMapper;
+  final StoryResponseToUiMapper _storyMapper;
   final CategoryMapper _categoryMapper;
 
   @override
@@ -42,7 +42,7 @@ class StoriesRepositoryImpl extends StoriesRepository {
 
   StoriesRepositoryImpl({
     required StoriesNetworkDataSource networkDataSource,
-    required StoryMapper storyMapper,
+    required StoryResponseToUiMapper storyMapper,
     required CategoryMapper categoryMapper,
   })  : _networkDataSource = networkDataSource,
         _storyMapper = storyMapper,

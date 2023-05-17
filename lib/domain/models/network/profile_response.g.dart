@@ -13,8 +13,8 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       firstName: json['firstName'] as String?,
       score: json['score'] as int?,
       lastName: json['lastName'] as String?,
-      dateJoined: json['dateJoined'] as String,
       isMe: json['isMe'] as bool?,
+      dateJoined: json['dateJoined'] as String,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
@@ -26,4 +26,5 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'lastName': instance.lastName,
       'dateJoined': instance.dateJoined,
       'score': instance.score,
+      'isMe': instance.isMe,
     };
