@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:jokes_app/common/utils/printer.dart';
 import 'package:jokes_app/data/database/app_database.dart';
 import 'package:jokes_app/domain/models/cache/story_cache.dart';
 
@@ -10,10 +11,11 @@ part 'story_dao.g.dart';
 class StoryDao extends DatabaseAccessor<AppDatabase> with _$StoryDaoMixin {
   StoryDao(super.attachedDatabase);
 
-  Stream<List<StoryCache>> getStories(int categoryId) {
+  Future<List<StoryCache>> getStories(int categoryId) {
+    printMessage("Dao id : $categoryId");
     return (select(storyCacheTable)
           ..where((tbl) => tbl.categoryId.equals(categoryId)))
-        .watch();
+        .get();
   }
 
   Future<void> insertStories(List<StoryCache> stories) async {
@@ -22,7 +24,9 @@ class StoryDao extends DatabaseAccessor<AppDatabase> with _$StoryDaoMixin {
     });
   }
 
-  Future<int> clearStories() async {
-    return await delete(storyCacheTable).go();
+  Future<int> clearStories(int categoryId) async {
+    return await (delete(storyCacheTable)
+          ..where((tbl) => tbl.categoryId.equals(categoryId)))
+        .go();
   }
 }

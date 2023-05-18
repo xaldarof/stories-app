@@ -85,8 +85,14 @@ class StoryItem extends StatelessWidget {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 4),
-                      child: StoryTypeIcon(
-                        value: story.timeCreate,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(left: 0, right: 12),
+                      height: 20,
+                      child: Text(
+                        "${story.timeCreate}    ID ${story.id}",
+                        style: primaryTextStyle(
+                            color: AppColors.white.withAlpha(152),
+                            fontSize: 12),
                       ),
                     ),
                   ],

@@ -7,13 +7,13 @@ class StoriesCacheDataSourceImpl extends StoriesCacheDataSource {
   final StoryDao _storyDao;
 
   @override
-  Stream<List<StoryCache>> getStories(int categoryId) {
+  Future<List<StoryCache>> getStories(int categoryId) {
     return _storyDao.getStories(categoryId);
   }
 
   @override
-  Future<void> clearStories() {
-    return _storyDao.clearStories();
+  Future<void> clearStories(int categoryId) {
+    return _storyDao.clearStories(categoryId);
   }
 
   @override

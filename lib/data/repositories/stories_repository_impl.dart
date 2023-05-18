@@ -16,7 +16,6 @@ class StoriesRepositoryImpl extends StoriesRepository {
   final CategoryMapper _categoryMapper;
   final StoryResponseToCacheMapper _storyResponseToCacheMapper;
   final StoryCacheToUiMapper _storyCacheToUiMapper;
-  bool initialLoad = true;
 
   @override
   Stream<DomainResult> getCategories() async* {
@@ -33,22 +32,22 @@ class StoriesRepositoryImpl extends StoriesRepository {
   }
 
   @override
-  Stream<List<Story>> getStories(int categoryId) {
-    return _cacheDataSource.getStories(categoryId).map(
-        (event) => event.map((e) => _storyCacheToUiMapper.map(e)).toList());
+  Future<List<Story>> getStories(int categoryId) async {
+    final res = await _cacheDataSource.getStories(categoryId);
+    return res.toList().map(
+        (event) => _storyCacheToUiMapper.map(event)).toList();
   }
 
   @override
-  Stream<DomainResult> loadStories(int? categoryId, int page) async* {
+  Stream<DomainResult> loadStories(int categoryId, int page) async* {
     try {
       yield DomainLoading();
       final res = await _networkDataSource.getStories(categoryId, page);
       if (res != null) {
         final mapped =
             res.map((e) => _storyResponseToCacheMapper.map(e)).toList();
-        if(initialLoad) {
-          initialLoad = false;
-          await _cacheDataSource.clearStories();
+        if (page == 1) {
+          await _cacheDataSource.clearStories(categoryId);
         }
         await _cacheDataSource.insertStory(mapped);
         yield DomainSuccess<int>(data: mapped.length);
@@ -81,9 +80,4 @@ class StoriesRepositoryImpl extends StoriesRepository {
         _categoryMapper = categoryMapper,
         _storyResponseToCacheMapper = storyResponseToCacheMapper,
         _storyCacheToUiMapper = storyCacheToUiMapper;
-
-  @override
-  Future<void> clearStoriesCache() {
-    return _cacheDataSource.clearStories();
-  }
 }

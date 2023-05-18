@@ -27,4 +27,9 @@ class Story {
     required this.canModify,
     required this.viewCount,
   });
+
+  @override
+  String toString() {
+    return 'Story{id: $id, body: $body, timeCreate: $timeCreate, categoryId: $categoryId, authorId: $authorId, authorName: $authorName, title: $title, viewCount: $viewCount, isPremium: $isPremium, isEnabled: $isEnabled, canModify: $canModify, isPublished: $isPublished}';
+  }
 }

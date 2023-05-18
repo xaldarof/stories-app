@@ -39,7 +39,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
     scrollController.onBottomReached(() {
       if (!endOfPaginationReached) {
         add(LoadStories());
-        add(GetStories());
+        page++;
       }
     });
   }
@@ -47,9 +47,9 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
   Future<void> _getCategoryStories(
       GetCategoryStories event, Emitter emitter) async {
     page = 1;
-    emitter(state.copyWith(stories: [], categoryId: event.categoryId));
-    add(LoadStories());
+    emitter(state.copyWith(categoryId: event.categoryId));
     add(GetStories());
+    add(LoadStories());
   }
 
   Future<void> _setAsRead(SetAsRead event, Emitter emitter) async {
@@ -58,7 +58,7 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
 
   Future<void> _loadStories(LoadStories event, Emitter emitter) {
     return emitter.forEach(
-      _repository.loadStories(state.categoryId ?? 0, page),
+      _repository.loadStories(state.categoryId ?? 1, page),
       onData: (data) {
         if (data is DomainLoading) {
           return state.copyWith(storiesStatus: StoriesStatus.loading);
@@ -68,8 +68,6 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
         }
         if (data is DomainSuccess<int>) {
           endOfPaginationReached = ((data.data ?? 0) < 10);
-          page++;
-          add(GetStories());
           return state.copyWith(storiesStatus: StoriesStatus.success);
         }
         return state;
@@ -77,13 +75,16 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
     );
   }
 
-  Future<void> _getStories(GetStories event, Emitter emitter) {
-    return emitter.forEach(
-      _repository.getStories(state.categoryId ?? 0),
-      onData: (data) {
-        return state.copyWith(stories: data);
-      },
-    );
+  Future<void> _getStories(GetStories event, Emitter emitter) async {
+    final res = await _repository.getStories(state.categoryId ?? 1);
+    return emitter(state.copyWith(stories: res));
+
+    // return emitter.forEach(
+    //   _repository.getStories(state.categoryId ?? 1),
+    //   onData: (data) {
+    //     printMessage("Loaded : ${data.toString()}");
+    //   },
+    // );
   }
 
   Future<void> _getCategories(GetCategories event, Emitter emitter) {
@@ -99,6 +100,8 @@ class StoriesBloc extends Bloc<StoriesEvent, StoriesState> {
         if (data is DomainSuccess<List<Category>>) {
           emitter(state.copyWith(categoryId: data.data?.first.id ?? 1));
           add(LoadStories());
+          // add(LoadStories());
+
           return state.copyWith(
               categoryStatus: StoriesStatus.success, categories: data.data);
         }

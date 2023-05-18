@@ -14,12 +14,8 @@ class StoryTypeIcon extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.only(left: 0, right: 12),
       height: 20,
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(24),
-      //   color: Colors.brown,
-      // ),
       child: Text(
-        value.toLowerCase(),
+        value,
         style: primaryTextStyle(
             color: AppColors.white.withAlpha(152), fontSize: 12),
       ),

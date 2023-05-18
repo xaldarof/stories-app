@@ -56,11 +56,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                           selected: selectedCategoryIndex == i,
                           onTap: () {
                             bloc.add(GetCategoryStories(categoryId: item.id));
-                            setState(
-                              () {
-                                selectedCategoryIndex = i;
-                              },
-                            );
+                            selectedCategoryIndex = i;
                           },
                         );
                       },
