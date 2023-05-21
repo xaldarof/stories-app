@@ -25,6 +25,8 @@
 - Authorization
 - Localization
 - FCM
+- Caching
+- Interceptor
 
 # Screenshots
 
