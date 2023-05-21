@@ -38,6 +38,7 @@ class StoriesRepositoryImpl extends StoriesRepository {
         (event) => _storyCacheToUiMapper.map(event)).toList();
   }
 
+
   @override
   Stream<DomainResult> loadStories(int categoryId, int page) async* {
     try {
