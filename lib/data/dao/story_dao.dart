@@ -12,7 +12,6 @@ class StoryDao extends DatabaseAccessor<AppDatabase> with _$StoryDaoMixin {
   StoryDao(super.attachedDatabase);
 
   Future<List<StoryCache>> getStories(int categoryId) {
-    printMessage("Dao id : $categoryId");
     return (select(storyCacheTable)
           ..where((tbl) => tbl.categoryId.equals(categoryId)))
         .get();
