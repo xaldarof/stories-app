@@ -34,10 +34,11 @@ class StoriesRepositoryImpl extends StoriesRepository {
   @override
   Future<List<Story>> getStories(int categoryId) async {
     final res = await _cacheDataSource.getStories(categoryId);
-    return res.toList().map(
-        (event) => _storyCacheToUiMapper.map(event)).toList();
+    return res
+        .toList()
+        .map((event) => _storyCacheToUiMapper.map(event))
+        .toList();
   }
-
 
   @override
   Stream<DomainResult> loadStories(int categoryId, int page) async* {
