@@ -582,13 +582,220 @@ class StoryCacheTableCompanion extends UpdateCompanion<StoryCache> {
   }
 }
 
+class $StoryCategoryCacheTableTable extends StoryCategoryCacheTable
+    with TableInfo<$StoryCategoryCacheTableTable, StoryCategoryCache> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $StoryCategoryCacheTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _countMeta = const VerificationMeta('count');
+  @override
+  late final GeneratedColumn<int> count = GeneratedColumn<int>(
+      'count', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, count, name];
+  @override
+  String get aliasedName => _alias ?? 'story_category_cache_table';
+  @override
+  String get actualTableName => 'story_category_cache_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<StoryCategoryCache> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('count')) {
+      context.handle(
+          _countMeta, count.isAcceptableOrUnknown(data['count']!, _countMeta));
+    } else if (isInserting) {
+      context.missing(_countMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  StoryCategoryCache map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return StoryCategoryCache(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      count: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}count'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+    );
+  }
+
+  @override
+  $StoryCategoryCacheTableTable createAlias(String alias) {
+    return $StoryCategoryCacheTableTable(attachedDatabase, alias);
+  }
+}
+
+class StoryCategoryCache extends DataClass
+    implements Insertable<StoryCategoryCache> {
+  final int id;
+  final int count;
+  final String name;
+  const StoryCategoryCache(
+      {required this.id, required this.count, required this.name});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['count'] = Variable<int>(count);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  StoryCategoryCacheTableCompanion toCompanion(bool nullToAbsent) {
+    return StoryCategoryCacheTableCompanion(
+      id: Value(id),
+      count: Value(count),
+      name: Value(name),
+    );
+  }
+
+  factory StoryCategoryCache.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return StoryCategoryCache(
+      id: serializer.fromJson<int>(json['id']),
+      count: serializer.fromJson<int>(json['count']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'count': serializer.toJson<int>(count),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  StoryCategoryCache copyWith({int? id, int? count, String? name}) =>
+      StoryCategoryCache(
+        id: id ?? this.id,
+        count: count ?? this.count,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('StoryCategoryCache(')
+          ..write('id: $id, ')
+          ..write('count: $count, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, count, name);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is StoryCategoryCache &&
+          other.id == this.id &&
+          other.count == this.count &&
+          other.name == this.name);
+}
+
+class StoryCategoryCacheTableCompanion
+    extends UpdateCompanion<StoryCategoryCache> {
+  final Value<int> id;
+  final Value<int> count;
+  final Value<String> name;
+  const StoryCategoryCacheTableCompanion({
+    this.id = const Value.absent(),
+    this.count = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  StoryCategoryCacheTableCompanion.insert({
+    this.id = const Value.absent(),
+    required int count,
+    required String name,
+  })  : count = Value(count),
+        name = Value(name);
+  static Insertable<StoryCategoryCache> custom({
+    Expression<int>? id,
+    Expression<int>? count,
+    Expression<String>? name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (count != null) 'count': count,
+      if (name != null) 'name': name,
+    });
+  }
+
+  StoryCategoryCacheTableCompanion copyWith(
+      {Value<int>? id, Value<int>? count, Value<String>? name}) {
+    return StoryCategoryCacheTableCompanion(
+      id: id ?? this.id,
+      count: count ?? this.count,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (count.present) {
+      map['count'] = Variable<int>(count.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('StoryCategoryCacheTableCompanion(')
+          ..write('id: $id, ')
+          ..write('count: $count, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $StoryCacheTableTable storyCacheTable =
       $StoryCacheTableTable(this);
+  late final $StoryCategoryCacheTableTable storyCategoryCacheTable =
+      $StoryCategoryCacheTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [storyCacheTable];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [storyCacheTable, storyCategoryCacheTable];
 }

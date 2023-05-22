@@ -5,6 +5,8 @@ abstract class StoriesEvent {}
 
 class GetStories extends StoriesEvent {}
 
+class LoadStories extends StoriesEvent {}
+
 class GetCategoryStories extends StoriesEvent {
   final int? categoryId;
 

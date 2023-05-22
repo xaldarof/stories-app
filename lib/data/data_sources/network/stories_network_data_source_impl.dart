@@ -12,7 +12,7 @@ class StoriesNetworkDataSourceImpl extends StoriesNetworkDataSource {
   final DioClient _client;
 
   @override
-  Future<List<StoryResponse>?> getStories(int? categoryId, int page) async {
+  Future<List<StoryResponse>?> getStories(int categoryId, int page) async {
     try {
       final response = await _client.get(
         "api/v1/stories",

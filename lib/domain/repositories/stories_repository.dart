@@ -1,7 +1,12 @@
 import '../models/common/domain_result.dart';
+import '../models/ui/story.dart';
 
 abstract class StoriesRepository {
-  Stream<DomainResult> getStories(int? categoryId, int page);
+  Future<List<Story>> getStories(int categoryId);
+
+  Stream<DomainResult> loadStories(int categoryId, int page);
+
+  Stream<DomainResult> loadCategories();
 
   Stream<DomainResult> getCategories();
 
