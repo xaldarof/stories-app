@@ -14,17 +14,17 @@ class StoryCategoryDao extends DatabaseAccessor<AppDatabase>
     with _$StoryCategoryDaoMixin {
   StoryCategoryDao(super.attachedDatabase);
 
-  Future<List<StoryCategoryCache>> getStories() {
+  Future<List<StoryCategoryCache>> getCategories() {
     return select(storyCategoryCacheTable).get();
   }
 
-  Future<void> insertStories(List<StoryCategoryCache> categories) async {
+  Future<void> insertCategories(List<StoryCategoryCache> categories) async {
     await batch((batch) {
       batch.insertAllOnConflictUpdate(storyCategoryCacheTable, categories);
     });
   }
 
-  Future<int> clearStories() async {
+  Future<int> clearCategories() async {
     return await delete(storyCategoryCacheTable).go();
   }
 }

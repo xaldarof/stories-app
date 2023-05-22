@@ -6,4 +6,8 @@ abstract class StoriesCacheDataSource {
   Future<void> insertStory(List<StoryCache> stories);
 
   Future<void> clearStories(int categoryId);
+
+  Future<void> clearCategories();
+
+  Future<void> insertCategories(List<StoryCategoryCache> mapped);
 }

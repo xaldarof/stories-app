@@ -16,6 +16,8 @@ class StoriesRepositoryImpl extends StoriesRepository {
   final CategoryMapper _categoryMapper;
   final StoryResponseToCacheMapper _storyResponseToCacheMapper;
   final StoryCacheToUiMapper _storyCacheToUiMapper;
+  final CategoryCacheToUiMapper _categoryCacheToUiMapper;
+  final CategoryResponseToCacheMapper _categoryResponseToCacheMapper;
 
   @override
   Stream<DomainResult> getCategories() async* {
@@ -61,6 +63,24 @@ class StoriesRepositoryImpl extends StoriesRepository {
   }
 
   @override
+  Stream<DomainResult> loadCategories() async* {
+    try {
+      yield DomainLoading();
+      final res = await _networkDataSource.getCategories();
+      if (res != null) {
+        final mapped =
+            res.map((e) => _categoryResponseToCacheMapper.map(e)).toList();
+        await _cacheDataSource.clearCategories();
+        await _cacheDataSource.insertCategories(mapped);
+        yield DomainSuccess<int>(data: mapped.length);
+      }
+    } catch (e) {
+      printMessage("Error ${e.toString()}");
+      yield DomainFail();
+    }
+  }
+
+  @override
   Future<void> setAsRead(int storyId) async {
     try {
       _networkDataSource.setAsRead(storyId);
@@ -76,10 +96,14 @@ class StoriesRepositoryImpl extends StoriesRepository {
     required CategoryMapper categoryMapper,
     required StoryResponseToCacheMapper storyResponseToCacheMapper,
     required StoryCacheToUiMapper storyCacheToUiMapper,
+    required CategoryCacheToUiMapper categoryCacheToUiMapper,
+    required CategoryResponseToCacheMapper categoryResponseToCacheMapper,
   })  : _networkDataSource = networkDataSource,
         _cacheDataSource = cacheDataSource,
         _storyMapper = storyMapper,
         _categoryMapper = categoryMapper,
         _storyResponseToCacheMapper = storyResponseToCacheMapper,
-        _storyCacheToUiMapper = storyCacheToUiMapper;
+        _storyCacheToUiMapper = storyCacheToUiMapper,
+        _categoryCacheToUiMapper = categoryCacheToUiMapper,
+        _categoryResponseToCacheMapper = categoryResponseToCacheMapper;
 }
