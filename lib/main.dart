@@ -1,4 +1,4 @@
-import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
+import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +13,8 @@ import 'common/language/language.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  await EncryptedSharedPreferences.initialize('1234930934-023940-2394-0324234');
+  await EasyLocalization.ensureInitialized('121234930934-023');
+  await EncryptedSharedPreferences.initialize('121234930934-023');
   await setUpDependencies();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

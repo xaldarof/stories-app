@@ -1,4 +1,4 @@
-import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
+import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:jokes_app/domain/data_sources/cache/profile_cache_data_source.dart';
 
 class ProfileCacheDataSourceImpl extends ProfileCacheDataSource {

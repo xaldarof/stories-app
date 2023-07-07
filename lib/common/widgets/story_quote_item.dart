@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/widgets/scale_tap.dart';
 import 'package:jokes_app/domain/models/ui/story_quote.dart';
 
-import '../../ui/profile/user_stories_screen.dart';
 import '../resource/colors.dart';
 import '../resource/fonts.dart';
 

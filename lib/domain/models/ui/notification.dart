@@ -1,5 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
 class UserNotification {
   final int id;
   final String content;

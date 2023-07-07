@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen>
             ],
             child: Scaffold(
               body: AnimateGradient(
+                duration: Duration(milliseconds: 500),
                 controller: _animationController,
                 primaryColors: [
                   AppColors.darkGreen,
@@ -133,7 +134,6 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   void dispose() {
-    _animationController.dispose();
     super.dispose();
   }
 }

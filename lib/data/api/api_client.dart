@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
-import 'package:flutter/foundation.dart';
 import 'package:jokes_app/core/session/manager/session_manager.dart';
 
 import 'interceptors.dart';

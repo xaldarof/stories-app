@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/colors.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
-import 'package:jokes_app/generated/locale_keys.g.dart';
 
 class About extends StatelessWidget {
   final String text;

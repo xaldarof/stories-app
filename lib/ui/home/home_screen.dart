@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/common/resource/fonts.dart';
+import 'package:jokes_app/common/utils/navigator.dart';
 import 'package:jokes_app/common/utils/ui.dart';
 import 'package:jokes_app/generated/locale_keys.g.dart';
 import 'package:jokes_app/ui/global/global_screen.dart';
+import 'package:jokes_app/ui/profile/notifications/notifications_screen.dart';
+import 'package:quick_actions/quick_actions.dart';
 
 import '../../common/resource/colors.dart';
 import '../profile/profile_screen.dart';
@@ -17,7 +20,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    _initQuickActions();
+    super.initState();
+  }
+
+  void _initQuickActions() {
+    const QuickActions quickActions = QuickActions();
+    quickActions.initialize((shortcutType) {
+      if (shortcutType == 'profile') {
+        setState(() {
+          _selectedIndex = 3;
+        });
+      }
+      if (shortcutType == 'publish') {
+        setState(() {
+          _selectedIndex = 2;
+        });
+      }
+      if (shortcutType == 'notifications') {
+        context.navigateTo(const NotificationsScreen());
+      }
+    });
+    quickActions.setShortcutItems(<ShortcutItem>[
+      ShortcutItem(
+          type: 'profile', localizedTitle: Strings.profile, icon: 'profile'),
+      ShortcutItem(
+          type: 'publish', localizedTitle: Strings.publish, icon: 'add_new_icon'),
+      ShortcutItem(
+          type: 'notifications',
+          localizedTitle: Strings.notifications,
+          icon: 'notification')
+    ]);
+  }
 
   final _screens = [
     const StoriesScreen(),
@@ -39,11 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.black,
-        currentIndex: selectedIndex,
+        currentIndex: _selectedIndex,
         onTap: (index) {
           setState(
             () {
-              selectedIndex = index;
+              _selectedIndex = index;
             },
           );
         },
@@ -72,12 +110,12 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          screenTitles[selectedIndex],
+          screenTitles[_selectedIndex],
           style: primaryTextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryColorBlack,
       ),
-      body: _screens[selectedIndex],
+      body: _screens[_selectedIndex],
     );
   }
 }

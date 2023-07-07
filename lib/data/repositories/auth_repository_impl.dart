@@ -1,4 +1,4 @@
-import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
+import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:jokes_app/common/resource/keys.dart';
 import 'package:jokes_app/domain/data_sources/network/auth_network_data_source.dart';

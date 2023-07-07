@@ -1,4 +1,4 @@
-import 'package:encrypt_shared_preferences/enc_shared_pref.dart';
+import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:jokes_app/core/session/manager/session_manager.dart';
 
 import '../../../common/resource/keys.dart';

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jokes_app/common/resource/colors.dart';
-import 'package:jokes_app/common/resource/fonts.dart';
-import 'package:jokes_app/common/utils/printer.dart';
-import '../../../../../generated/locale_keys.g.dart';
 import 'animated_text.dart';
 
 /// Animated Text that displays a [Text] element as if it is being typed one
@@ -117,7 +113,7 @@ class TypewriterAnimatedText extends AnimatedText {
     return RichText(
       text: TextSpan(
         children: [
-          TextSpan(text: visibleString,style: textStyle),
+          TextSpan(text: visibleString, style: textStyle),
           TextSpan(
             text: cursor,
             style:
